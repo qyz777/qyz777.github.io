@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content>
+  <meta name="author" content="YiZhong">
+  <meta name="keywords" content>
+  <title>UITableView和UICollectionView实现自定义滚动动画 - YiZhong&#39;s Blog</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/tomorrow-night-eighties.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>YiZhong's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-06-25 17:22">
+      2020年6月25日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      707 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>看到这个标题你可能会觉得“这不是很简单吗？像下面这么一写就完了呗”</p>
+<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-selector-tag">UIView</span><span class="hljs-selector-class">.animate</span>(<span class="hljs-attribute">withDuration</span>: <span class="hljs-number">0.25</span>) &#123;
+    <span class="hljs-selector-tag">self</span><span class="hljs-selector-class">.tableView</span><span class="hljs-selector-class">.setContentOffset</span>(CGPoint(<span class="hljs-attribute">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attribute">y</span>: <span class="hljs-number">500</span>), <span class="hljs-attribute">animated</span>: false)
+&#125;</code></pre></div>
+
+<p>不不不，如果你觉得就这么简单的话说明你还是太年轻了。这样写你的列表在滚动的一开始上面的cell就消失了，这种效果是完全过不了产品和视觉小姐姐的像素眼。</p>
+<p>为了实现自定义滚动动效我们可以使用CADisplayLink来实现，至于为什么不用其他timer相信大家可以自己百度了解。</p>
+<p>当然如果你并不想那么麻烦的自己写的话可以使用Facebook出品的Pop动画库，它也是基于CADisplayLink实现的。由于UIScrollView的滚动原理，我们可以用<code>POPBasicAnimation</code>设置UIScrollView的<code>bounds</code>属性动画即可。</p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p><a href="https://github.com/qyz777/scroll_animation" target="_blank" rel="noopener">自定义列表滚动动效</a></p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="Animator"><a href="#Animator" class="headerlink" title="Animator"></a>Animator</h2><p>首先我们先实现实际动画的类<code>ScrollViewAnimator</code>。</p>
+<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ScrollViewAnimator</span> </span>&#123;
+    
+    <span class="hljs-keyword">weak</span> <span class="hljs-keyword">var</span> scrollView: <span class="hljs-type">UIScrollView?</span>
+    <span class="hljs-keyword">let</span> timingFunction: <span class="hljs-type">ScrollTimingFunction</span>
+    
+    <span class="hljs-keyword">var</span> closure: (() -&gt; <span class="hljs-type">Void</span>)?
+    
+    <span class="hljs-comment">//动画开始时间</span>
+    <span class="hljs-keyword">var</span> startTime: <span class="hljs-type">TimeInterval</span> = <span class="hljs-number">0</span>
+    <span class="hljs-comment">//动画初始的contentOffset</span>
+    <span class="hljs-keyword">var</span> startOffset: <span class="hljs-type">CGPoint</span> = .zero
+    <span class="hljs-comment">//动画目标的contentOffset</span>
+    <span class="hljs-keyword">var</span> destinationOffset: <span class="hljs-type">CGPoint</span> = .zero
+    <span class="hljs-comment">//动画时长</span>
+    <span class="hljs-keyword">var</span> duration: <span class="hljs-type">TimeInterval</span> = <span class="hljs-number">0</span>
+    <span class="hljs-comment">//动画已运行时长</span>
+    <span class="hljs-keyword">var</span> runTime: <span class="hljs-type">TimeInterval</span> = <span class="hljs-number">0</span>
+    
+    <span class="hljs-keyword">var</span> timer: <span class="hljs-type">CADisplayLink?</span>
+    
+    <span class="hljs-keyword">init</span>(scrollView: <span class="hljs-type">UIScrollView</span>, timingFunction: <span class="hljs-type">ScrollTimingFunction</span>) &#123;
+        <span class="hljs-keyword">self</span>.scrollView = scrollView
+        <span class="hljs-keyword">self</span>.timingFunction = timingFunction
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setContentOffset</span><span class="hljs-params">(<span class="hljs-number">_</span> contentOffset: CGPoint, duration: TimeInterval)</span></span> &#123;
+        <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> scrollView = scrollView <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">return</span>
+        &#125;
+        <span class="hljs-comment">//设置需要的属性</span>
+        startTime = <span class="hljs-type">Date</span>().timeIntervalSince1970
+        startOffset = scrollView.contentOffset
+        destinationOffset = contentOffset
+        <span class="hljs-keyword">self</span>.duration = duration
+        runTime = <span class="hljs-number">0</span>
+        <span class="hljs-keyword">guard</span> <span class="hljs-keyword">self</span>.duration &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> &#123;
+            scrollView.setContentOffset(contentOffset, animated: <span class="hljs-literal">false</span>)
+            <span class="hljs-keyword">return</span>
+        &#125;
+        <span class="hljs-keyword">if</span> timer == <span class="hljs-literal">nil</span> &#123;
+            timer = <span class="hljs-type">CADisplayLink</span>(target: <span class="hljs-keyword">self</span>, selector: #selector(animtedScroll))
+            <span class="hljs-comment">//把timer加入到common的runloop中</span>
+            timer?.add(to: .main, forMode: .common)
+        &#125;
+    &#125;
+    
+    <span class="hljs-meta">@objc</span>
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">animtedScroll</span><span class="hljs-params">()</span></span> &#123;
+        <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> timer = timer <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;
+        <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> scrollView = scrollView <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;
+        <span class="hljs-comment">//由于CADisplayLink每次回调的时间不固定，所以使用它自己记录的回调时间来增加运行时长</span>
+        runTime += timer.duration
+        <span class="hljs-keyword">if</span> runTime &gt;= duration &#123;
+            <span class="hljs-comment">//如果运行时长超过动画时长说明动画需要结束了</span>
+            scrollView.setContentOffset(destinationOffset, animated: <span class="hljs-literal">false</span>)
+            timer.invalidate()
+            <span class="hljs-keyword">self</span>.timer = <span class="hljs-literal">nil</span>
+            closure?()
+            <span class="hljs-keyword">return</span>
+        &#125;
+        
+        <span class="hljs-keyword">var</span> offset = scrollView.contentOffset
+        offset.x = timingFunction.compute(<span class="hljs-type">CGFloat</span>(runTime), startOffset.x, destinationOffset.x - startOffset.x, <span class="hljs-type">CGFloat</span>(duration))
+        offset.y = timingFunction.compute(<span class="hljs-type">CGFloat</span>(runTime), startOffset.y, destinationOffset.y - startOffset.y, <span class="hljs-type">CGFloat</span>(duration))
+        scrollView.setContentOffset(offset, animated: <span class="hljs-literal">false</span>)
+    &#125;
+    
+&#125;</code></pre></div>
+
+<h2 id="UIScrollView拓展"><a href="#UIScrollView拓展" class="headerlink" title="UIScrollView拓展"></a>UIScrollView拓展</h2><p>我们用OC的runtime知识动态为分类添加属性方便使用</p>
+<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">UIScrollView</span> </span>&#123;
+    
+    <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AssociatedKeys</span> </span>&#123;
+        <span class="hljs-keyword">static</span> <span class="hljs-keyword">var</span> animator: <span class="hljs-type">String</span> = <span class="hljs-string">"animator"</span>
+    &#125;
+    
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> animator: <span class="hljs-type">ScrollViewAnimator?</span> &#123;
+        <span class="hljs-keyword">set</span> &#123;
+            objc_setAssociatedObject(<span class="hljs-keyword">self</span>, &amp;<span class="hljs-type">AssociatedKeys</span>.animator, newValue, .<span class="hljs-type">OBJC_ASSOCIATION_RETAIN_NONATOMIC</span>)
+        &#125;
+        <span class="hljs-keyword">get</span> &#123;
+            <span class="hljs-keyword">return</span> objc_getAssociatedObject(<span class="hljs-keyword">self</span>, &amp;<span class="hljs-type">AssociatedKeys</span>.animator) <span class="hljs-keyword">as</span>? <span class="hljs-type">ScrollViewAnimator</span>
+        &#125;
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setContentOffset</span><span class="hljs-params">(<span class="hljs-number">_</span> contentOffset: CGPoint, duration: TimeInterval, timingFunction: ScrollTimingFunction = .linear, completion: <span class="hljs-params">(<span class="hljs-params">()</span></span></span></span> -&gt; <span class="hljs-type">Void</span>)? = <span class="hljs-literal">nil</span>) &#123;
+        <span class="hljs-keyword">if</span> animator == <span class="hljs-literal">nil</span> &#123;
+            animator = <span class="hljs-type">ScrollViewAnimator</span>(scrollView: <span class="hljs-keyword">self</span>, timingFunction: timingFunction)
+        &#125;
+        animator!.closure = &#123; [<span class="hljs-keyword">weak</span> <span class="hljs-keyword">self</span>] <span class="hljs-keyword">in</span>
+            <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> strongSelf = <span class="hljs-keyword">self</span> <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;
+            <span class="hljs-type">DispatchQueue</span>.main.async &#123;
+                strongSelf.animator = <span class="hljs-literal">nil</span>
+            &#125;
+            completion?()
+        &#125;
+        animator!.setContentOffset(contentOffset, duration: duration)
+    &#125;
+    
+&#125;</code></pre></div>
+
+<h2 id="ScrollTimingFunction枚举"><a href="#ScrollTimingFunction枚举" class="headerlink" title="ScrollTimingFunction枚举"></a>ScrollTimingFunction枚举</h2><p>动画缓冲函数的实现可以参考<a href="http://robertpenner.com/easing/" target="_blank" rel="noopener">http://robertpenner.com/easing/</a>。具体实现例子在<a href="https://github.com/qyz777/scroll_animation" target="_blank" rel="noopener">Demo</a>中</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://robertpenner.com/easing/" target="_blank" rel="noopener">http://robertpenner.com/easing/</a><br><a href="https://blog.csdn.net/S_clifftop/article/details/89490422" target="_blank" rel="noopener">https://blog.csdn.net/S_clifftop/article/details/89490422</a><br><a href="https://zsisme.gitbooks.io/ios-/content/index.html" target="_blank" rel="noopener">https://zsisme.gitbooks.io/ios-/content/index.html</a></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/View/">View</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/iOS/">iOS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Animation/">Animation</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/25/DispatchGroup出现EXC-BAD-INSTRUCTION问题/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">DispatchGroup出现EXC_BAD_INSTRUCTION问题</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">京ICP备18016370号-1</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "UITableView和UICollectionView实现自定义滚动动画&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
