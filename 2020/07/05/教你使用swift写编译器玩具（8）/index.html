@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content>
+  <meta name="author" content="YiZhong">
+  <meta name="keywords" content>
+  <title>教你使用swift写编译器玩具（8） - YiZhong&#39;s Blog</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/tomorrow-night-eighties.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>YiZhong's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-05 16:33">
+      2020年7月5日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      756 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章对应<a href="http://llvm.org/docs/tutorial/MyFirstLanguageFrontend/LangImpl08.html" target="_blank" rel="noopener">官方教程第8章</a>。本章介绍如何将语言编译为目标文件。</p>
+<p>教程如下:</p>
+<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（0）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（0）</a></p>
+<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（1）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（1）</a></p>
+<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（2）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（2）</a></p>
+<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（3）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（3）</a></p>
+<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（4）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（4）</a></p>
+<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（5）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（5）</a></p>
+<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（6）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（6）</a></p>
+<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（7）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（7）</a></p>
+<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（8）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（8）</a></p>
+<p><a href="https://github.com/qyz777/Kaleidoscope" target="_blank" rel="noopener">仓库在这</a></p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>因为我们之前用了<code>JIT</code>，但是我们现在也要生成目标文件，两者只能选其一，所以我们现在把封装一下<code>JIT</code>以及main文件。</p>
+<p>首先是封装<code>JIT</code>，我这里封装为类<code>CodeRunner</code>。</p>
+<div class="hljs"><pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CodeRunner</span> </span>&#123;
+    
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> jit: <span class="hljs-type">JIT</span>
+    
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">typealias</span> fnPr = <span class="hljs-meta">@convention</span>(<span class="hljs-built_in">c</span>) () -&gt; <span class="hljs-type">Double</span>
+    
+    <span class="hljs-keyword">init</span>(machine: <span class="hljs-type">TargetMachine</span>) &#123;
+        jit = <span class="hljs-type">JIT</span>(machine: machine)
+    &#125;
+    
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">run</span><span class="hljs-params">(module: Module)</span></span> &#123;
+        <span class="hljs-keyword">do</span> &#123;
+            <span class="hljs-keyword">let</span> handle = <span class="hljs-keyword">try</span> jit.addEagerlyCompiledIR(module, &#123; (<span class="hljs-number">_</span>) -&gt; <span class="hljs-type">JIT</span>.<span class="hljs-type">TargetAddress</span> <span class="hljs-keyword">in</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-type">JIT</span>.<span class="hljs-type">TargetAddress</span>()
+            &#125;)
+            <span class="hljs-keyword">let</span> addr = <span class="hljs-keyword">try</span> jit.address(of: <span class="hljs-string">"__anon_expr"</span>)
+            <span class="hljs-keyword">let</span> fn = <span class="hljs-built_in">unsafeBitCast</span>(addr, to: fnPr.<span class="hljs-keyword">self</span>)
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">"\(fn())"</span>)
+            <span class="hljs-keyword">try</span> jit.removeModule(handle)
+        &#125; <span class="hljs-keyword">catch</span> &#123;
+            <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"Adds the IR from a given module failure."</span>)
+        &#125;
+    &#125;
+    
+&#125;</code></pre></div>
+
+<p>接着是main文件。</p>
+<div class="hljs"><pre><code class="hljs swift"><span class="hljs-keyword">let</span> isUseJIT = <span class="hljs-literal">false</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">readFile</span><span class="hljs-params">(<span class="hljs-number">_</span> path: String)</span></span> -&gt; <span class="hljs-type">String?</span> &#123;
+    <span class="hljs-keyword">var</span> path = path
+    <span class="hljs-keyword">if</span> path.hasSuffix(<span class="hljs-string">"\n"</span>) &#123;
+        path.removeLast()
+    &#125;
+    <span class="hljs-keyword">guard</span> path.<span class="hljs-built_in">split</span>(separator: <span class="hljs-string">"."</span>).last! == <span class="hljs-string">"k"</span> <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">"Expected file is *.k."</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+    &#125;
+    <span class="hljs-keyword">do</span> &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">try</span> <span class="hljs-type">String</span>(contentsOfFile: path, encoding: .utf8)
+    &#125; <span class="hljs-keyword">catch</span> &#123;
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">"Read file \(path) failure."</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;
+    <span class="hljs-comment">//初始化Module和中间代码优化器</span>
+    initModule()
+    <span class="hljs-comment">//解析器</span>
+    <span class="hljs-keyword">let</span> parser = <span class="hljs-type">Parser</span>()
+    
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> path = <span class="hljs-type">String</span>(data: <span class="hljs-type">FileHandle</span>.standardInput.availableData, encoding: .utf8) &#123;
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> str = readFile(path) &#123;
+            parser.parse(str)
+          	<span class="hljs-comment">//指定目标</span>
+            theModule.targetTriple = .<span class="hljs-keyword">default</span>
+            <span class="hljs-keyword">do</span> &#123;
+                <span class="hljs-comment">//这个初始化方法里已经调用了initializeLLVM()</span>
+                <span class="hljs-keyword">let</span> targetMachine = <span class="hljs-keyword">try</span> <span class="hljs-type">TargetMachine</span>(triple: .<span class="hljs-keyword">default</span>,
+                                                      cpu: <span class="hljs-string">"x86-64"</span>,
+                                                      features: <span class="hljs-string">""</span>,
+                                                      optLevel: .<span class="hljs-keyword">default</span>,
+                                                      relocations: .<span class="hljs-keyword">default</span>,
+                                                      codeModel: .<span class="hljs-keyword">default</span>)
+              	<span class="hljs-comment">//指定数据布局</span>
+                theModule.dataLayout = targetMachine.dataLayout
+              	<span class="hljs-comment">//把代码优化放在这里</span>
+                <span class="hljs-keyword">let</span> pass = <span class="hljs-type">PassPipeliner</span>(module: theModule)
+                pass.execute()
+                <span class="hljs-keyword">if</span> isUseJIT &#123;
+                    <span class="hljs-keyword">let</span> runner = <span class="hljs-type">CodeRunner</span>(machine: targetMachine)
+                    runner.run(module: theModule)
+                &#125; <span class="hljs-keyword">else</span> &#123;
+                    <span class="hljs-comment">//修改为自己的路径</span>
+                    <span class="hljs-keyword">let</span> path = <span class="hljs-string">"填你自己的路径"</span>
+                  	<span class="hljs-comment">//这里就是生成目标文件</span>
+                    <span class="hljs-keyword">try</span> targetMachine.emitToFile(module: theModule, type: .object, path: path)
+                    <span class="hljs-built_in">print</span>(<span class="hljs-string">"Wrote \(path)"</span>)
+                &#125;
+            &#125; <span class="hljs-keyword">catch</span> &#123;
+                <span class="hljs-built_in">print</span>(<span class="hljs-string">"\(error)"</span>)
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+main()</code></pre></div>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>我们新建.k文件<code>average.k</code>。</p>
+<div class="hljs"><pre><code class="hljs undefined">def average(<span class="hljs-name">x</span> y) (<span class="hljs-name">x</span> + y) * <span class="hljs-number">0.5</span><span class="hljs-comment">;</span></code></pre></div>
+
+<p>我们运行代码生成目标文件<code>output.o</code>，我们可以用下面命令看一下目标文件是否生成了符号表。</p>
+<div class="hljs"><pre><code class="hljs shell">objdump -t output.o</code></pre></div>
+
+<p>会输出类似的以下信息。</p>
+<div class="hljs"><pre><code class="hljs undefined">output.o:	file <span class="hljs-built_in">format</span> Mach-O <span class="hljs-number">64</span>-bit x86-<span class="hljs-number">64</span>
+
+SYMBOL TABLE:
+<span class="hljs-number">0000000000000000</span> g     F <span class="hljs-variable">__TEXT</span>,<span class="hljs-variable">__text</span>	<span class="hljs-variable">_average</span></code></pre></div>
+
+<p>生成完目标文件我们需要写一段C++代码进行调用。</p>
+<div class="hljs"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">extern</span> <span class="hljs-string">"C"</span> &#123;
+    <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">average</span><span class="hljs-params">(<span class="hljs-keyword">double</span>, <span class="hljs-keyword">double</span>)</span></span>;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"average of 3.0 and 4.0: "</span> &lt;&lt; average(<span class="hljs-number">3.0</span>, <span class="hljs-number">4.0</span>) &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+&#125;</code></pre></div>
+
+<p>将程序链接到output.o并查看结果</p>
+<div class="hljs"><pre><code class="hljs shell">clang++ main.cpp output.o -o main
+./main
+
+//输出
+average of 3.0 and 4.0: 3.5</code></pre></div>
+
+<p>完整代码请参考<a href="https://github.com/qyz777/Kaleidoscope" target="_blank" rel="noopener">仓库</a>。</p>
+<h2 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><p>macOS下’wchar.h’ File Not Found</p>
+<p>参考回答<a href="https://stackoverflow.com/questions/26185978/macos-wchar-h-file-not-found" target="_blank" rel="noopener">macOS ‘wchar.h’ File Not Found</a></p>
+<div class="hljs"><pre><code class="hljs shell">open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg</code></pre></div>
+
+<p>Mojava下安装头文件包即可。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/编译原理/">编译原理</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/swift/">swift</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/05/教你使用swift写编译器玩具（7）/">
+                        <span class="hidden-mobile">教你使用swift写编译器玩具（7）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">京ICP备18016370号-1</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "教你使用swift写编译器玩具（8）&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
