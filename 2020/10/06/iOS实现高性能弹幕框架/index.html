@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content>
+  <meta name="author" content="YiZhong">
+  <meta name="keywords" content>
+  <title>iOS实现高性能弹幕框架 - YiZhong&#39;s Blog</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/tomorrow-night-eighties.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>YiZhong's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-10-06 16:03">
+      2020年10月6日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我之前维护过公司的弹幕库，但由于它的历史包袱过重，改造成本过高，一直没有将它改造成我心中理想状态的一个库。另外在周末，我也需要做一些事情来消磨时间，所以我写了一个比较符合我心中理想状态的弹幕库并将它开源：<a href="https://github.com/qyz777/DanmakuKit" target="_blank" rel="noopener">https://github.com/qyz777/DanmakuKit</a></p>
+<p>目前DanmakuKit已经具备一些基础的能力，我还列了一些TODO，未来我会利用周末的空余时间持续完善它的功能。</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><a href="https://github.com/qyz777/DanmakuKit" target="_blank" rel="noopener">DanmakuKit</a>是一个高性能弹幕框架，它提供了基础的弹幕功能，能够让你通过异步队列的方式渲染弹幕。它提供三种弹幕类别，分别是浮动、置顶和置底弹幕。目前它支持的功能如下：</p>
+<ul>
+<li>速度调节</li>
+<li>轨道高度调节</li>
+<li>显示区域调节</li>
+<li>点击回调</li>
+<li>暂停单个弹幕</li>
+<li>重叠展示</li>
+<li>禁用不同类型的弹幕</li>
+<li>渲染不同进度的弹幕到屏幕上</li>
+</ul>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>在说原理之前先把弹幕库的类图放上，DanmakuKit由DanmakuView作为承载弹幕的主体，其中包含不同的DanmakuTrack作为管理view中弹幕的对象。对于使用者而言，只需要给DanmakuView传入了实现DanmakuCellModel协议的对象，它就能根据协议自动创建或复用一个DanmakuCell来展示弹幕。</p>
+<p><img src="https://cdn.qyizhong.cn/1240.png" srcset="/img/loading.gif" alt="类图"></p>
+<h2 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h2><p>在实际写代码之前就必须考虑到弹幕的性能问题，因为如果不考虑这个问题的话一旦弹幕量很大那就会极大的影响app使用体验。那么在iOS中，想要获得最佳的性能体验，我们可以很快的想到一个流程，那就是异步队列渲染出一张弹幕图片，把它放在layer.content中，再用Core Animation播放出来。另外，反复的创建和销毁管理弹幕的对象也有一些开销，我们要用合适的方法来管理这些对象。</p>
+<p>因此我们总结一下，如果想要实现一个高性能的弹幕，那我们肯定会用到以下3点：</p>
+<ul>
+<li>复用</li>
+<li>异步队列绘制</li>
+<li>Core Animation</li>
+</ul>
+<h3 id="复用"><a href="#复用" class="headerlink" title="复用"></a>复用</h3><p>复用是一个很容易想到的想法，在DanmakuKit中，弹幕的绘制是由DanmakuCell实现的，而它是一个view的子类，所以复用也是以view为维度的。复用view是为了减少反复addSubview以及removeFromSuperView的开销，当然，在实际测试来看这块性能开销并不会特别大。</p>
+<h3 id="异步队列绘制"><a href="#异步队列绘制" class="headerlink" title="异步队列绘制"></a>异步队列绘制</h3><p>在DanmakuKit中，绘制使用的是<code>CGContext</code>，将内容绘制成一张图片放在layer.content中。如果这块的逻辑是在主线程同步的话那么必然会是个不小的开销，此时选择异步队列绘制就是一个很好的选择。当然，异步队列绘制也有它的劣势，那就是在写代码的过程中必须注意线程安全问题。</p>
+<p>异步队列渲染的原理可以参考<a href="https://github.com/ibireme/YYAsyncLayer" target="_blank" rel="noopener">https://github.com/ibireme/YYAsyncLayer</a> ，网上也有不少的播客解析过原理。</p>
+<h3 id="使用Core-Animation"><a href="#使用Core-Animation" class="headerlink" title="使用Core Animation"></a>使用Core Animation</h3><p>如果动画使用Pop，那就不用操心手势响应事件了，但由于Pop是基于CADisplayLink实现的动画，它的执行是在主线程中，所以主线程一旦卡顿，那么动画也必然卡。而Core Animation的动画是由系统用一个专用的进程来进行渲染，使用它的好处不用多说了。</p>
+<h2 id="点击事件"><a href="#点击事件" class="headerlink" title="点击事件"></a>点击事件</h2><p>由于DanmakuKit使用了Core Animation，因此弹幕在动画过程中的展示的其实是layer而不是view。layer是不支持手势响应的，因此点击事件必然也需要特别的实现一下。</p>
+<p>实现弹幕在动画中的点击并不是一件很难的事情，我们可以充分利用手势响应链的知识来实现。众所周知，系统是先找到最上层最适合响应事件的view，再往下找能够响应的view，其中找view的方法就是hitTest。</p>
+<p>在hitTest中，系统先会判断当前的point是否在view的范围内，如果在的话会从后往前遍历当前view的subViews数组，将传入的point转化为子view的point继续传入调用子view的hitTest方法，直到找到为止。那么我们只要将其中找子view的部分替换为找当前在播放动画的layer就好了，代码如下：</p>
+<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">hitTest</span><span class="hljs-params">(<span class="hljs-number">_</span> point: CGPoint, with event: UIEvent?)</span></span> -&gt; <span class="hljs-type">UIView?</span> &#123;
+    <span class="hljs-keyword">guard</span> <span class="hljs-keyword">self</span>.point(inside: point, with: event) <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span> &#125;
+    
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (<span class="hljs-number">0</span>..&lt;subviews.<span class="hljs-built_in">count</span>).reversed() &#123;
+        <span class="hljs-keyword">let</span> subView = subviews[i]
+        <span class="hljs-comment">//如果当前的layer正在播放动画</span>
+        <span class="hljs-keyword">if</span> subView.layer.animationKeys() != <span class="hljs-literal">nil</span>, <span class="hljs-keyword">let</span> presentationLayer = subView.layer.presentation() &#123;
+        	<span class="hljs-comment">//用动画的layer判断一下是否在点击范围内</span>
+            <span class="hljs-keyword">let</span> newPoint = layer.convert(point, to: presentationLayer)
+            <span class="hljs-keyword">if</span> presentationLayer.<span class="hljs-built_in">contains</span>(newPoint) &#123;
+            	<span class="hljs-comment">//是的话就找到这个view了</span>
+                <span class="hljs-keyword">return</span> subView
+            &#125;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">let</span> newPoint = convert(point, to: subView)
+            <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> findView = subView.hitTest(newPoint, with: event) &#123;
+                <span class="hljs-keyword">return</span> findView
+            &#125;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+&#125;</code></pre></div>
+
+<p>需要注意的是，Core Animation动画中获取实时坐标的layer是layer.presentation()。另外，在开发过程中我发现presentationLayer的实际size与layer并不是完全相同的，因此在计算中最好只使用presentationLayer的坐标，否则总会出一些奇奇怪怪的问题。</p>
+<h2 id="队列池"><a href="#队列池" class="headerlink" title="队列池"></a>队列池</h2><p>之前说到渲染弹幕要使用异步队列，那我们能不能直接使用GCD的并行队列呢？答案是不行的，因为随意使用GCD的并行队列很容易造成线程数量爆炸，引发内存问题或者使主线程卡死，大家可以用for循环遍历1000次来执行GCD的并行队列任务试试看。</p>
+<p>为了解决这类的问题，我们必须实现一个队列池来解决在可控数量的队列内满足我们的并行需求。实现原理很简单，就是创建一定数量的串行队列存在数组中，每次获取队列时通过计数来获取到不同的队列，下方是一个简单的实现代码：</p>
+<div class="hljs"><pre><code class="hljs undefined">import Foundation
+
+class DanmakuQueuePool &#123;
+    
+    public let name: String
+    
+    private var queues: [DispatchQueue] = []
+    
+    public let queueCount: Int
+    
+    private var counter: Int = 0
+    
+    public init(name: String, queueCount: Int, qos: DispatchQoS) &#123;
+        self.name = name
+        self.queueCount = queueCount
+        <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> 0<span class="hljs-built_in">..</span>&lt;queueCount &#123;
+            let<span class="hljs-built_in"> queue </span>= DispatchQueue(label: name, qos: qos, attributes: [], autoreleaseFrequency: .inherit, target: <span class="hljs-literal">nil</span>)
+            queues.append(queue)
+        &#125;
+    &#125;
+    
+    public var queue: DispatchQueue &#123;
+        return getQueue()
+    &#125;
+    
+    private func getQueue() -&gt; DispatchQueue &#123;
+        <span class="hljs-keyword">if</span> counter == Int.max &#123;
+            counter = 0
+        &#125;
+        let<span class="hljs-built_in"> queue </span>= queues[counter % queueCount]
+        counter += 1
+        return<span class="hljs-built_in"> queue
+</span>    &#125;
+    
+&#125;</code></pre></div>
+
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>欢迎大家使用<a href="https://github.com/qyz777/DanmakuKit" target="_blank" rel="noopener">DanmakuKit</a>，或为它提供建议。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/iOS/">iOS</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/swift/">swift</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/05/帧率和丢帧/">
+                        <span class="hidden-mobile">帧率和丢帧</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">京ICP备18016370号-1</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "iOS实现高性能弹幕框架&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
