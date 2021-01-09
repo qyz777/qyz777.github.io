@@ -1,48 +1,65 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" >
 
 
 
-
-
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
   <link rel="icon" type="image/png" href="/img/favicon.ico">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content>
+  <meta name="description" content="">
   <meta name="author" content="YiZhong">
-  <meta name="keywords" content>
+  <meta name="keywords" content="">
   <title>教你使用swift写编译器玩具（7） - YiZhong&#39;s Blog</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
-
-  
-    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/tomorrow-night-eighties.min.css">
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-</head>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null},"tajs":null}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
 
 
 <body>
@@ -124,41 +141,45 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
           </li>
+        
         
       </ul>
     </div>
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner" id="banner" 
          style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="教你使用swift写编译器玩具（7）">
               
             </span>
 
             
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-07-05 16:32">
-      2020年7月5日 下午
-    </time>
-  </div>
-
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-07-05 16:32" pubdate>
+        2020年7月5日 下午
+      </time>
+    </span>
+  
+</div>
 
 <div class="mt-1">
   
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      1.8k 字
     </span>
   
 
@@ -168,7 +189,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      27
+      28
        分钟
     </span>
   
@@ -190,367 +211,59 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">教你使用swift写编译器玩具（7）</h1>
             
-            <article class="markdown-body">
-              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章对应<a href="http://llvm.org/docs/tutorial/MyFirstLanguageFrontend/LangImpl07.html" target="_blank" rel="noopener">官方教程第7章</a>。本章的目的是支持变量<code>var</code>和`=运算符，我们需要在堆栈分配内存给变量，详细说明请查看官方教程第7章。</p>
+            <div class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章对应<a target="_blank" rel="noopener" href="http://llvm.org/docs/tutorial/MyFirstLanguageFrontend/LangImpl07.html">官方教程第7章</a>。本章的目的是支持变量<code>var</code>和`=运算符，我们需要在堆栈分配内存给变量，详细说明请查看官方教程第7章。</p>
 <p>教程如下:</p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（0）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（0）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（1）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（1）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（2）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（2）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（3）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（3）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（4）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（4）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（5）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（5）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（6）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（6）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（7）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（7）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（8）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（8）</a></p>
-<p><a href="https://github.com/qyz777/Kaleidoscope" target="_blank" rel="noopener">仓库在这</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（0）/">教你使用swift写编译器玩具（0）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（1）/">教你使用swift写编译器玩具（1）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（2）/">教你使用swift写编译器玩具（2）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（3）/">教你使用swift写编译器玩具（3）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（4）/">教你使用swift写编译器玩具（4）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（5）/">教你使用swift写编译器玩具（5）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（6）/">教你使用swift写编译器玩具（6）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（7）/">教你使用swift写编译器玩具（7）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（8）/">教你使用swift写编译器玩具（8）</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/qyz777/Kaleidoscope">仓库在这</a></p>
 <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="调整现有变量"><a href="#调整现有变量" class="headerlink" title="调整现有变量"></a>调整现有变量</h3><p>首先我们需要改变<code>namedValues</code>的value类型。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-keyword">var</span> namedValues: [<span class="hljs-type">String</span>: <span class="hljs-type">IRInstruction</span>] = [:]</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">var</span> namedValues: [<span class="hljs-type">String</span>: <span class="hljs-type">IRInstruction</span>] <span class="hljs-operator">=</span> [:]<br></code></pre></td></tr></table></figure>
 <p>此外，我们需要一个辅助函数来创建<code>Alloca</code>。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">createEntryBlockAlloca</span><span class="hljs-params">(function: Function, name: String)</span></span> -&gt; <span class="hljs-type">IRInstruction</span> &#123;
-    <span class="hljs-keyword">let</span> instruction = builder.buildAlloca(type: <span class="hljs-type">FloatType</span>.double, <span class="hljs-built_in">count</span>: <span class="hljs-number">0</span>, name: name)
-    <span class="hljs-keyword">return</span> instruction
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">createEntryBlockAlloca</span><span class="hljs-params">(function: Function, name: String)</span></span> -&gt; <span class="hljs-type">IRInstruction</span> &#123;<br>    <span class="hljs-keyword">let</span> instruction <span class="hljs-operator">=</span> builder.buildAlloca(type: <span class="hljs-type">FloatType</span>.double, count: <span class="hljs-number">0</span>, name: name)<br>    <span class="hljs-keyword">return</span> instruction<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>在本章中，变量改为了存于堆栈中，因此变量的代码生成也需要从堆栈中加载。我们修改<code>VariableExprAST</code>的<code>codeGen()</code>方法。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">codeGen</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">IRValue?</span> &#123;
-    <span class="hljs-keyword">let</span> value = namedValues[name]
-    <span class="hljs-keyword">guard</span> value != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"unknow variable name."</span>)
-    &#125;
-    <span class="hljs-keyword">return</span> builder.buildLoad(value!, name: name)
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">codeGen</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">IRValue</span>? &#123;<br>    <span class="hljs-keyword">let</span> value <span class="hljs-operator">=</span> namedValues[name]<br>    <span class="hljs-keyword">guard</span> value <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">&quot;unknow variable name.&quot;</span>)<br>    &#125;<br>    <span class="hljs-keyword">return</span> builder.buildLoad(value<span class="hljs-operator">!</span>, name: name)<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>现在我们需要更新定义变量的代码来设置<code>Alloca</code>。我们从<code>ForExprAST</code>的<code>codeGen()</code>方法开始。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">codeGen</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">IRValue?</span> &#123;
-    <span class="hljs-keyword">let</span> startVal = start.codeGen()
-    <span class="hljs-keyword">guard</span> startVal != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    
-    <span class="hljs-comment">//for循环，插在当前的block之后</span>
-    <span class="hljs-keyword">let</span> theFunction = builder.insertBlock?.parent
-    <span class="hljs-keyword">guard</span> theFunction != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    <span class="hljs-comment">//在entry block中为变量创建alloca</span>
-    <span class="hljs-keyword">let</span> alloca = createEntryBlockAlloca(function: theFunction!, name: name)
-  	把变量存储在alloca中
-    builder.buildStore(startVal!, to: alloca)
-    
-    <span class="hljs-keyword">let</span> loopBB = theFunction!.appendBasicBlock(named: <span class="hljs-string">"loop"</span>)
-    builder.buildBr(loopBB)
-    builder.positionAtEnd(of: loopBB)
-    
-    <span class="hljs-keyword">let</span> oldVal = namedValues[name]
-    namedValues[name] = alloca
-    
-    <span class="hljs-keyword">guard</span> body.codeGen() != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    
-    <span class="hljs-keyword">let</span> stepVal: <span class="hljs-type">IRValue?</span>
-    <span class="hljs-keyword">if</span> step != <span class="hljs-literal">nil</span> &#123;
-        stepVal = step!.codeGen()
-        <span class="hljs-keyword">guard</span> stepVal != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-        &#125;
-    &#125; <span class="hljs-keyword">else</span> &#123;
-        stepVal = <span class="hljs-type">FloatType</span>.double.constant(<span class="hljs-number">1</span>)
-    &#125;
-    
-    <span class="hljs-comment">//循环终止条件</span>
-    <span class="hljs-keyword">var</span> endCond = end.codeGen()
-    <span class="hljs-keyword">guard</span> endCond != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    <span class="hljs-comment">//build条件时候要使用int类型</span>
-    endCond = builder.buildICmp(endCond!, <span class="hljs-type">IntType</span>.int1.zero(), .notEqual, name: <span class="hljs-string">"loopCond"</span>)
-    
-  	<span class="hljs-comment">//加载当前变量</span>
-    <span class="hljs-keyword">let</span> curVal = builder.buildLoad(alloca)
-  	<span class="hljs-comment">//让下一个变量为当前变量+步长，即增长了</span>
-    <span class="hljs-keyword">let</span> nextVal = builder.buildAdd(curVal, stepVal!, name: <span class="hljs-string">"nextVal"</span>)
-  	<span class="hljs-comment">//再重新存储到alloca中</span>
-    builder.buildStore(nextVal, to: alloca)
-    
-    <span class="hljs-comment">//循环后的代码basic block</span>
-    <span class="hljs-keyword">let</span> afterBB = theFunction?.appendBasicBlock(named: <span class="hljs-string">"afterLoop"</span>)
-    builder.buildCondBr(condition: endCond!, then: loopBB, <span class="hljs-keyword">else</span>: afterBB!)
-    builder.positionAtEnd(of: afterBB!)
-    
-    <span class="hljs-keyword">if</span> oldVal != <span class="hljs-literal">nil</span> &#123;
-        namedValues[name] = oldVal!
-    &#125; <span class="hljs-keyword">else</span> &#123;
-        namedValues[name] = <span class="hljs-literal">nil</span>
-    &#125;
-    
-    <span class="hljs-comment">//for循环解析总是返回0</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-type">FloatType</span>.double.constant(<span class="hljs-number">0</span>)
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">codeGen</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">IRValue</span>? &#123;<br>    <span class="hljs-keyword">let</span> startVal <span class="hljs-operator">=</span> start.codeGen()<br>    <span class="hljs-keyword">guard</span> startVal <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <br>    <span class="hljs-comment">//for循环，插在当前的block之后</span><br>    <span class="hljs-keyword">let</span> theFunction <span class="hljs-operator">=</span> builder.insertBlock<span class="hljs-operator">?</span>.parent<br>    <span class="hljs-keyword">guard</span> theFunction <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <span class="hljs-comment">//在entry block中为变量创建alloca</span><br>    <span class="hljs-keyword">let</span> alloca <span class="hljs-operator">=</span> createEntryBlockAlloca(function: theFunction<span class="hljs-operator">!</span>, name: name)<br>  	把变量存储在alloca中<br>    builder.buildStore(startVal<span class="hljs-operator">!</span>, to: alloca)<br>    <br>    <span class="hljs-keyword">let</span> loopBB <span class="hljs-operator">=</span> theFunction<span class="hljs-operator">!</span>.appendBasicBlock(named: <span class="hljs-string">&quot;loop&quot;</span>)<br>    builder.buildBr(loopBB)<br>    builder.positionAtEnd(of: loopBB)<br>    <br>    <span class="hljs-keyword">let</span> oldVal <span class="hljs-operator">=</span> namedValues[name]<br>    namedValues[name] <span class="hljs-operator">=</span> alloca<br>    <br>    <span class="hljs-keyword">guard</span> body.codeGen() <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <br>    <span class="hljs-keyword">let</span> stepVal: <span class="hljs-type">IRValue</span>?<br>    <span class="hljs-keyword">if</span> step <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> &#123;<br>        stepVal <span class="hljs-operator">=</span> step<span class="hljs-operator">!</span>.codeGen()<br>        <span class="hljs-keyword">guard</span> stepVal <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        stepVal <span class="hljs-operator">=</span> <span class="hljs-type">FloatType</span>.double.constant(<span class="hljs-number">1</span>)<br>    &#125;<br>    <br>    <span class="hljs-comment">//循环终止条件</span><br>    <span class="hljs-keyword">var</span> endCond <span class="hljs-operator">=</span> end.codeGen()<br>    <span class="hljs-keyword">guard</span> endCond <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <span class="hljs-comment">//build条件时候要使用int类型</span><br>    endCond <span class="hljs-operator">=</span> builder.buildICmp(endCond<span class="hljs-operator">!</span>, <span class="hljs-type">IntType</span>.int1.zero(), .notEqual, name: <span class="hljs-string">&quot;loopCond&quot;</span>)<br>    <br>  	<span class="hljs-comment">//加载当前变量</span><br>    <span class="hljs-keyword">let</span> curVal <span class="hljs-operator">=</span> builder.buildLoad(alloca)<br>  	<span class="hljs-comment">//让下一个变量为当前变量+步长，即增长了</span><br>    <span class="hljs-keyword">let</span> nextVal <span class="hljs-operator">=</span> builder.buildAdd(curVal, stepVal<span class="hljs-operator">!</span>, name: <span class="hljs-string">&quot;nextVal&quot;</span>)<br>  	<span class="hljs-comment">//再重新存储到alloca中</span><br>    builder.buildStore(nextVal, to: alloca)<br>    <br>    <span class="hljs-comment">//循环后的代码basic block</span><br>    <span class="hljs-keyword">let</span> afterBB <span class="hljs-operator">=</span> theFunction<span class="hljs-operator">?</span>.appendBasicBlock(named: <span class="hljs-string">&quot;afterLoop&quot;</span>)<br>    builder.buildCondBr(condition: endCond<span class="hljs-operator">!</span>, then: loopBB, <span class="hljs-keyword">else</span>: afterBB<span class="hljs-operator">!</span>)<br>    builder.positionAtEnd(of: afterBB<span class="hljs-operator">!</span>)<br>    <br>    <span class="hljs-keyword">if</span> oldVal <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> &#123;<br>        namedValues[name] <span class="hljs-operator">=</span> oldVal<span class="hljs-operator">!</span><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        namedValues[name] <span class="hljs-operator">=</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <br>    <span class="hljs-comment">//for循环解析总是返回0</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-type">FloatType</span>.double.constant(<span class="hljs-number">0</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>这其中最大的变化就是我们不再使用<code>phi</code>操作而是使用<code>load/store</code>来根据需要访问变量。</p>
 <p>我们在<code>FunctionAST</code>中也需要改变<code>codeGen()</code>方法。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">codeGen</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">Function?</span> &#123;
-    functionProtos[proto.name] = proto
-    <span class="hljs-keyword">let</span> theFunction = getFunction(named: proto.name)
-    <span class="hljs-keyword">guard</span> theFunction != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    
-    <span class="hljs-comment">//如果是操作符，把他放在全局的操作符表中</span>
-    <span class="hljs-keyword">if</span> proto.isOperator &#123;
-        <span class="hljs-type">BinOpPrecedence</span>[proto.operatorName!] = proto.<span class="hljs-keyword">precedence</span>
-    &#125;
-    
-    <span class="hljs-keyword">let</span> entry = theFunction!.appendBasicBlock(named: <span class="hljs-string">"entry"</span>)
-    builder.positionAtEnd(of: entry)
-    
-    namedValues.removeAll()
-    <span class="hljs-keyword">var</span> arg = theFunction!.firstParameter
-    <span class="hljs-keyword">while</span> arg != <span class="hljs-literal">nil</span> &#123;
-      	<span class="hljs-comment">//为参数创建alloca</span>
-        <span class="hljs-keyword">let</span> alloca = createEntryBlockAlloca(function: theFunction!, name: arg!.name)
-      	<span class="hljs-comment">//把变量存到alloca中</span>
-        builder.buildStore(arg!, to: alloca)
-      	<span class="hljs-comment">//把变量放到符号表里</span>
-        namedValues[arg!.name] = alloca
-        arg = arg?.next()
-    &#125;
-    
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> retValue = body.codeGen() &#123;
-        builder.buildRet(retValue)
-        <span class="hljs-keyword">do</span> &#123;
-            <span class="hljs-keyword">try</span> theModule.verify()
-            <span class="hljs-keyword">return</span> theFunction
-        &#125; <span class="hljs-keyword">catch</span> &#123;
-            <span class="hljs-built_in">print</span>(<span class="hljs-string">"\(error)"</span>)
-        &#125;
-    &#125;
-    <span class="hljs-comment">//函数体出现问题，移除函数</span>
-    theFunction!.eraseFromParent()
-    <span class="hljs-keyword">if</span> proto.isOperator &#123;
-        <span class="hljs-type">BinOpPrecedence</span>[proto.operatorName!] = <span class="hljs-literal">nil</span>
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">codeGen</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">Function</span>? &#123;<br>    functionProtos[proto.name] <span class="hljs-operator">=</span> proto<br>    <span class="hljs-keyword">let</span> theFunction <span class="hljs-operator">=</span> getFunction(named: proto.name)<br>    <span class="hljs-keyword">guard</span> theFunction <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <br>    <span class="hljs-comment">//如果是操作符，把他放在全局的操作符表中</span><br>    <span class="hljs-keyword">if</span> proto.isOperator &#123;<br>        <span class="hljs-type">BinOpPrecedence</span>[proto.operatorName<span class="hljs-operator">!</span>] <span class="hljs-operator">=</span> proto.precedence<br>    &#125;<br>    <br>    <span class="hljs-keyword">let</span> entry <span class="hljs-operator">=</span> theFunction<span class="hljs-operator">!</span>.appendBasicBlock(named: <span class="hljs-string">&quot;entry&quot;</span>)<br>    builder.positionAtEnd(of: entry)<br>    <br>    namedValues.removeAll()<br>    <span class="hljs-keyword">var</span> arg <span class="hljs-operator">=</span> theFunction<span class="hljs-operator">!</span>.firstParameter<br>    <span class="hljs-keyword">while</span> arg <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> &#123;<br>      	<span class="hljs-comment">//为参数创建alloca</span><br>        <span class="hljs-keyword">let</span> alloca <span class="hljs-operator">=</span> createEntryBlockAlloca(function: theFunction<span class="hljs-operator">!</span>, name: arg<span class="hljs-operator">!</span>.name)<br>      	<span class="hljs-comment">//把变量存到alloca中</span><br>        builder.buildStore(arg<span class="hljs-operator">!</span>, to: alloca)<br>      	<span class="hljs-comment">//把变量放到符号表里</span><br>        namedValues[arg<span class="hljs-operator">!</span>.name] <span class="hljs-operator">=</span> alloca<br>        arg <span class="hljs-operator">=</span> arg<span class="hljs-operator">?</span>.next()<br>    &#125;<br>    <br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> retValue <span class="hljs-operator">=</span> body.codeGen() &#123;<br>        builder.buildRet(retValue)<br>        <span class="hljs-keyword">do</span> &#123;<br>            <span class="hljs-keyword">try</span> theModule.verify()<br>            <span class="hljs-keyword">return</span> theFunction<br>        &#125; <span class="hljs-keyword">catch</span> &#123;<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;<span class="hljs-subst">\(error)</span>&quot;</span>)<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">//函数体出现问题，移除函数</span><br>    theFunction<span class="hljs-operator">!</span>.eraseFromParent()<br>    <span class="hljs-keyword">if</span> proto.isOperator &#123;<br>        <span class="hljs-type">BinOpPrecedence</span>[proto.operatorName<span class="hljs-operator">!</span>] <span class="hljs-operator">=</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="添加新的运算符"><a href="#添加新的运算符" class="headerlink" title="添加新的运算符"></a>添加新的运算符</h3><p>我们需要在全局操作符表中加入<code>=</code>。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-keyword">var</span> <span class="hljs-type">BinOpPrecedence</span>: [<span class="hljs-type">String</span>: <span class="hljs-type">UInt</span>] = [<span class="hljs-string">"="</span>: <span class="hljs-number">2</span>, <span class="hljs-string">"&lt;"</span>: <span class="hljs-number">10</span>, <span class="hljs-string">"+"</span>: <span class="hljs-number">20</span>, <span class="hljs-string">"-"</span>: <span class="hljs-number">20</span>, <span class="hljs-string">"*"</span>: <span class="hljs-number">40</span>]</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">var</span> <span class="hljs-type">BinOpPrecedence</span>: [<span class="hljs-type">String</span>: <span class="hljs-type">UInt</span>] <span class="hljs-operator">=</span> [<span class="hljs-string">&quot;=&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;&lt;&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;+&quot;</span>: <span class="hljs-number">20</span>, <span class="hljs-string">&quot;-&quot;</span>: <span class="hljs-number">20</span>, <span class="hljs-string">&quot;*&quot;</span>: <span class="hljs-number">40</span>]<br></code></pre></td></tr></table></figure>
 <p>接下来我想大家都能想到，那就是去修改<code>BinaryExprAST</code>的<code>codeGen()</code>方法。</p>
 <p>我们只需要在<code>codeGen()</code>方法最开始判断一下<code>=</code>即可。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-keyword">if</span> op == <span class="hljs-string">"="</span> &#123;
-    <span class="hljs-keyword">let</span> lhse = lhs <span class="hljs-keyword">as</span>? <span class="hljs-type">VariableExprAST</span>
-    <span class="hljs-keyword">guard</span> lhse != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"Destination of '=' must be a variable."</span>)
-    &#125;
-    <span class="hljs-keyword">let</span> val = lhse?.codeGen()
-    <span class="hljs-keyword">guard</span> val != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-  	<span class="hljs-comment">//获取符号表中的变量</span>
-    <span class="hljs-keyword">let</span> variable = namedValues[lhse!.name]
-    <span class="hljs-keyword">guard</span> variable != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"Unknow variable name."</span>)
-    &#125;
-  	<span class="hljs-comment">//为变量赋值</span>
-    builder.buildStore(val!, to: variable!)
-    <span class="hljs-keyword">return</span> val
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">if</span> op <span class="hljs-operator">==</span> <span class="hljs-string">&quot;=&quot;</span> &#123;<br>    <span class="hljs-keyword">let</span> lhse <span class="hljs-operator">=</span> lhs <span class="hljs-keyword">as?</span> <span class="hljs-type">VariableExprAST</span><br>    <span class="hljs-keyword">guard</span> lhse <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">&quot;Destination of &#x27;=&#x27; must be a variable.&quot;</span>)<br>    &#125;<br>    <span class="hljs-keyword">let</span> val <span class="hljs-operator">=</span> lhse<span class="hljs-operator">?</span>.codeGen()<br>    <span class="hljs-keyword">guard</span> val <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>  	<span class="hljs-comment">//获取符号表中的变量</span><br>    <span class="hljs-keyword">let</span> variable <span class="hljs-operator">=</span> namedValues[lhse<span class="hljs-operator">!</span>.name]<br>    <span class="hljs-keyword">guard</span> variable <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">&quot;Unknow variable name.&quot;</span>)<br>    &#125;<br>  	<span class="hljs-comment">//为变量赋值</span><br>    builder.buildStore(val<span class="hljs-operator">!</span>, to: variable<span class="hljs-operator">!</span>)<br>    <span class="hljs-keyword">return</span> val<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="用户定义的局部变量"><a href="#用户定义的局部变量" class="headerlink" title="用户定义的局部变量"></a>用户定义的局部变量</h3><p>就像之前所做过的扩展一样，我们先要在<code>Token</code>、<code>Lexer</code>和<code>Parser</code>。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Token</span> </span>&#123;
-		...
-    <span class="hljs-keyword">case</span> `<span class="hljs-keyword">var</span>`
-    ...
-&#125;
-<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> identifierStr == <span class="hljs-string">"var"</span> &#123;
-		currentToken = <span class="hljs-type">CurrentToken</span>(token: .<span class="hljs-keyword">var</span>, val: <span class="hljs-string">"var"</span>)
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Token</span> </span>&#123;<br>		<span class="hljs-operator">...</span><br>    <span class="hljs-keyword">case</span> `var`<br>    <span class="hljs-operator">...</span><br>&#125;<br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> identifierStr <span class="hljs-operator">==</span> <span class="hljs-string">&quot;var&quot;</span> &#123;<br>		currentToken <span class="hljs-operator">=</span> <span class="hljs-type">CurrentToken</span>(token: .var, val: <span class="hljs-string">&quot;var&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>接着我们构造<code>VarExprAST</code>AST Node。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VarExprAST</span>: <span class="hljs-title">ExprAST</span> </span>&#123;
-    
-    <span class="hljs-keyword">let</span> varNames: [(<span class="hljs-type">String</span>, <span class="hljs-type">ExprAST?</span>)]
-    
-    <span class="hljs-keyword">let</span> body: <span class="hljs-type">ExprAST</span>
-    
-    <span class="hljs-keyword">init</span>(<span class="hljs-number">_</span> varNames: [(<span class="hljs-type">String</span>, <span class="hljs-type">ExprAST?</span>)], <span class="hljs-number">_</span> body: <span class="hljs-type">ExprAST</span>) &#123;
-        <span class="hljs-keyword">self</span>.varNames = varNames
-        <span class="hljs-keyword">self</span>.body = body
-    &#125;
-    
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VarExprAST</span>: <span class="hljs-title">ExprAST</span> </span>&#123;<br>    <br>    <span class="hljs-keyword">let</span> varNames: [(<span class="hljs-type">String</span>, <span class="hljs-type">ExprAST</span>?)]<br>    <br>    <span class="hljs-keyword">let</span> body: <span class="hljs-type">ExprAST</span><br>    <br>    <span class="hljs-keyword">init</span>(<span class="hljs-keyword">_</span> varNames: [(<span class="hljs-type">String</span>, <span class="hljs-type">ExprAST</span>?)], <span class="hljs-keyword">_</span> body: <span class="hljs-type">ExprAST</span>) &#123;<br>        <span class="hljs-keyword">self</span>.varNames <span class="hljs-operator">=</span> varNames<br>        <span class="hljs-keyword">self</span>.body <span class="hljs-operator">=</span> body<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
 <p>我们允许通过<code>var/in</code>一次定义多个变量以及其初始化的值，并且我们允许在body中访问<code>var/in</code>定义的变量。</p>
 <p>之后我们需要定义<code>Parser</code>的方法。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-comment">/// 解析Var变量</span>
-<span class="hljs-comment">///</span>
-<span class="hljs-comment">/// - Returns: AST</span>
-<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseVarExpr</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">ExprAST?</span> &#123;
-    lexer.nextToken()
-    <span class="hljs-keyword">var</span> varNames: [(<span class="hljs-type">String</span>, <span class="hljs-type">ExprAST?</span>)] = []
-    <span class="hljs-keyword">guard</span> lexer.currentToken!.token == .identifier <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"Expected identifier after val."</span>)
-    &#125;
-    <span class="hljs-keyword">while</span> <span class="hljs-literal">true</span> &#123;
-        <span class="hljs-keyword">let</span> name = lexer.currentToken!.val
-        lexer.nextToken()
-        
-        <span class="hljs-keyword">let</span> expr: <span class="hljs-type">ExprAST?</span> = <span class="hljs-literal">nil</span>
-        <span class="hljs-keyword">if</span> lexer.currentToken!.val == <span class="hljs-string">"="</span> &#123;
-            lexer.nextToken()
-          	<span class="hljs-comment">//解析"="右边</span>
-            <span class="hljs-keyword">let</span> expr = parseExpression()
-            <span class="hljs-keyword">guard</span> expr != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-                <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-            &#125;
-        &#125;
-        
-        varNames.append((name, expr))
-        
-      	<span class="hljs-comment">//看看还有没有下一个</span>
-        <span class="hljs-keyword">if</span> lexer.currentToken!.val != <span class="hljs-string">","</span> &#123;
-            <span class="hljs-keyword">break</span>
-        &#125;
-        lexer.nextToken()
-        <span class="hljs-keyword">if</span> lexer.currentToken!.token != .identifier &#123;
-            <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"Expected identifier list after var."</span>)
-        &#125;
-    &#125;
-    <span class="hljs-keyword">if</span> lexer.currentToken!.token != .<span class="hljs-keyword">in</span> &#123;
-        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"Expected 'in' keyword after 'var'."</span>)
-    &#125;
-    lexer.nextToken()
-  	<span class="hljs-comment">//解析body</span>
-    <span class="hljs-keyword">let</span> body = parseExpression()
-    <span class="hljs-keyword">guard</span> body != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-type">VarExprAST</span>(varNames, body!)
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">/// 解析Var变量</span><br><span class="hljs-comment">///</span><br><span class="hljs-comment">/// - Returns: AST</span><br><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseVarExpr</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">ExprAST</span>? &#123;<br>    lexer.nextToken()<br>    <span class="hljs-keyword">var</span> varNames: [(<span class="hljs-type">String</span>, <span class="hljs-type">ExprAST</span>?)] <span class="hljs-operator">=</span> []<br>    <span class="hljs-keyword">guard</span> lexer.currentToken<span class="hljs-operator">!</span>.token <span class="hljs-operator">==</span> .identifier <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">&quot;Expected identifier after val.&quot;</span>)<br>    &#125;<br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">true</span> &#123;<br>        <span class="hljs-keyword">let</span> name <span class="hljs-operator">=</span> lexer.currentToken<span class="hljs-operator">!</span>.val<br>        lexer.nextToken()<br>        <br>        <span class="hljs-keyword">let</span> expr: <span class="hljs-type">ExprAST</span>? <span class="hljs-operator">=</span> <span class="hljs-literal">nil</span><br>        <span class="hljs-keyword">if</span> lexer.currentToken<span class="hljs-operator">!</span>.val <span class="hljs-operator">==</span> <span class="hljs-string">&quot;=&quot;</span> &#123;<br>            lexer.nextToken()<br>          	<span class="hljs-comment">//解析&quot;=&quot;右边</span><br>            <span class="hljs-keyword">let</span> expr <span class="hljs-operator">=</span> parseExpression()<br>            <span class="hljs-keyword">guard</span> expr <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>            &#125;<br>        &#125;<br>        <br>        varNames.append((name, expr))<br>        <br>      	<span class="hljs-comment">//看看还有没有下一个</span><br>        <span class="hljs-keyword">if</span> lexer.currentToken<span class="hljs-operator">!</span>.val <span class="hljs-operator">!=</span> <span class="hljs-string">&quot;,&quot;</span> &#123;<br>            <span class="hljs-keyword">break</span><br>        &#125;<br>        lexer.nextToken()<br>        <span class="hljs-keyword">if</span> lexer.currentToken<span class="hljs-operator">!</span>.token <span class="hljs-operator">!=</span> .identifier &#123;<br>            <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">&quot;Expected identifier list after var.&quot;</span>)<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span> lexer.currentToken<span class="hljs-operator">!</span>.token <span class="hljs-operator">!=</span> .in &#123;<br>        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">&quot;Expected &#x27;in&#x27; keyword after &#x27;var&#x27;.&quot;</span>)<br>    &#125;<br>    lexer.nextToken()<br>  	<span class="hljs-comment">//解析body</span><br>    <span class="hljs-keyword">let</span> body <span class="hljs-operator">=</span> parseExpression()<br>    <span class="hljs-keyword">guard</span> body <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-type">VarExprAST</span>(varNames, body<span class="hljs-operator">!</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>最后需要添加的是我们<code>VarExprAST</code>中的<code>codeGen()</code>方法。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">codeGen</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">IRValue?</span> &#123;
-    <span class="hljs-keyword">var</span> oldBindings: [<span class="hljs-type">IRInstruction?</span>] = []
-    <span class="hljs-keyword">let</span> theFunction = builder.insertBlock?.parent
-    <span class="hljs-keyword">guard</span> theFunction != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    <span class="hljs-comment">//注册所有变量，并让他们初始化</span>
-    <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> varNames &#123;
-        <span class="hljs-keyword">let</span> initVal: <span class="hljs-type">IRValue?</span>
-        <span class="hljs-keyword">if</span> v.<span class="hljs-number">1</span> != <span class="hljs-literal">nil</span> &#123;
-            initVal = v.<span class="hljs-number">1</span>?.codeGen()
-            <span class="hljs-keyword">guard</span> initVal != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-                <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-            &#125;
-        &#125; <span class="hljs-keyword">else</span> &#123;
-            <span class="hljs-comment">//没有的话就默认0</span>
-            initVal = <span class="hljs-type">FloatType</span>.double.constant(<span class="hljs-number">0</span>)
-        &#125;
-        
-        <span class="hljs-keyword">let</span> alloca = createEntryBlockAlloca(function: theFunction!, name: v.<span class="hljs-number">0</span>)
-        <span class="hljs-comment">//初始化变量，把initVal存到alloca中</span>
-        builder.buildStore(initVal!, to: alloca)
-      	<span class="hljs-comment">//记录的目的是防止丢失外部变量名相同的变量，比如说外部有变量a，body里也有变量a</span>
-        oldBindings.append(namedValues[v.<span class="hljs-number">0</span>])
-        namedValues[v.<span class="hljs-number">0</span>] = alloca
-    &#125;
-    
-    <span class="hljs-keyword">let</span> bodyVal = body.codeGen()
-    <span class="hljs-keyword">guard</span> bodyVal != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    <span class="hljs-comment">//恢复之前的变量绑定</span>
-    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">0</span>..&lt;varNames.<span class="hljs-built_in">count</span> &#123;
-        namedValues[varNames[i].<span class="hljs-number">0</span>] = oldBindings[i]
-    &#125;
-    <span class="hljs-keyword">return</span> bodyVal
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">codeGen</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">IRValue</span>? &#123;<br>    <span class="hljs-keyword">var</span> oldBindings: [<span class="hljs-type">IRInstruction</span>?] <span class="hljs-operator">=</span> []<br>    <span class="hljs-keyword">let</span> theFunction <span class="hljs-operator">=</span> builder.insertBlock<span class="hljs-operator">?</span>.parent<br>    <span class="hljs-keyword">guard</span> theFunction <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <span class="hljs-comment">//注册所有变量，并让他们初始化</span><br>    <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> varNames &#123;<br>        <span class="hljs-keyword">let</span> initVal: <span class="hljs-type">IRValue</span>?<br>        <span class="hljs-keyword">if</span> v.<span class="hljs-number">1</span> <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> &#123;<br>            initVal <span class="hljs-operator">=</span> v.<span class="hljs-number">1</span><span class="hljs-operator">?</span>.codeGen()<br>            <span class="hljs-keyword">guard</span> initVal <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-comment">//没有的话就默认0</span><br>            initVal <span class="hljs-operator">=</span> <span class="hljs-type">FloatType</span>.double.constant(<span class="hljs-number">0</span>)<br>        &#125;<br>        <br>        <span class="hljs-keyword">let</span> alloca <span class="hljs-operator">=</span> createEntryBlockAlloca(function: theFunction<span class="hljs-operator">!</span>, name: v.<span class="hljs-number">0</span>)<br>        <span class="hljs-comment">//初始化变量，把initVal存到alloca中</span><br>        builder.buildStore(initVal<span class="hljs-operator">!</span>, to: alloca)<br>      	<span class="hljs-comment">//记录的目的是防止丢失外部变量名相同的变量，比如说外部有变量a，body里也有变量a</span><br>        oldBindings.append(namedValues[v.<span class="hljs-number">0</span>])<br>        namedValues[v.<span class="hljs-number">0</span>] <span class="hljs-operator">=</span> alloca<br>    &#125;<br>    <br>    <span class="hljs-keyword">let</span> bodyVal <span class="hljs-operator">=</span> body.codeGen()<br>    <span class="hljs-keyword">guard</span> bodyVal <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <span class="hljs-comment">//恢复之前的变量绑定</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">0</span><span class="hljs-operator">..&lt;</span>varNames.count &#123;<br>        namedValues[varNames[i].<span class="hljs-number">0</span>] <span class="hljs-operator">=</span> oldBindings[i]<br>    &#125;<br>    <span class="hljs-keyword">return</span> bodyVal<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>我们输入</p>
-<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">binary</span> : 1 <span class="hljs-params">(x y)</span></span> y;
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fibi</span><span class="hljs-params">(x)</span></span>
-    var a = <span class="hljs-number">1</span>, b = <span class="hljs-number">1</span>, c <span class="hljs-keyword">in</span>
-    (<span class="hljs-keyword">for</span> i = <span class="hljs-number">3</span>, i &lt; x <span class="hljs-keyword">in</span>
-        c = a + b :
-        a = b :
-        b = c) :
-    b;
-
-fibi(<span class="hljs-number">10</span>);</code></pre></div>
-
+<figure class="highlight flix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs flix"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">binary</span> </span>: <span class="hljs-number">1</span> (x y) y;<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fibi</span></span>(x)<br>    var a = <span class="hljs-number">1</span>, b = <span class="hljs-number">1</span>, c <span class="hljs-keyword">in</span><br>    (for i = <span class="hljs-number">3</span>, i &lt; x <span class="hljs-keyword">in</span><br>        c = a + b :<br>        a = b :<br>        b = c) :<br>    b;<br><br>fibi(<span class="hljs-number">10</span>);<br></code></pre></td></tr></table></figure>
 <p>输出</p>
-<div class="hljs"><pre><code class="hljs undefined">Read function definition:
-
-<span class="hljs-keyword">define</span> <span class="hljs-keyword">double</span> @<span class="hljs-string">"binary:"</span>(<span class="hljs-keyword">double</span> <span class="hljs-symbol">%x</span>, <span class="hljs-keyword">double</span> <span class="hljs-symbol">%y</span>) &#123;
-entry:
-  <span class="hljs-symbol">%x1</span> = <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">i64</span> <span class="hljs-number">0</span>
-  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-symbol">%x</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%x1</span>
-  <span class="hljs-symbol">%y2</span> = <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">i64</span> <span class="hljs-number">0</span>
-  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-symbol">%y</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%y2</span>
-  <span class="hljs-symbol">%y3</span> = <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%y2</span>
-  <span class="hljs-keyword">ret</span> <span class="hljs-keyword">double</span> <span class="hljs-symbol">%y3</span>
-&#125;
-Read function definition:
-
-<span class="hljs-keyword">define</span> <span class="hljs-keyword">double</span> <span class="hljs-title">@fibi</span>(<span class="hljs-keyword">double</span> <span class="hljs-symbol">%x</span>) &#123;
-entry:
-  <span class="hljs-symbol">%x1</span> = <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">i64</span> <span class="hljs-number">0</span>
-  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-symbol">%x</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%x1</span>
-  <span class="hljs-symbol">%a</span> = <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">i64</span> <span class="hljs-number">0</span>
-  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-number">0.000000e+00</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%a</span>
-  <span class="hljs-symbol">%b</span> = <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">i64</span> <span class="hljs-number">0</span>
-  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-number">0.000000e+00</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%b</span>
-  <span class="hljs-symbol">%c</span> = <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">i64</span> <span class="hljs-number">0</span>
-  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-number">0.000000e+00</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%c</span>
-  <span class="hljs-symbol">%i</span> = <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">i64</span> <span class="hljs-number">0</span>
-  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-number">3.000000e+00</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%i</span>
-  <span class="hljs-keyword">br</span> label <span class="hljs-symbol">%loop</span>
-
-loop:                                             <span class="hljs-comment">; preds = %loop, %entry
-</span>  <span class="hljs-symbol">%c2</span> = <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%c</span>
-  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-symbol">%c2</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%c</span>
-  <span class="hljs-symbol">%a3</span> = <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%a</span>
-  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-symbol">%a3</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%a</span>
-  <span class="hljs-symbol">%binaryOp</span> = <span class="hljs-keyword">call</span> <span class="hljs-keyword">double</span> @<span class="hljs-string">"binary:"</span>(<span class="hljs-keyword">double</span> <span class="hljs-symbol">%c2</span>, <span class="hljs-keyword">double</span> <span class="hljs-symbol">%a3</span>)
-  <span class="hljs-symbol">%b4</span> = <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%b</span>
-  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-symbol">%b4</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%b</span>
-  <span class="hljs-symbol">%binaryOp5</span> = <span class="hljs-keyword">call</span> <span class="hljs-keyword">double</span> @<span class="hljs-string">"binary:"</span>(<span class="hljs-keyword">double</span> <span class="hljs-symbol">%binaryOp</span>, <span class="hljs-keyword">double</span> <span class="hljs-symbol">%b4</span>)
-  <span class="hljs-symbol">%i6</span> = <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%i</span>
-  <span class="hljs-symbol">%x7</span> = <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%x1</span>
-  <span class="hljs-symbol">%boolCmp</span> = <span class="hljs-keyword">fcmp</span> <span class="hljs-keyword">olt</span> <span class="hljs-keyword">double</span> <span class="hljs-symbol">%i6</span>, <span class="hljs-symbol">%x7</span>
-  <span class="hljs-symbol">%loopCond</span> = <span class="hljs-keyword">icmp</span> <span class="hljs-keyword">ne</span> <span class="hljs-keyword">i1</span> <span class="hljs-symbol">%boolCmp</span>, <span class="hljs-keyword">false</span>
-  <span class="hljs-symbol">%0</span> = <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%i</span>
-  <span class="hljs-symbol">%nextVal</span> = <span class="hljs-keyword">fadd</span> <span class="hljs-keyword">double</span> <span class="hljs-symbol">%0</span>, <span class="hljs-number">1.000000e+00</span>
-  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-symbol">%nextVal</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%i</span>
-  <span class="hljs-keyword">br</span> <span class="hljs-keyword">i1</span> <span class="hljs-symbol">%loopCond</span>, label <span class="hljs-symbol">%loop</span>, label <span class="hljs-symbol">%afterLoop</span>
-
-afterLoop:                                        <span class="hljs-comment">; preds = %loop
-</span>  <span class="hljs-symbol">%b8</span> = <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span>, <span class="hljs-keyword">double</span>* <span class="hljs-symbol">%b</span>
-  <span class="hljs-symbol">%binaryOp9</span> = <span class="hljs-keyword">call</span> <span class="hljs-keyword">double</span> @<span class="hljs-string">"binary:"</span>(<span class="hljs-keyword">double</span> <span class="hljs-number">0.000000e+00</span>, <span class="hljs-keyword">double</span> <span class="hljs-symbol">%b8</span>)
-  <span class="hljs-keyword">ret</span> <span class="hljs-keyword">double</span> <span class="hljs-symbol">%binaryOp9</span>
-&#125;
-Read top-level expression:
-
-<span class="hljs-keyword">define</span> <span class="hljs-keyword">double</span> <span class="hljs-title">@__anon_expr</span>() &#123;
-entry:
-  <span class="hljs-symbol">%call</span> = <span class="hljs-keyword">call</span> <span class="hljs-keyword">double</span> <span class="hljs-title">@fibi</span>(<span class="hljs-keyword">double</span> <span class="hljs-number">1.000000e+01</span>)
-  <span class="hljs-keyword">ret</span> <span class="hljs-keyword">double</span> <span class="hljs-symbol">%call</span>
-&#125;
-<span class="hljs-number">0.0</span></code></pre></div>
-            </article>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs llvm">Read function definition:<br><br><span class="hljs-keyword">define</span> <span class="hljs-keyword">double</span> @<span class="hljs-string">&quot;binary:&quot;</span>(<span class="hljs-keyword">double</span> <span class="hljs-variable">%x</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%y</span>) &#123;<br><span class="hljs-symbol">entry:</span><br>  <span class="hljs-variable">%x1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-type">i64</span> <span class="hljs-number">0</span><br>  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%x</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%x1</span><br>  <span class="hljs-variable">%y2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-type">i64</span> <span class="hljs-number">0</span><br>  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%y</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%y2</span><br>  <span class="hljs-variable">%y3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%y2</span><br>  <span class="hljs-keyword">ret</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%y3</span><br>&#125;<br>Read function definition:<br><br><span class="hljs-keyword">define</span> <span class="hljs-keyword">double</span> <span class="hljs-title">@fibi</span>(<span class="hljs-keyword">double</span> <span class="hljs-variable">%x</span>) &#123;<br><span class="hljs-symbol">entry:</span><br>  <span class="hljs-variable">%x1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-type">i64</span> <span class="hljs-number">0</span><br>  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%x</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%x1</span><br>  <span class="hljs-variable">%a</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-type">i64</span> <span class="hljs-number">0</span><br>  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-number">0.000000e+00</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%a</span><br>  <span class="hljs-variable">%b</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-type">i64</span> <span class="hljs-number">0</span><br>  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-number">0.000000e+00</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%b</span><br>  <span class="hljs-variable">%c</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-type">i64</span> <span class="hljs-number">0</span><br>  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-number">0.000000e+00</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%c</span><br>  <span class="hljs-variable">%i</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">alloca</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-type">i64</span> <span class="hljs-number">0</span><br>  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-number">3.000000e+00</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%i</span><br>  <span class="hljs-keyword">br</span> label <span class="hljs-variable">%loop</span><br><br><span class="hljs-symbol">loop:</span>                                             <span class="hljs-comment">; preds = %loop, %entry</span><br>  <span class="hljs-variable">%c2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%c</span><br>  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%c2</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%c</span><br>  <span class="hljs-variable">%a3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%a</span><br>  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%a3</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%a</span><br>  <span class="hljs-variable">%binaryOp</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">call</span> <span class="hljs-keyword">double</span> @<span class="hljs-string">&quot;binary:&quot;</span>(<span class="hljs-keyword">double</span> <span class="hljs-variable">%c2</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%a3</span>)<br>  <span class="hljs-variable">%b4</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%b</span><br>  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%b4</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%b</span><br>  <span class="hljs-variable">%binaryOp5</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">call</span> <span class="hljs-keyword">double</span> @<span class="hljs-string">&quot;binary:&quot;</span>(<span class="hljs-keyword">double</span> <span class="hljs-variable">%binaryOp</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%b4</span>)<br>  <span class="hljs-variable">%i6</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%i</span><br>  <span class="hljs-variable">%x7</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%x1</span><br>  <span class="hljs-variable">%boolCmp</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">fcmp</span> <span class="hljs-keyword">olt</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%i6</span><span class="hljs-punctuation">,</span> <span class="hljs-variable">%x7</span><br>  <span class="hljs-variable">%loopCond</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">icmp</span> <span class="hljs-keyword">ne</span> <span class="hljs-type">i1</span> <span class="hljs-variable">%boolCmp</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">false</span><br>  <span class="hljs-variable">%0</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%i</span><br>  <span class="hljs-variable">%nextVal</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">fadd</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%0</span><span class="hljs-punctuation">,</span> <span class="hljs-number">1.000000e+00</span><br>  <span class="hljs-keyword">store</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%nextVal</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%i</span><br>  <span class="hljs-keyword">br</span> <span class="hljs-type">i1</span> <span class="hljs-variable">%loopCond</span><span class="hljs-punctuation">,</span> label <span class="hljs-variable">%loop</span><span class="hljs-punctuation">,</span> label <span class="hljs-variable">%afterLoop</span><br><br>afterLoop:                                        <span class="hljs-comment">; preds = %loop</span><br>  <span class="hljs-variable">%b8</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">load</span> <span class="hljs-keyword">double</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span>* <span class="hljs-variable">%b</span><br>  <span class="hljs-variable">%binaryOp9</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">call</span> <span class="hljs-keyword">double</span> @<span class="hljs-string">&quot;binary:&quot;</span>(<span class="hljs-keyword">double</span> <span class="hljs-number">0.000000e+00</span><span class="hljs-punctuation">,</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%b8</span>)<br>  <span class="hljs-keyword">ret</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%binaryOp9</span><br>&#125;<br>Read top-level expression:<br><br><span class="hljs-keyword">define</span> <span class="hljs-keyword">double</span> <span class="hljs-title">@__anon_expr</span>() &#123;<br><span class="hljs-symbol">entry:</span><br>  <span class="hljs-variable">%call</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">call</span> <span class="hljs-keyword">double</span> <span class="hljs-title">@fibi</span>(<span class="hljs-keyword">double</span> <span class="hljs-number">1.000000e+01</span>)<br>  <span class="hljs-keyword">ret</span> <span class="hljs-keyword">double</span> <span class="hljs-variable">%call</span><br>&#125;<br><span class="hljs-number">0.0</span><br></code></pre></td></tr></table></figure>
+            </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
@@ -558,7 +271,7 @@ entry:
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/编译原理/">编译原理</a>
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
                     
                   </div>
                 
@@ -572,36 +285,69 @@ entry:
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
-                <div class="post-prevnext row">
-                  <div class="post-prev col-6">
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/05/教你使用swift写编译器玩具（8）/">
+                      <a href="/2020/07/05/%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8swift%E5%86%99%E7%BC%96%E8%AF%91%E5%99%A8%E7%8E%A9%E5%85%B7%EF%BC%888%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">教你使用swift写编译器玩具（8）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
-                  </div>
-                  <div class="post-next col-6">
+                  </article>
+                  <article class="post-next col-6">
                     
                     
-                      <a href="/2020/07/05/教你使用swift写编译器玩具（6）/">
+                      <a href="/2020/07/05/%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8swift%E5%86%99%E7%BC%96%E8%AF%91%E5%99%A8%E7%8E%A9%E5%85%B7%EF%BC%886%EF%BC%89/">
                         <span class="hidden-mobile">教你使用swift写编译器玩具（6）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
-                  </div>
+                  </article>
                 </div>
               
             </div>
 
             
-          </div>
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'qyz777/qyz777.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
         </div>
       </div>
     </div>
@@ -609,7 +355,7 @@ entry:
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -621,16 +367,15 @@ entry:
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -651,21 +396,16 @@ entry:
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
     
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
   <div class="statistics">
     
     
@@ -691,24 +431,40 @@ entry:
   </div>
 
 
-    
+  
   <!-- 备案信息 -->
   <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">京ICP备18016370号-1</a>
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        京ICP备18016370号-1
+      </a>
+    </span>
     
   </div>
 
 
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -719,8 +475,23 @@ entry:
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
@@ -729,95 +500,29 @@ entry:
 
 
 
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: 'article.markdown-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "教你使用swift写编译器玩具（7）&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+      typing(title)
+      
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -834,8 +539,8 @@ entry:
 
 
 
-
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

@@ -1,48 +1,65 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" >
 
 
 
-
-
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
   <link rel="icon" type="image/png" href="/img/favicon.ico">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content>
+  <meta name="description" content="">
   <meta name="author" content="YiZhong">
-  <meta name="keywords" content>
+  <meta name="keywords" content="">
   <title>KVOController源码全解析 - YiZhong&#39;s Blog</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
-
-  
-    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/tomorrow-night-eighties.min.css">
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-</head>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null},"tajs":null}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
 
 
 <body>
@@ -124,34 +141,38 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
           </li>
+        
         
       </ul>
     </div>
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner" id="banner" 
          style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="KVOController源码全解析">
               
             </span>
 
             
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-06-27 10:00">
-      2020年6月27日 上午
-    </time>
-  </div>
-
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-27 10:00" pubdate>
+        2020年6月27日 上午
+      </time>
+    </span>
+  
+</div>
 
 <div class="mt-1">
   
@@ -168,7 +189,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      25
+      26
        分钟
     </span>
   
@@ -190,78 +211,37 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">KVOController源码全解析</h1>
             
-            <article class="markdown-body">
+            <div class="markdown-body">
               <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在阅读公司源码的一些功能时发现了KVOController这个神奇的库。这个库十分的好用，可以主动的去观察一个对象的属性。</p>
 <p>例如</p>
-<div class="hljs"><pre><code class="hljs undefined">[<span class="hljs-keyword">self</span>.KVOControllerNonRetaining observe:_test
-                                    keyPath:<span class="hljs-string">@"test"</span>
-                                    options:<span class="hljs-number">0</span>
-                                      block::^(<span class="hljs-keyword">id</span> _Nullable observer, <span class="hljs-keyword">id</span> object, <span class="hljs-built_in">NSDictionary</span>&lt;<span class="hljs-built_in">NSString</span> *, <span class="hljs-keyword">id</span>&gt; *change) &#123;
-                                          
-                                      &#125;];</code></pre></div>
-
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs objectivec">[<span class="hljs-keyword">self</span>.KVOControllerNonRetaining observe:_test<br>                                    keyPath:<span class="hljs-string">@&quot;test&quot;</span><br>                                    options:<span class="hljs-number">0</span><br>                                      block::^(<span class="hljs-keyword">id</span> _Nullable observer, <span class="hljs-keyword">id</span> object, <span class="hljs-built_in">NSDictionary</span>&lt;<span class="hljs-built_in">NSString</span> *, <span class="hljs-keyword">id</span>&gt; *change) &#123;<br>                                          <br>                                      &#125;];<br></code></pre></td></tr></table></figure>
 <p>KVOController的源码不多，加上分类也就不到800行，所以我花了一段时间阅读它的源码，这篇文章是阅读源码的总结。</p>
 <h1 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h1><p>下图是我通过阅读源码画的UML类图，因为有些偷懒，所以这个类图的方法并不全。但这并不重要，这张类图的意义在于我们能够清晰地看明白他们之间的关系。</p>
 <p><img src="https://cdn.qyizhong.cn/8216167-6d7422401bf1329a.png" srcset="/img/loading.gif" alt="KVOController类图.png"></p>
 <h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><h2 id="FBKVOInfo"><a href="#FBKVOInfo" class="headerlink" title="_FBKVOInfo"></a>_FBKVOInfo</h2><p>_FBKVOInfo作为一个被两个类组合的类，在KVOController中属于Model的性质，用来保存所需要的内容，以下是这个类拥有的变量</p>
-<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-variable">__weak</span> FBKVOController *<span class="hljs-variable">_controller</span>;
-  NSString *<span class="hljs-variable">_keyPath</span>;
-  NSKeyValueObservingOptions <span class="hljs-variable">_options</span>;
-  SEL <span class="hljs-variable">_action</span>;
-  void *<span class="hljs-variable">_context</span>;
-  FBKVONotificationBlock <span class="hljs-variable">_block</span>;
-  <span class="hljs-variable">_FBKVOInfoState</span> <span class="hljs-variable">_state</span>;</code></pre></div>
-
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sqf"><span class="hljs-variable">__weak</span> FBKVOController *<span class="hljs-variable">_controller</span>;<br>  NSString *<span class="hljs-variable">_keyPath</span>;<br>  NSKeyValueObservingOptions <span class="hljs-variable">_options</span>;<br>  SEL <span class="hljs-variable">_action</span>;<br>  void *<span class="hljs-variable">_context</span>;<br>  FBKVONotificationBlock <span class="hljs-variable">_block</span>;<br>  <span class="hljs-variable">_FBKVOInfoState</span> <span class="hljs-variable">_state</span>;<br></code></pre></td></tr></table></figure>
 <h3 id="controller"><a href="#controller" class="headerlink" title="_controller"></a>_controller</h3><p>_FBKVOInfo在FBKVOController中初始化，初始化时就把FBKVOController对象持有了，这里用一个weak修饰防止循环引用</p>
 <h3 id="keyPath"><a href="#keyPath" class="headerlink" title="_keyPath"></a>_keyPath</h3><p>这个应该不怎么需要解释，这个就是KVO观察的keyPath</p>
 <h3 id="options"><a href="#options" class="headerlink" title="_options"></a>_options</h3><p>这个也是KVO观察的设置，是一个枚举，设置不同的枚举KVO效果是不同的，这里就不详细展开了。</p>
-<div class="hljs"><pre><code class="hljs undefined">typedef <span class="hljs-type">NS_OPTIONS</span>(<span class="hljs-type">NSUInteger</span>, <span class="hljs-type">NSKeyValueObservingOptions</span>) &#123;
-    <span class="hljs-type">NSKeyValueObservingOptionNew</span> = 0x01,
-    <span class="hljs-type">NSKeyValueObservingOptionOld</span> = 0x02,
-    <span class="hljs-type">NSKeyValueObservingOptionInitial</span> = 0x04,
-    <span class="hljs-type">NSKeyValueObservingOptionPrior</span> = 0x08
-&#125;;</code></pre></div>
-
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs elm">typedef <span class="hljs-type">NS_OPTIONS</span>(<span class="hljs-type">NSUInteger</span>, <span class="hljs-type">NSKeyValueObservingOptions</span>) &#123;<br>    <span class="hljs-type">NSKeyValueObservingOptionNew</span> = 0x01,<br>    <span class="hljs-type">NSKeyValueObservingOptionOld</span> = 0x02,<br>    <span class="hljs-type">NSKeyValueObservingOptionInitial</span> = 0x04,<br>    <span class="hljs-type">NSKeyValueObservingOptionPrior</span> = 0x08<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h3 id="action、-block"><a href="#action、-block" class="headerlink" title="_action、_block"></a>_action、_block</h3><p>这个是用来保存FBKVOController需要调用的方法和block</p>
 <h3 id="context"><a href="#context" class="headerlink" title="context"></a>context</h3><p>上下文，这个也不多解释</p>
 <h3 id="state"><a href="#state" class="headerlink" title="_state"></a>_state</h3><p>这是一个很重要的枚举，用来保存_FBKVOInfo所对应对象的观察状态</p>
-<div class="hljs"><pre><code class="hljs undefined">typedef NS_ENUM(uint8_t, <span class="hljs-variable">_FBKVOInfoState</span>) &#123;
-<span class="hljs-comment">// 初始化状态</span>
-  <span class="hljs-variable">_FBKVOInfoStateInitial</span> = <span class="hljs-number">0</span>,
-<span class="hljs-comment">// 被观察状态</span>
-  <span class="hljs-variable">_FBKVOInfoStateObserving</span>,
-<span class="hljs-comment">// 没被观察状态</span>
-  <span class="hljs-variable">_FBKVOInfoStateNotObserving</span>,
-&#125;;</code></pre></div>
-
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sqf">typedef NS_ENUM(uint8_t, <span class="hljs-variable">_FBKVOInfoState</span>) &#123;<br><span class="hljs-comment">// 初始化状态</span><br>  <span class="hljs-variable">_FBKVOInfoStateInitial</span> = <span class="hljs-number">0</span>,<br><span class="hljs-comment">// 被观察状态</span><br>  <span class="hljs-variable">_FBKVOInfoStateObserving</span>,<br><span class="hljs-comment">// 没被观察状态</span><br>  <span class="hljs-variable">_FBKVOInfoStateNotObserving</span>,<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="FBKVOController"><a href="#FBKVOController" class="headerlink" title="FBKVOController"></a>FBKVOController</h2><p>FBKVOController是KVOController对外暴露的类，其中我们主要用以下两个方法</p>
-<div class="hljs"><pre><code class="hljs undefined">- <span class="hljs-params">(void)</span>observe:<span class="hljs-params">(nullable id)</span>object keyPath:<span class="hljs-params">(NSString *)</span>keyPath options:<span class="hljs-params">(NSKeyValueObservingOptions)</span>options block:<span class="hljs-params">(FBKVONotificationBlock)</span>block;
-
-- <span class="hljs-params">(void)</span>observe:<span class="hljs-params">(nullable id)</span>object keyPath:<span class="hljs-params">(NSString *)</span>keyPath options:<span class="hljs-params">(NSKeyValueObservingOptions)</span>options action:<span class="hljs-params">(SEL)</span>action;</code></pre></div>
-
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs erlang">- <span class="hljs-params">(void)</span>observe:<span class="hljs-params">(nullable id)</span>object keyPath:<span class="hljs-params">(NSString *)</span>keyPath options:<span class="hljs-params">(NSKeyValueObservingOptions)</span>options block:<span class="hljs-params">(FBKVONotificationBlock)</span>block;<br><br>- <span class="hljs-params">(void)</span>observe:<span class="hljs-params">(nullable id)</span>object keyPath:<span class="hljs-params">(NSString *)</span>keyPath options:<span class="hljs-params">(NSKeyValueObservingOptions)</span>options action:<span class="hljs-params">(SEL)</span>action;<br></code></pre></td></tr></table></figure>
 <p>一个是KVO之后的block的回调，另一个是KVO之后调用的方法，下面我们以第一个方法进行讲解。</p>
-<div class="hljs"><pre><code class="hljs undefined">- (<span class="hljs-built_in">void</span>)observe:(nullable id)<span class="hljs-keyword">object</span> keyPath:(<span class="hljs-type">NSString</span> *)keyPath options:(<span class="hljs-type">NSKeyValueObservingOptions</span>)options <span class="hljs-keyword">block</span>:(<span class="hljs-type">FBKVONotificationBlock</span>)<span class="hljs-keyword">block</span>
-&#123;
-  <span class="hljs-type">NSAssert</span>(<span class="hljs-number">0</span> != keyPath.length &amp;&amp; <span class="hljs-type">NULL</span> != <span class="hljs-keyword">block</span>, @<span class="hljs-string">"missing required parameters observe:%@ keyPath:%@ block:%p"</span>, <span class="hljs-keyword">object</span>, keyPath, <span class="hljs-keyword">block</span>);
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">nil</span> == <span class="hljs-keyword">object</span> || <span class="hljs-number">0</span> == keyPath.length || <span class="hljs-type">NULL</span> == <span class="hljs-keyword">block</span>) &#123;
-    <span class="hljs-keyword">return</span>;
-  &#125;
-
-  // create info
-  _FBKVOInfo *info = [[_FBKVOInfo alloc] initWithController:self keyPath:keyPath options:options <span class="hljs-keyword">block</span>:<span class="hljs-keyword">block</span>];
-
-  // observe <span class="hljs-keyword">object</span> <span class="hljs-keyword">with</span> info
-  [self _observe:<span class="hljs-keyword">object</span> info:info];
-&#125;</code></pre></div>
-
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">- (<span class="hljs-type">void</span>)observe:(nullable id)<span class="hljs-keyword">object</span> keyPath:(NSString *)keyPath <span class="hljs-keyword">options</span>:(NSKeyValueObservingOptions)<span class="hljs-keyword">options</span> block:(FBKVONotificationBlock)block<br>&#123;<br>  NSAssert(<span class="hljs-number">0</span> != keyPath.length &amp;&amp; <span class="hljs-keyword">NULL</span> != block, @&quot;missing required parameters observe:%@ keyPath:%@ block:%p&quot;, <span class="hljs-keyword">object</span>, keyPath, block);<br>  <span class="hljs-keyword">if</span> (nil == <span class="hljs-keyword">object</span> || <span class="hljs-number">0</span> == keyPath.length || <span class="hljs-keyword">NULL</span> == block) &#123;<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br><br>  // <span class="hljs-keyword">create</span> <span class="hljs-keyword">info</span><br>  _FBKVOInfo *<span class="hljs-keyword">info</span> = [[_FBKVOInfo alloc] initWithController:self keyPath:keyPath <span class="hljs-keyword">options</span>:<span class="hljs-keyword">options</span> block:block];<br><br>  // observe <span class="hljs-keyword">object</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">info</span><br>  [self _observe:<span class="hljs-keyword">object</span> <span class="hljs-keyword">info</span>:<span class="hljs-keyword">info</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>方法执行步骤:</p>
 <ol>
 <li>断言以及错误判断</li>
@@ -269,38 +249,7 @@
 <li>调用_observe:info:</li>
 </ol>
 <p>根据上文的结论，我们可以得知_FBKVOInfo是一个Model的存在，所以需要先把它初始化了。</p>
-<div class="hljs"><pre><code class="hljs undefined">- (void)<span class="hljs-variable">_observe</span>:(id)object info:(<span class="hljs-variable">_FBKVOInfo</span> *)info
-&#123;
-  <span class="hljs-comment">// lock</span>
-  pthread_mutex_lock(&amp;<span class="hljs-variable">_lock</span>);
-
-  NSMutableSet *infos = [<span class="hljs-variable">_objectInfosMap</span> objectForKey:object];
-
-  <span class="hljs-comment">// check for info existence</span>
-  <span class="hljs-variable">_FBKVOInfo</span> *existingInfo = [infos member:info];
-  <span class="hljs-keyword">if</span> (<span class="hljs-literal">nil</span> != existingInfo) &#123;
-    <span class="hljs-comment">// observation info already exists; do not observe it again</span>
-
-    <span class="hljs-comment">// unlock and return</span>
-    pthread_mutex_unlock(&amp;<span class="hljs-variable">_lock</span>);
-    return;
-  &#125;
-
-  <span class="hljs-comment">// lazilly create set of infos</span>
-  <span class="hljs-keyword">if</span> (<span class="hljs-literal">nil</span> == infos) &#123;
-    infos = [NSMutableSet <span class="hljs-built_in">set</span>];
-    [<span class="hljs-variable">_objectInfosMap</span> setObject:infos forKey:object];
-  &#125;
-
-  <span class="hljs-comment">// add info and oberve</span>
-  [infos addObject:info];
-
-  <span class="hljs-comment">// unlock prior to callout</span>
-  pthread_mutex_unlock(&amp;<span class="hljs-variable">_lock</span>);
-
-  [[<span class="hljs-variable">_FBKVOSharedController</span> sharedController] observe:object info:info];
-&#125;</code></pre></div>
-
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">- (<span class="hljs-type">void</span>)_observe:(id)<span class="hljs-keyword">object</span> <span class="hljs-keyword">info</span>:(_FBKVOInfo *)<span class="hljs-keyword">info</span><br>&#123;<br>  // <span class="hljs-keyword">lock</span><br>  pthread_mutex_lock(&amp;_lock);<br><br>  NSMutableSet *infos = [_objectInfosMap objectForKey:<span class="hljs-keyword">object</span>];<br><br>  // <span class="hljs-keyword">check</span> <span class="hljs-keyword">for</span> <span class="hljs-keyword">info</span> existence<br>  _FBKVOInfo *existingInfo = [infos member:<span class="hljs-keyword">info</span>];<br>  <span class="hljs-keyword">if</span> (nil != existingInfo) &#123;<br>    // observation <span class="hljs-keyword">info</span> already <span class="hljs-keyword">exists</span>; <span class="hljs-keyword">do</span> <span class="hljs-keyword">not</span> observe it again<br><br>    // unlock <span class="hljs-keyword">and</span> <span class="hljs-keyword">return</span><br>    pthread_mutex_unlock(&amp;_lock);<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br><br>  // lazilly <span class="hljs-keyword">create</span> <span class="hljs-keyword">set</span> <span class="hljs-keyword">of</span> infos<br>  <span class="hljs-keyword">if</span> (nil == infos) &#123;<br>    infos = [NSMutableSet <span class="hljs-keyword">set</span>];<br>    [_objectInfosMap setObject:infos forKey:<span class="hljs-keyword">object</span>];<br>  &#125;<br><br>  // <span class="hljs-keyword">add</span> <span class="hljs-keyword">info</span> <span class="hljs-keyword">and</span> oberve<br>  [infos addObject:<span class="hljs-keyword">info</span>];<br><br>  // unlock prior <span class="hljs-keyword">to</span> callout<br>  pthread_mutex_unlock(&amp;_lock);<br><br>  [[_FBKVOSharedController sharedController] observe:<span class="hljs-keyword">object</span> <span class="hljs-keyword">info</span>:<span class="hljs-keyword">info</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>_objectInfosMap是临界资源，所以在这个方法里进行加锁防止资源被争抢。</p>
 <p>方法执行步骤:</p>
 <ol>
@@ -311,30 +260,10 @@
 <li>解锁</li>
 <li>调用_FBKVOSharedController</li>
 </ol>
-<p>这里涉及到一个知识点是NSMapTable，这是一个类似NSDictionary的容器，但是它不仅能做到key和value之间的映射关系，它也能做到object和object之间的映射关系。这种object和object之间的映射关系在KVOController中体现的很好，每一个被观察者(object)对应一个_FBKVOInfo对象(object)。推荐阅读<a href="http://www.isaced.com/post-235.html" target="_blank" rel="noopener">NSMapTable: 不只是一个能放weak指针的 NSDictionary</a></p>
+<p>这里涉及到一个知识点是NSMapTable，这是一个类似NSDictionary的容器，但是它不仅能做到key和value之间的映射关系，它也能做到object和object之间的映射关系。这种object和object之间的映射关系在KVOController中体现的很好，每一个被观察者(object)对应一个_FBKVOInfo对象(object)。推荐阅读<a target="_blank" rel="noopener" href="http://www.isaced.com/post-235.html">NSMapTable: 不只是一个能放weak指针的 NSDictionary</a></p>
 <h2 id="FBKVOSharedController"><a href="#FBKVOSharedController" class="headerlink" title="_FBKVOSharedController"></a>_FBKVOSharedController</h2><p>_FBKVOSharedController它是一个单例，这个私有类才是KVOController提供服务的实际实现类。</p>
 <p>我们继续来看_FBKVOSharedController被FBKVOController所调用的方法</p>
-<div class="hljs"><pre><code class="hljs undefined">- (void)observe:(id)object <span class="hljs-meta">info</span>:(nullable _FBKVOInfo *)<span class="hljs-meta">info</span>
-&#123;
-  <span class="hljs-meta">if</span> (nil == <span class="hljs-meta">info</span>) &#123;
-    return<span class="hljs-comment">;</span>
-  &#125;
-
-  // register <span class="hljs-meta">info</span>
-  pthread_mutex_lock(&amp;_mutex)<span class="hljs-comment">;</span>
-  [_infos <span class="hljs-keyword">addObject:info];
-</span>  pthread_mutex_unlock(&amp;_mutex)<span class="hljs-comment">;</span>
-
-  // <span class="hljs-keyword">add </span>observer
-  [object <span class="hljs-keyword">addObserver:self </span>forKeyPath:<span class="hljs-meta">info</span>-&gt;_keyPath options:<span class="hljs-meta">info</span>-&gt;_options context:(void *)<span class="hljs-meta">info</span>]<span class="hljs-comment">;</span>
-
-  <span class="hljs-meta">if</span> (<span class="hljs-meta">info</span>-&gt;_state == _FBKVOInfoStateInitial) &#123;
-    <span class="hljs-meta">info</span>-&gt;_state = _FBKVOInfoStateObserving<span class="hljs-comment">;</span>
-  &#125; <span class="hljs-meta">else</span> <span class="hljs-meta">if</span> (<span class="hljs-meta">info</span>-&gt;_state == _FBKVOInfoStateNotObserving) &#123;
-    [object removeObserver:<span class="hljs-keyword">self </span>forKeyPath:<span class="hljs-meta">info</span>-&gt;_keyPath context:(void *)<span class="hljs-meta">info</span>]<span class="hljs-comment">;</span>
-  &#125;
-&#125;</code></pre></div>
-
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">- (<span class="hljs-type">void</span>)observe:(id)<span class="hljs-keyword">object</span> <span class="hljs-keyword">info</span>:(nullable _FBKVOInfo *)<span class="hljs-keyword">info</span><br>&#123;<br>  <span class="hljs-keyword">if</span> (nil == <span class="hljs-keyword">info</span>) &#123;<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br><br>  // register <span class="hljs-keyword">info</span><br>  pthread_mutex_lock(&amp;_mutex);<br>  [_infos addObject:<span class="hljs-keyword">info</span>];<br>  pthread_mutex_unlock(&amp;_mutex);<br><br>  // <span class="hljs-keyword">add</span> observer<br>  [<span class="hljs-keyword">object</span> addObserver:self forKeyPath:<span class="hljs-keyword">info</span>-&gt;_keyPath <span class="hljs-keyword">options</span>:<span class="hljs-keyword">info</span>-&gt;_options context:(<span class="hljs-type">void</span> *)<span class="hljs-keyword">info</span>];<br><br>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">info</span>-&gt;_state == _FBKVOInfoStateInitial) &#123;<br>    <span class="hljs-keyword">info</span>-&gt;_state = _FBKVOInfoStateObserving;<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">info</span>-&gt;_state == _FBKVOInfoStateNotObserving) &#123;<br>    [<span class="hljs-keyword">object</span> removeObserver:self forKeyPath:<span class="hljs-keyword">info</span>-&gt;_keyPath context:(<span class="hljs-type">void</span> *)<span class="hljs-keyword">info</span>];<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>方法执行步骤:</p>
 <ol>
 <li>添加临界资源</li>
@@ -343,61 +272,9 @@
 </ol>
 <p>这里涉及到NSHashTable，这个类似于NSSet，本文对此不展开说明。</p>
 <p>之所以说_FBKVOSharedController才是KVOSharedController的实际实现类是因为它实现了KVO的回调方法</p>
-<div class="hljs"><pre><code class="hljs undefined">- (<span class="hljs-keyword">void</span>)observeValueForKeyPath:(<span class="hljs-keyword">nullable</span> <span class="hljs-built_in">NSString</span> *)keyPath
-                      ofObject:(<span class="hljs-keyword">nullable</span> <span class="hljs-keyword">id</span>)object
-                        change:(<span class="hljs-keyword">nullable</span> <span class="hljs-built_in">NSDictionary</span>&lt;<span class="hljs-built_in">NSString</span> *, <span class="hljs-keyword">id</span>&gt; *)change
-                       context:(<span class="hljs-keyword">nullable</span> <span class="hljs-keyword">void</span> *)context</code></pre></div>
-
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs objectivec">- (<span class="hljs-keyword">void</span>)observeValueForKeyPath:(<span class="hljs-keyword">nullable</span> <span class="hljs-built_in">NSString</span> *)keyPath<br>                      ofObject:(<span class="hljs-keyword">nullable</span> <span class="hljs-keyword">id</span>)object<br>                        change:(<span class="hljs-keyword">nullable</span> <span class="hljs-built_in">NSDictionary</span>&lt;<span class="hljs-built_in">NSString</span> *, <span class="hljs-keyword">id</span>&gt; *)change<br>                       context:(<span class="hljs-keyword">nullable</span> <span class="hljs-keyword">void</span> *)context<br></code></pre></td></tr></table></figure>
 <p>我们来看一下里面的内容</p>
-<div class="hljs"><pre><code class="hljs undefined">- (<span class="hljs-keyword">void</span>)observeValueForKeyPath:(<span class="hljs-keyword">nullable</span> <span class="hljs-built_in">NSString</span> *)keyPath
-                      ofObject:(<span class="hljs-keyword">nullable</span> <span class="hljs-keyword">id</span>)object
-                        change:(<span class="hljs-keyword">nullable</span> <span class="hljs-built_in">NSDictionary</span>&lt;<span class="hljs-built_in">NSString</span> *, <span class="hljs-keyword">id</span>&gt; *)change
-                       context:(<span class="hljs-keyword">nullable</span> <span class="hljs-keyword">void</span> *)context
-&#123;
-  <span class="hljs-built_in">NSAssert</span>(context, <span class="hljs-string">@"missing context keyPath:%@ object:%@ change:%@"</span>, keyPath, object, change);
-
-  _FBKVOInfo *info;
-
-  &#123;
-    <span class="hljs-comment">// lookup context in registered infos, taking out a strong reference only if it exists</span>
-    pthread_mutex_lock(&amp;_mutex);
-    info = [_infos member:(__bridge <span class="hljs-keyword">id</span>)context];
-    pthread_mutex_unlock(&amp;_mutex);
-  &#125;
-
-  <span class="hljs-keyword">if</span> (<span class="hljs-literal">nil</span> != info) &#123;
-
-    <span class="hljs-comment">// take strong reference to controller</span>
-    FBKVOController *controller = info-&gt;_controller;
-    <span class="hljs-keyword">if</span> (<span class="hljs-literal">nil</span> != controller) &#123;
-
-      <span class="hljs-comment">// take strong reference to observer</span>
-      <span class="hljs-keyword">id</span> observer = controller.observer;
-      <span class="hljs-keyword">if</span> (<span class="hljs-literal">nil</span> != observer) &#123;
-
-        <span class="hljs-comment">// dispatch custom block or action, fall back to default action</span>
-        <span class="hljs-keyword">if</span> (info-&gt;_block) &#123;
-          <span class="hljs-built_in">NSDictionary</span>&lt;<span class="hljs-built_in">NSString</span> *, <span class="hljs-keyword">id</span>&gt; *changeWithKeyPath = change;
-          <span class="hljs-comment">// add the keyPath to the change dictionary for clarity when mulitple keyPaths are being observed</span>
-          <span class="hljs-keyword">if</span> (keyPath) &#123;
-            <span class="hljs-built_in">NSMutableDictionary</span>&lt;<span class="hljs-built_in">NSString</span> *, <span class="hljs-keyword">id</span>&gt; *mChange = [<span class="hljs-built_in">NSMutableDictionary</span> dictionaryWithObject:keyPath forKey:FBKVONotificationKeyPathKey];
-            [mChange addEntriesFromDictionary:change];
-            changeWithKeyPath = [mChange <span class="hljs-keyword">copy</span>];
-          &#125;
-          info-&gt;_block(observer, object, changeWithKeyPath);
-        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (info-&gt;_action) &#123;
-<span class="hljs-meta">#pragma clang diagnostic push</span>
-<span class="hljs-meta">#pragma clang diagnostic ignored <span class="hljs-meta-string">"-Warc-performSelector-leaks"</span></span>
-          [observer performSelector:info-&gt;_action withObject:change withObject:object];
-<span class="hljs-meta">#pragma clang diagnostic pop</span>
-        &#125; <span class="hljs-keyword">else</span> &#123;
-          [observer observeValueForKeyPath:keyPath ofObject:object change:change context:info-&gt;_context];
-        &#125;
-      &#125;
-    &#125;
-  &#125;
-&#125;</code></pre></div>
-
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs objectivec">- (<span class="hljs-keyword">void</span>)observeValueForKeyPath:(<span class="hljs-keyword">nullable</span> <span class="hljs-built_in">NSString</span> *)keyPath<br>                      ofObject:(<span class="hljs-keyword">nullable</span> <span class="hljs-keyword">id</span>)object<br>                        change:(<span class="hljs-keyword">nullable</span> <span class="hljs-built_in">NSDictionary</span>&lt;<span class="hljs-built_in">NSString</span> *, <span class="hljs-keyword">id</span>&gt; *)change<br>                       context:(<span class="hljs-keyword">nullable</span> <span class="hljs-keyword">void</span> *)context<br>&#123;<br>  <span class="hljs-built_in">NSAssert</span>(context, <span class="hljs-string">@&quot;missing context keyPath:%@ object:%@ change:%@&quot;</span>, keyPath, object, change);<br><br>  _FBKVOInfo *info;<br><br>  &#123;<br>    <span class="hljs-comment">// lookup context in registered infos, taking out a strong reference only if it exists</span><br>    pthread_mutex_lock(&amp;_mutex);<br>    info = [_infos member:(__bridge <span class="hljs-keyword">id</span>)context];<br>    pthread_mutex_unlock(&amp;_mutex);<br>  &#125;<br><br>  <span class="hljs-keyword">if</span> (<span class="hljs-literal">nil</span> != info) &#123;<br><br>    <span class="hljs-comment">// take strong reference to controller</span><br>    FBKVOController *controller = info-&gt;_controller;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-literal">nil</span> != controller) &#123;<br><br>      <span class="hljs-comment">// take strong reference to observer</span><br>      <span class="hljs-keyword">id</span> observer = controller.observer;<br>      <span class="hljs-keyword">if</span> (<span class="hljs-literal">nil</span> != observer) &#123;<br><br>        <span class="hljs-comment">// dispatch custom block or action, fall back to default action</span><br>        <span class="hljs-keyword">if</span> (info-&gt;_block) &#123;<br>          <span class="hljs-built_in">NSDictionary</span>&lt;<span class="hljs-built_in">NSString</span> *, <span class="hljs-keyword">id</span>&gt; *changeWithKeyPath = change;<br>          <span class="hljs-comment">// add the keyPath to the change dictionary for clarity when mulitple keyPaths are being observed</span><br>          <span class="hljs-keyword">if</span> (keyPath) &#123;<br>            <span class="hljs-built_in">NSMutableDictionary</span>&lt;<span class="hljs-built_in">NSString</span> *, <span class="hljs-keyword">id</span>&gt; *mChange = [<span class="hljs-built_in">NSMutableDictionary</span> dictionaryWithObject:keyPath forKey:FBKVONotificationKeyPathKey];<br>            [mChange addEntriesFromDictionary:change];<br>            changeWithKeyPath = [mChange <span class="hljs-keyword">copy</span>];<br>          &#125;<br>          info-&gt;_block(observer, object, changeWithKeyPath);<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (info-&gt;_action) &#123;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> clang diagnostic push</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> clang diagnostic ignored <span class="hljs-meta-string">&quot;-Warc-performSelector-leaks&quot;</span></span><br>          [observer performSelector:info-&gt;_action withObject:change withObject:object];<br><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> clang diagnostic pop</span><br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>          [observer observeValueForKeyPath:keyPath ofObject:object change:change context:info-&gt;_context];<br>        &#125;<br>      &#125;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>方法执行步骤</p>
 <ol>
 <li>断言</li>
@@ -407,89 +284,18 @@
 </ol>
 <p>最后一步调用发现block或者SEL都不存在时必须让object调用，因为observe里可能存在observeValueForKeyPath的实现</p>
 <h2 id="为什么使用FBKVOController不需要移除通知"><a href="#为什么使用FBKVOController不需要移除通知" class="headerlink" title="为什么使用FBKVOController不需要移除通知"></a>为什么使用FBKVOController不需要移除通知</h2><p>在FBKVOController的dealloc里是这样写的</p>
-<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-selector-tag">-</span> (void)<span class="hljs-selector-tag">dealloc</span>
-&#123;
-  <span class="hljs-selector-attr">[self unobserveAll]</span>;
-  <span class="hljs-selector-tag">pthread_mutex_destroy</span>(&amp;_lock);
-&#125;</code></pre></div>
-
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-tag">-</span> (void)<span class="hljs-selector-tag">dealloc</span><br>&#123;<br>  <span class="hljs-selector-attr">[self unobserveAll]</span>;<br>  <span class="hljs-selector-tag">pthread_mutex_destroy</span>(&amp;_lock);<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>unobserveAll所调用的是</p>
-<div class="hljs"><pre><code class="hljs undefined">- (void)<span class="hljs-variable">_unobserveAll</span>
-&#123;
-  <span class="hljs-comment">// lock</span>
-  pthread_mutex_lock(&amp;<span class="hljs-variable">_lock</span>);
-
-  NSMapTable *objectInfoMaps = [<span class="hljs-variable">_objectInfosMap</span> copy];
-
-  <span class="hljs-comment">// clear table and map</span>
-  [<span class="hljs-variable">_objectInfosMap</span> removeAllObjects];
-
-  <span class="hljs-comment">// unlock</span>
-  pthread_mutex_unlock(&amp;<span class="hljs-variable">_lock</span>);
-
-  <span class="hljs-variable">_FBKVOSharedController</span> *shareController = [<span class="hljs-variable">_FBKVOSharedController</span> sharedController];
-
-  <span class="hljs-keyword">for</span> (id object <span class="hljs-built_in">in</span> objectInfoMaps) &#123;
-    <span class="hljs-comment">// unobserve each registered object and infos</span>
-    NSSet *infos = [objectInfoMaps objectForKey:object];
-    [shareController unobserve:object infos:infos];
-  &#125;
-&#125;</code></pre></div>
-
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs sqf">- (void)<span class="hljs-variable">_unobserveAll</span><br>&#123;<br>  <span class="hljs-comment">// lock</span><br>  pthread_mutex_lock(&amp;<span class="hljs-variable">_lock</span>);<br><br>  NSMapTable *objectInfoMaps = [<span class="hljs-variable">_objectInfosMap</span> copy];<br><br>  <span class="hljs-comment">// clear table and map</span><br>  [<span class="hljs-variable">_objectInfosMap</span> removeAllObjects];<br><br>  <span class="hljs-comment">// unlock</span><br>  pthread_mutex_unlock(&amp;<span class="hljs-variable">_lock</span>);<br><br>  <span class="hljs-variable">_FBKVOSharedController</span> *shareController = [<span class="hljs-variable">_FBKVOSharedController</span> sharedController];<br><br>  <span class="hljs-keyword">for</span> (id object <span class="hljs-built_in">in</span> objectInfoMaps) &#123;<br>    <span class="hljs-comment">// unobserve each registered object and infos</span><br>    NSSet *infos = [objectInfoMaps objectForKey:object];<br>    [shareController unobserve:object infos:infos];<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>可以发现FBKVOController通过遍历Map，把所持有的观察者都一一去除了</p>
 <p>最终调用的方法是_FBKVOSharedController的取消观察方法</p>
-<div class="hljs"><pre><code class="hljs undefined">- (void)unobserve:(id)object infos:(nullable NSSet&lt;<span class="hljs-variable">_FBKVOInfo</span> *&gt; *)infos
-&#123;
-  <span class="hljs-keyword">if</span> (<span class="hljs-number">0</span> == infos.<span class="hljs-built_in">count</span>) &#123;
-    return;
-  &#125;
-
-  <span class="hljs-comment">// unregister info</span>
-  pthread_mutex_lock(&amp;<span class="hljs-variable">_mutex</span>);
-  <span class="hljs-keyword">for</span> (<span class="hljs-variable">_FBKVOInfo</span> *info <span class="hljs-built_in">in</span> infos) &#123;
-    [<span class="hljs-variable">_infos</span> removeObject:info];
-  &#125;
-  pthread_mutex_unlock(&amp;<span class="hljs-variable">_mutex</span>);
-
-  <span class="hljs-comment">// remove observer</span>
-  <span class="hljs-keyword">for</span> (<span class="hljs-variable">_FBKVOInfo</span> *info <span class="hljs-built_in">in</span> infos) &#123;
-    <span class="hljs-keyword">if</span> (info-&gt;<span class="hljs-variable">_state</span> == <span class="hljs-variable">_FBKVOInfoStateObserving</span>) &#123;
-      [object removeObserver:self forKeyPath:info-&gt;<span class="hljs-variable">_keyPath</span> context:(void *)info];
-    &#125;
-    info-&gt;<span class="hljs-variable">_state</span> = <span class="hljs-variable">_FBKVOInfoStateNotObserving</span>;
-  &#125;
-&#125;</code></pre></div>
-
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs sqf">- (void)unobserve:(id)object infos:(nullable NSSet&lt;<span class="hljs-variable">_FBKVOInfo</span> *&gt; *)infos<br>&#123;<br>  <span class="hljs-keyword">if</span> (<span class="hljs-number">0</span> == infos.<span class="hljs-built_in">count</span>) &#123;<br>    return;<br>  &#125;<br><br>  <span class="hljs-comment">// unregister info</span><br>  pthread_mutex_lock(&amp;<span class="hljs-variable">_mutex</span>);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-variable">_FBKVOInfo</span> *info <span class="hljs-built_in">in</span> infos) &#123;<br>    [<span class="hljs-variable">_infos</span> removeObject:info];<br>  &#125;<br>  pthread_mutex_unlock(&amp;<span class="hljs-variable">_mutex</span>);<br><br>  <span class="hljs-comment">// remove observer</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-variable">_FBKVOInfo</span> *info <span class="hljs-built_in">in</span> infos) &#123;<br>    <span class="hljs-keyword">if</span> (info-&gt;<span class="hljs-variable">_state</span> == <span class="hljs-variable">_FBKVOInfoStateObserving</span>) &#123;<br>      [object removeObserver:self forKeyPath:info-&gt;<span class="hljs-variable">_keyPath</span> context:(void *)info];<br>    &#125;<br>    info-&gt;<span class="hljs-variable">_state</span> = <span class="hljs-variable">_FBKVOInfoStateNotObserving</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>这个方法可以看出来object所对应的_FBKVOSharedController所持有的_FBKVOInfo全部都被removeObserver了</p>
 <h2 id="“NSObject-FBKVOController-h”"><a href="#“NSObject-FBKVOController-h”" class="headerlink" title="“NSObject+FBKVOController.h”"></a>“NSObject+FBKVOController.h”</h2><p>KVOController还有一个NSObject的分类，提供两种方式使用KVOController的懒加载，分别是持有方式和不持有方式。</p>
-<div class="hljs"><pre><code class="hljs undefined">- (FBKVOController *)KVOController
-&#123;
-  <span class="hljs-keyword">id</span> controller = objc_getAssociatedObject(<span class="hljs-keyword">self</span>, <span class="hljs-built_in">NSObjectKVOControllerKey</span>);
-  
-  <span class="hljs-comment">// lazily create the KVOController</span>
-  <span class="hljs-keyword">if</span> (<span class="hljs-literal">nil</span> == controller) &#123;
-    controller = [FBKVOController controllerWithObserver:<span class="hljs-keyword">self</span>];
-    <span class="hljs-keyword">self</span>.KVOController = controller;
-  &#125;
-  
-  <span class="hljs-keyword">return</span> controller;
-&#125;
-
-- (FBKVOController *)KVOControllerNonRetaining
-&#123;
-  <span class="hljs-keyword">id</span> controller = objc_getAssociatedObject(<span class="hljs-keyword">self</span>, <span class="hljs-built_in">NSObjectKVOControllerNonRetainingKey</span>);
-  
-  <span class="hljs-keyword">if</span> (<span class="hljs-literal">nil</span> == controller) &#123;
-    controller = [[FBKVOController alloc] initWithObserver:<span class="hljs-keyword">self</span> retainObserved:<span class="hljs-literal">NO</span>];
-    <span class="hljs-keyword">self</span>.KVOControllerNonRetaining = controller;
-  &#125;
-  
-  <span class="hljs-keyword">return</span> controller;
-&#125;</code></pre></div>
-
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs objectivec">- (FBKVOController *)KVOController<br>&#123;<br>  <span class="hljs-keyword">id</span> controller = objc_getAssociatedObject(<span class="hljs-keyword">self</span>, <span class="hljs-built_in">NSObjectKVOControllerKey</span>);<br>  <br>  <span class="hljs-comment">// lazily create the KVOController</span><br>  <span class="hljs-keyword">if</span> (<span class="hljs-literal">nil</span> == controller) &#123;<br>    controller = [FBKVOController controllerWithObserver:<span class="hljs-keyword">self</span>];<br>    <span class="hljs-keyword">self</span>.KVOController = controller;<br>  &#125;<br>  <br>  <span class="hljs-keyword">return</span> controller;<br>&#125;<br><br>- (FBKVOController *)KVOControllerNonRetaining<br>&#123;<br>  <span class="hljs-keyword">id</span> controller = objc_getAssociatedObject(<span class="hljs-keyword">self</span>, <span class="hljs-built_in">NSObjectKVOControllerNonRetainingKey</span>);<br>  <br>  <span class="hljs-keyword">if</span> (<span class="hljs-literal">nil</span> == controller) &#123;<br>    controller = [[FBKVOController alloc] initWithObserver:<span class="hljs-keyword">self</span> retainObserved:<span class="hljs-literal">NO</span>];<br>    <span class="hljs-keyword">self</span>.KVOControllerNonRetaining = controller;<br>  &#125;<br>  <br>  <span class="hljs-keyword">return</span> controller;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>他们的区别就是被观察者的内存管理机制是strong还是weak，前者是strong，后者是weak。</p>
 
-            </article>
+            </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
@@ -511,36 +317,69 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
-                <div class="post-prevnext row">
-                  <div class="post-prev col-6">
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/06/27/Tensorflow Lite实战——在iOS上部署中文文本分类模型/">
+                      <a href="/2020/06/27/Tensorflow%20Lite%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94%E5%9C%A8iOS%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%AD%E6%96%87%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Tensorflow Lite实战——在iOS上部署中文文本分类模型</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
-                  </div>
-                  <div class="post-next col-6">
+                  </article>
+                  <article class="post-next col-6">
                     
                     
-                      <a href="/2020/06/25/大学的回忆与总结/">
+                      <a href="/2020/06/25/%E5%A4%A7%E5%AD%A6%E7%9A%84%E5%9B%9E%E5%BF%86%E4%B8%8E%E6%80%BB%E7%BB%93/">
                         <span class="hidden-mobile">大学的回忆与总结</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
-                  </div>
+                  </article>
                 </div>
               
             </div>
 
             
-          </div>
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'qyz777/qyz777.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
         </div>
       </div>
     </div>
@@ -548,7 +387,7 @@
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -560,16 +399,15 @@
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -590,21 +428,16 @@
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
     
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
   <div class="statistics">
     
     
@@ -630,24 +463,40 @@
   </div>
 
 
-    
+  
   <!-- 备案信息 -->
   <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">京ICP备18016370号-1</a>
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        京ICP备18016370号-1
+      </a>
+    </span>
     
   </div>
 
 
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -658,8 +507,23 @@
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
@@ -668,95 +532,29 @@
 
 
 
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: 'article.markdown-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "KVOController源码全解析&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+      typing(title)
+      
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -773,8 +571,8 @@
 
 
 
-
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

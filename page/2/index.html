@@ -1,39 +1,49 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" >
 
 
 
-
-
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
   <link rel="icon" type="image/png" href="/img/favicon.ico">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content>
+  <meta name="description" content="">
   <meta name="author" content="YiZhong">
-  <meta name="keywords" content>
+  <meta name="keywords" content="">
   <title>YiZhong&#39;s Blog</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-</head>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null},"tajs":null}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
 
 
 <body>
@@ -115,22 +125,23 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
           </li>
+        
         
       </ul>
     </div>
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner" id="banner" 
          style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="你好鸭～">
               
             </span>
 
@@ -149,9 +160,9 @@
 
   <main>
     
-      <div class="container nopadding-md">
+      <div class="container nopadding-x-md">
         <div class="py-5" id="board"
-          style=margin-top:0>
+          >
           
           <div class="container">
             <div class="row">
@@ -162,15 +173,19 @@
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/07/05/教你使用swift写编译器玩具（1）/">教你使用swift写编译器玩具（1）</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/07/05/%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8swift%E5%86%99%E7%BC%96%E8%AF%91%E5%99%A8%E7%8E%A9%E5%85%B7%EF%BC%881%EF%BC%89/">教你使用swift写编译器玩具（1）</a>
+      </h1>
 
-      <a href="/2020/07/05/教你使用swift写编译器玩具（1）/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/07/05/%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8swift%E5%86%99%E7%BC%96%E8%AF%91%E5%99%A8%E7%8E%A9%E5%85%B7%EF%BC%881%EF%BC%89/">
           
-        
-        <div>前言本章对应官方教程第1章，介绍了Kaleidoscope以及实现词法分析器(Lexer)。
+          
+            
+          
+          前言本章对应官方教程第1章，介绍了Kaleidoscope以及实现词法分析器(Lexer)。
 教程如下:
 教你使用swift写编译器玩具（0）
 教你使用swift写编译器玩具（1）
@@ -179,20 +194,24 @@
 教你使用swift写编译器玩具（4）
 教你使用swift写编译器玩具（5）
 教你使用swift写编译器玩具（6）
-教你使用swift写编译器玩</div>
-      </a>
+教你使用swift写编译器玩
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-07-05
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-07-05 16:29" pubdate>
+              2020-07-05
+            </time>
           </div>
         
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/编译原理/">编译原理</a>
+              <a href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
             
           </div>
         
@@ -205,35 +224,43 @@
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/07/05/教你使用swift写编译器玩具（0）/">教你使用swift写编译器玩具（0）</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/07/05/%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8swift%E5%86%99%E7%BC%96%E8%AF%91%E5%99%A8%E7%8E%A9%E5%85%B7%EF%BC%880%EF%BC%89/">教你使用swift写编译器玩具（0）</a>
+      </h1>
 
-      <a href="/2020/07/05/教你使用swift写编译器玩具（0）/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/07/05/%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8swift%E5%86%99%E7%BC%96%E8%AF%91%E5%99%A8%E7%8E%A9%E5%85%B7%EF%BC%880%EF%BC%89/">
           
-        
-        <div>前言在上学期学完编译原理之后总想搞个大事情，于是就萌生了写编译器的想法。在多方查找之下我发现了LLVM的官方教程。这个教程实现了一门玩具语言叫做Kaleidoscope。在官方教程中提供了即时编译执行以及生成目标文件被C++调用的两种执行方法，我在工程中也有一一对应实现。
-官方教程是用C++写的，我就想能不能用swift来写呢？结果还真给我找到了办法，网上有一个现成的swift开源库LLVMSwi</div>
-      </a>
+          
+            
+          
+          前言在上学期学完编译原理之后总想搞个大事情，于是就萌生了写编译器的想法。在多方查找之下我发现了LLVM的官方教程。这个教程实现了一门玩具语言叫做Kaleidoscope。在官方教程中提供了即时编译执行以及生成目标文件被C++调用的两种执行方法，我在工程中也有一一对应实现。
+官方教程是用C++写的，我就想能不能用swift来写呢？结果还真给我找到了办法，网上有一个现成的swift开源库LLVMSwi
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-07-05
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-07-05 16:28" pubdate>
+              2020-07-05
+            </time>
           </div>
         
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/编译原理/">编译原理</a>
+              <a href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
             
           </div>
         
@@ -246,29 +273,37 @@
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/06/27/Tensorflow Lite实战——在iOS上部署中文文本分类模型/">Tensorflow Lite实战——在iOS上部署中文文本分类模型</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/27/Tensorflow%20Lite%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94%E5%9C%A8iOS%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%AD%E6%96%87%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/">Tensorflow Lite实战——在iOS上部署中文文本分类模型</a>
+      </h1>
 
-      <a href="/2020/06/27/Tensorflow Lite实战——在iOS上部署中文文本分类模型/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/06/27/Tensorflow%20Lite%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94%E5%9C%A8iOS%E4%B8%8A%E9%83%A8%E7%BD%B2%E4%B8%AD%E6%96%87%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/">
           
-        
-        <div>前言本文所使用的分类模型来自于CNN-RNN中文文本分类，基于TensorFlow，感谢开源。
+          
+            
+          
+          前言本文所使用的分类模型来自于CNN-RNN中文文本分类，基于TensorFlow，感谢开源。
 最近一段时间需要用到中文文本分类这样一个功能，于是我马上想到了Create ML，但是经过自己的尝试以后发现Create ML并不支持中文的文本分类(不信可以自己试试)。
-最近发现有道词典有离线翻译这样一个功能，我猜测这应该就是把模型下载到本地使用了，这么一看模型部署到移动端理论上是可行的。但各个深度学</div>
-      </a>
+最近发现有道词典有离线翻译这样一个功能，我猜测这应该就是把模型下载到本地使用了，这么一看模型部署到移动端理论上是可行的。但各个深度学
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-06-27
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-27 10:06" pubdate>
+              2020-06-27
+            </time>
           </div>
         
         
@@ -281,31 +316,37 @@
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/06/27/KVOController源码全解析/">KVOController源码全解析</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/27/KVOController%E6%BA%90%E7%A0%81%E5%85%A8%E8%A7%A3%E6%9E%90/">KVOController源码全解析</a>
+      </h1>
 
-      <a href="/2020/06/27/KVOController源码全解析/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/06/27/KVOController%E6%BA%90%E7%A0%81%E5%85%A8%E8%A7%A3%E6%9E%90/">
           
-        
-        <div>前言在阅读公司源码的一些功能时发现了KVOController这个神奇的库。这个库十分的好用，可以主动的去观察一个对象的属性。
+          
+            
+          
+          前言在阅读公司源码的一些功能时发现了KVOController这个神奇的库。这个库十分的好用，可以主动的去观察一个对象的属性。
 例如
-[self.KVOControllerNonRetaining observe:_test
-                                    keyPath:@"test"
-                                   </div>
-      </a>
+123456[self.KVOControllerNonRetaining observe:_test                                    keyPath:@&quot;test&quot;                     
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-06-27
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-27 10:00" pubdate>
+              2020-06-27
+            </time>
           </div>
         
         
@@ -325,35 +366,43 @@
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/06/25/大学的回忆与总结/">大学的回忆与总结</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/25/%E5%A4%A7%E5%AD%A6%E7%9A%84%E5%9B%9E%E5%BF%86%E4%B8%8E%E6%80%BB%E7%BB%93/">大学的回忆与总结</a>
+      </h1>
 
-      <a href="/2020/06/25/大学的回忆与总结/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/06/25/%E5%A4%A7%E5%AD%A6%E7%9A%84%E5%9B%9E%E5%BF%86%E4%B8%8E%E6%80%BB%E7%BB%93/">
           
-        
-        <div>前几天发现学信网上的学籍状态变更为已毕业，想着之前规划好的毕业回忆与总结也必须趁着端午节动手了。原计划是拿了双证之后再动手填这个坑，但没想到是尽管我人身在北京，竟然连学校都没办法去，双证也不知何时才能到手。
-我坐在电脑前仔细回想这四年，发现这四年并如平常文章所说的快的一转眼就过去。对我来说，大学的四年不仅十分漫长与曲折，还夹杂一些痛苦。现在回头想想，高中简直是我最快乐的时光，只需要一心一意学习就行</div>
-      </a>
+          
+            
+          
+          前几天发现学信网上的学籍状态变更为已毕业，想着之前规划好的毕业回忆与总结也必须趁着端午节动手了。原计划是拿了双证之后再动手填这个坑，但没想到是尽管我人身在北京，竟然连学校都没办法去，双证也不知何时才能到手。
+我坐在电脑前仔细回想这四年，发现这四年并如平常文章所说的快的一转眼就过去。对我来说，大学的四年不仅十分漫长与曲折，还夹杂一些痛苦。现在回头想想，高中简直是我最快乐的时光，只需要一心一意学习就行
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-06-25
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-25 20:07" pubdate>
+              2020-06-25
+            </time>
           </div>
         
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/杂谈/">杂谈</a>
+              <a href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a>
             
           </div>
         
@@ -361,39 +410,47 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/杂谈/">杂谈</a>
+              <a href="/tags/%E6%9D%82%E8%B0%88/">杂谈</a>
             
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/06/25/大二至大三实习一年，你想知道的这里都有/">大二至大三实习一年，你想知道的这里都有</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/25/%E5%A4%A7%E4%BA%8C%E8%87%B3%E5%A4%A7%E4%B8%89%E5%AE%9E%E4%B9%A0%E4%B8%80%E5%B9%B4%EF%BC%8C%E4%BD%A0%E6%83%B3%E7%9F%A5%E9%81%93%E7%9A%84%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89/">大二至大三实习一年，你想知道的这里都有</a>
+      </h1>
 
-      <a href="/2020/06/25/大二至大三实习一年，你想知道的这里都有/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/06/25/%E5%A4%A7%E4%BA%8C%E8%87%B3%E5%A4%A7%E4%B8%89%E5%AE%9E%E4%B9%A0%E4%B8%80%E5%B9%B4%EF%BC%8C%E4%BD%A0%E6%83%B3%E7%9F%A5%E9%81%93%E7%9A%84%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89/">
           
-        
-        <div>前言我还很清晰的记得2018年4月25日是我第一天实习，在这步入社会的一年里，我的心态发生了很大的变化。说是一年，其实也并不是完整的一年，我在18年9月份的时候休息了整整一个月，当然也顺便利用这段时间去面试拿到了下一个offer。因为第一次实习发现工作真的是太累了，能理解到长辈赚钱真的很不容易，我自己也体会到当码农的感觉。写代码是我的一个爱好，尤其是写iOS。但是当爱好转化为我的工作进行输出时，我</div>
-      </a>
+          
+            
+          
+          前言我还很清晰的记得2018年4月25日是我第一天实习，在这步入社会的一年里，我的心态发生了很大的变化。说是一年，其实也并不是完整的一年，我在18年9月份的时候休息了整整一个月，当然也顺便利用这段时间去面试拿到了下一个offer。因为第一次实习发现工作真的是太累了，能理解到长辈赚钱真的很不容易，我自己也体会到当码农的感觉。写代码是我的一个爱好，尤其是写iOS。但是当爱好转化为我的工作进行输出时，我
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-06-25
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-25 18:13" pubdate>
+              2020-06-25
+            </time>
           </div>
         
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/杂谈/">杂谈</a>
+              <a href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a>
             
           </div>
         
@@ -401,33 +458,41 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/杂谈/">杂谈</a>
+              <a href="/tags/%E6%9D%82%E8%B0%88/">杂谈</a>
             
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/06/25/DispatchGroup出现EXC-BAD-INSTRUCTION问题/">DispatchGroup出现EXC_BAD_INSTRUCTION问题</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/25/DispatchGroup%E5%87%BA%E7%8E%B0EXC-BAD-INSTRUCTION%E9%97%AE%E9%A2%98/">DispatchGroup出现EXC_BAD_INSTRUCTION问题</a>
+      </h1>
 
-      <a href="/2020/06/25/DispatchGroup出现EXC-BAD-INSTRUCTION问题/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/06/25/DispatchGroup%E5%87%BA%E7%8E%B0EXC-BAD-INSTRUCTION%E9%97%AE%E9%A2%98/">
           
-        
-        <div>前言前段时间看app的线上奔溃总是出现意义不明的崩溃问题，而且崩溃栈出现在闭包的回调里，并且bugly上提示说是有可能在swift解包的时候出现问题，也就是对nil使用了!。这就完全误导了我，把我对问题的理解定义为数据保护的不够到位。结果就是在多次发版后这个问题还未得到解决，所以我绝对对这个问题一探究竟。
-出现问题的原因其实出现这个问题的原因很简单，那就是group的enter和leave没有成对</div>
-      </a>
+          
+            
+          
+          前言前段时间看app的线上奔溃总是出现意义不明的崩溃问题，而且崩溃栈出现在闭包的回调里，并且bugly上提示说是有可能在swift解包的时候出现问题，也就是对nil使用了!。这就完全误导了我，把我对问题的理解定义为数据保护的不够到位。结果就是在多次发版后这个问题还未得到解决，所以我绝对对这个问题一探究竟。
+出现问题的原因其实出现这个问题的原因很简单，那就是group的enter和leave没有成对
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-06-25
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-25 17:26" pubdate>
+              2020-06-25
+            </time>
           </div>
         
         
@@ -447,32 +512,37 @@
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/06/25/UITableView和UICollectionView实现自定义滚动动画/">UITableView和UICollectionView实现自定义滚动动画</a>
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/25/UITableView%E5%92%8CUICollectionView%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%BB%9A%E5%8A%A8%E5%8A%A8%E7%94%BB/">UITableView和UICollectionView实现自定义滚动动画</a>
+      </h1>
 
-      <a href="/2020/06/25/UITableView和UICollectionView实现自定义滚动动画/" class="index-excerpt">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/06/25/UITableView%E5%92%8CUICollectionView%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%BB%9A%E5%8A%A8%E5%8A%A8%E7%94%BB/">
           
-        
-        <div>前言看到这个标题你可能会觉得“这不是很简单吗？像下面这么一写就完了呗”
-UIView.animate(withDuration: 0.25) &#123;
-    self.tableView.setContentOffset(CGPoint(x: 0, y: 500), animated: false)
-&#125;
-
-不不不，如果你觉得就这么简单的话说明你还是太年轻了。这样写你的列表在滚动的一</div>
-      </a>
+          
+            
+          
+          前言看到这个标题你可能会觉得“这不是很简单吗？像下面这么一写就完了呗”
+123UIView.animate(withDuration: 0.25) &#123;    self.tableView.setContentOffset(CGPoint(x: 0, y: 500), animated: false)&#125;
+不不不，如果你觉得就这么简单的话说明你还是太年轻了。这样写你的列表在滚动的一
+        </a>
+      </p>
 
       <div class="index-btm post-metas">
         
           <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-06-25
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-25 17:22" pubdate>
+              2020-06-25
+            </time>
           </div>
         
         
@@ -494,7 +564,7 @@ UIView.animate(withDuration: 0.25) &#123;
           </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
 
@@ -519,16 +589,15 @@ UIView.animate(withDuration: 0.25) &#123;
         </div>
       </div>
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -549,21 +618,16 @@ UIView.animate(withDuration: 0.25) &#123;
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
     
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
   <div class="statistics">
     
     
@@ -589,24 +653,40 @@ UIView.animate(withDuration: 0.25) &#123;
   </div>
 
 
-    
+  
   <!-- 备案信息 -->
   <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">京ICP备18016370号-1</a>
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        京ICP备18016370号-1
+      </a>
+    </span>
     
   </div>
 
 
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -617,8 +697,17 @@ UIView.animate(withDuration: 0.25) &#123;
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
@@ -627,39 +716,29 @@ UIView.animate(withDuration: 0.25) &#123;
 
 
 
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "你好鸭～&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
   </script>
-
-
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
   </script>
 
 
@@ -676,10 +755,8 @@ UIView.animate(withDuration: 0.25) &#123;
 
 
 
-
-
-
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

@@ -1,48 +1,65 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" >
 
 
 
-
-
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
   <link rel="icon" type="image/png" href="/img/favicon.ico">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content>
+  <meta name="description" content="">
   <meta name="author" content="YiZhong">
-  <meta name="keywords" content>
+  <meta name="keywords" content="">
   <title>教你使用swift写编译器玩具（5） - YiZhong&#39;s Blog</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
-
-  
-    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/tomorrow-night-eighties.min.css">
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-</head>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null},"tajs":null}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
 
 
 <body>
@@ -124,41 +141,45 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
           </li>
+        
         
       </ul>
     </div>
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner" id="banner" 
          style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="教你使用swift写编译器玩具（5）">
               
             </span>
 
             
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-07-05 16:31">
-      2020年7月5日 下午
-    </time>
-  </div>
-
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-07-05 16:31" pubdate>
+        2020年7月5日 下午
+      </time>
+    </span>
+  
+</div>
 
 <div class="mt-1">
   
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      1.8k 字
     </span>
   
 
@@ -168,7 +189,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      26
+      28
        分钟
     </span>
   
@@ -190,381 +211,60 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">教你使用swift写编译器玩具（5）</h1>
             
-            <article class="markdown-body">
-              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章对应<a href="http://llvm.org/docs/tutorial/MyFirstLanguageFrontend/LangImpl05.html" target="_blank" rel="noopener">官方教程第5章</a>，本章介绍如何扩展Kaleidoscope以使用<code>if / then / else</code>表达式和一个简单的<code>for</code>循环。</p>
+            <div class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本章对应<a target="_blank" rel="noopener" href="http://llvm.org/docs/tutorial/MyFirstLanguageFrontend/LangImpl05.html">官方教程第5章</a>，本章介绍如何扩展Kaleidoscope以使用<code>if / then / else</code>表达式和一个简单的<code>for</code>循环。</p>
 <p>教程如下:</p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（0）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（0）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（1）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（1）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（2）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（2）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（3）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（3）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（4）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（4）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（5）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（5）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（6）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（6）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（7）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（7）</a></p>
-<p><a href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（8）/" target="_blank" rel="noopener">教你使用swift写编译器玩具（8）</a></p>
-<p><a href="https://github.com/qyz777/Kaleidoscope" target="_blank" rel="noopener">仓库在这</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（0）/">教你使用swift写编译器玩具（0）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（1）/">教你使用swift写编译器玩具（1）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（2）/">教你使用swift写编译器玩具（2）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（3）/">教你使用swift写编译器玩具（3）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（4）/">教你使用swift写编译器玩具（4）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（5）/">教你使用swift写编译器玩具（5）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（6）/">教你使用swift写编译器玩具（6）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（7）/">教你使用swift写编译器玩具（7）</a></p>
+<p><a target="_blank" rel="noopener" href="https://qyizhong.cn/2020/07/05/教你使用swift写编译器玩具（8）/">教你使用swift写编译器玩具（8）</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/qyz777/Kaleidoscope">仓库在这</a></p>
 <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="if-then-else"><a href="#if-then-else" class="headerlink" title="if / then / else"></a>if / then / else</h3><p><code>if / then / else</code>也是一种表达式，我们需要把它计算为int1类型，0是假，1是真。如果<code>if</code>表达式计算为真返回<code>then</code>表达式，否则返回<code>else</code>表达式。</p>
 <p>首先我们需要做的第一件事情是扩展我们的Token枚举</p>
-<div class="hljs"><pre><code class="hljs swift">...
-<span class="hljs-keyword">case</span> `<span class="hljs-keyword">if</span>`
-<span class="hljs-keyword">case</span> then
-<span class="hljs-keyword">case</span> `<span class="hljs-keyword">else</span>`
-...</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-operator">...</span><br><span class="hljs-keyword">case</span> `if`<br><span class="hljs-keyword">case</span> then<br><span class="hljs-keyword">case</span> `else`<br><span class="hljs-operator">...</span><br></code></pre></td></tr></table></figure>
 <p>接着我们在<code>Lexer</code>的<code>nextToken()</code>方法中补充token的解析</p>
-<div class="hljs"><pre><code class="hljs swift">&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> identifierStr == <span class="hljs-string">"if"</span> &#123;
-		currentToken = <span class="hljs-type">CurrentToken</span>(token: .<span class="hljs-keyword">if</span>, val: <span class="hljs-string">"if"</span>)
-&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> identifierStr == <span class="hljs-string">"then"</span> &#123;
-		currentToken = <span class="hljs-type">CurrentToken</span>(token: .then, val: <span class="hljs-string">"then"</span>)
-&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> identifierStr == <span class="hljs-string">"else"</span> &#123;
-		currentToken = <span class="hljs-type">CurrentToken</span>(token: .<span class="hljs-keyword">else</span>, val: <span class="hljs-string">"else"</span>)
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs swift">&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> identifierStr <span class="hljs-operator">==</span> <span class="hljs-string">&quot;if&quot;</span> &#123;<br>		currentToken <span class="hljs-operator">=</span> <span class="hljs-type">CurrentToken</span>(token: .if, val: <span class="hljs-string">&quot;if&quot;</span>)<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> identifierStr <span class="hljs-operator">==</span> <span class="hljs-string">&quot;then&quot;</span> &#123;<br>		currentToken <span class="hljs-operator">=</span> <span class="hljs-type">CurrentToken</span>(token: .then, val: <span class="hljs-string">&quot;then&quot;</span>)<br>&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> identifierStr <span class="hljs-operator">==</span> <span class="hljs-string">&quot;else&quot;</span> &#123;<br>		currentToken <span class="hljs-operator">=</span> <span class="hljs-type">CurrentToken</span>(token: .else, val: <span class="hljs-string">&quot;else&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="if-then-else的AST扩展"><a href="#if-then-else的AST扩展" class="headerlink" title="if / then / else的AST扩展"></a>if / then / else的AST扩展</h3><p>为了解析新的表达式我们需要添加新的AST Node。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IfExprAST</span>: <span class="hljs-title">ExprAST</span> </span>&#123;
-    
-    <span class="hljs-keyword">let</span> cond: <span class="hljs-type">ExprAST</span>
-    
-    <span class="hljs-keyword">let</span> then: <span class="hljs-type">ExprAST</span>
-    
-    <span class="hljs-keyword">let</span> `<span class="hljs-keyword">else</span>`: <span class="hljs-type">ExprAST</span>
-    
-    <span class="hljs-keyword">init</span>(<span class="hljs-number">_</span> cond: <span class="hljs-type">ExprAST</span>, <span class="hljs-number">_</span> then: <span class="hljs-type">ExprAST</span>, <span class="hljs-number">_</span> `<span class="hljs-keyword">else</span>`: <span class="hljs-type">ExprAST</span>) &#123;
-        <span class="hljs-keyword">self</span>.cond = cond
-        <span class="hljs-keyword">self</span>.then = then
-        <span class="hljs-keyword">self</span>.<span class="hljs-keyword">else</span> = `<span class="hljs-keyword">else</span>`
-    &#125;
-    
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IfExprAST</span>: <span class="hljs-title">ExprAST</span> </span>&#123;<br>    <br>    <span class="hljs-keyword">let</span> cond: <span class="hljs-type">ExprAST</span><br>    <br>    <span class="hljs-keyword">let</span> then: <span class="hljs-type">ExprAST</span><br>    <br>    <span class="hljs-keyword">let</span> `else`: <span class="hljs-type">ExprAST</span><br>    <br>    <span class="hljs-keyword">init</span>(<span class="hljs-keyword">_</span> cond: <span class="hljs-type">ExprAST</span>, <span class="hljs-keyword">_</span> then: <span class="hljs-type">ExprAST</span>, <span class="hljs-keyword">_</span> `else`: <span class="hljs-type">ExprAST</span>) &#123;<br>        <span class="hljs-keyword">self</span>.cond <span class="hljs-operator">=</span> cond<br>        <span class="hljs-keyword">self</span>.then <span class="hljs-operator">=</span> then<br>        <span class="hljs-keyword">self</span>.else <span class="hljs-operator">=</span> `else`<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="if-then-else的Parser扩展"><a href="#if-then-else的Parser扩展" class="headerlink" title="if / then / else的Parser扩展"></a>if / then / else的Parser扩展</h3><p>有了AST之后我们要做的事情那就是扩展<code>Parser</code>了。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-comment">/// 解析条件语句</span>
-<span class="hljs-comment">///</span>
-<span class="hljs-comment">/// - Returns: AST</span>
-<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseIfExpr</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">ExprAST?</span> &#123;
-    lexer.nextToken()
-  	<span class="hljs-comment">//解析if表达式</span>
-    <span class="hljs-keyword">let</span> cond = parseExpression()
-    <span class="hljs-keyword">guard</span> cond != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-  	<span class="hljs-comment">//if表达式后面不是then就报错</span>
-    <span class="hljs-keyword">guard</span> lexer.currentToken!.token == .then <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"expected then."</span>)
-    &#125;
-    lexer.nextToken()
-  	<span class="hljs-comment">//解析then表达式</span>
-    <span class="hljs-keyword">let</span> then = parseExpression()
-    <span class="hljs-keyword">guard</span> then != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-  	<span class="hljs-comment">//then表达式后面不是else表达式就报错</span>
-    <span class="hljs-keyword">guard</span> lexer.currentToken!.token == .<span class="hljs-keyword">else</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"expected else."</span>)
-    &#125;
-    lexer.nextToken()
-    <span class="hljs-keyword">let</span> `<span class="hljs-keyword">else</span>` = parseExpression()
-    <span class="hljs-keyword">guard</span> `<span class="hljs-keyword">else</span>` != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-type">IfExprAST</span>(cond!, then!, `<span class="hljs-keyword">else</span>`!)
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">/// 解析条件语句</span><br><span class="hljs-comment">///</span><br><span class="hljs-comment">/// - Returns: AST</span><br><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseIfExpr</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">ExprAST</span>? &#123;<br>    lexer.nextToken()<br>  	<span class="hljs-comment">//解析if表达式</span><br>    <span class="hljs-keyword">let</span> cond <span class="hljs-operator">=</span> parseExpression()<br>    <span class="hljs-keyword">guard</span> cond <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>  	<span class="hljs-comment">//if表达式后面不是then就报错</span><br>    <span class="hljs-keyword">guard</span> lexer.currentToken<span class="hljs-operator">!</span>.token <span class="hljs-operator">==</span> .then <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">&quot;expected then.&quot;</span>)<br>    &#125;<br>    lexer.nextToken()<br>  	<span class="hljs-comment">//解析then表达式</span><br>    <span class="hljs-keyword">let</span> then <span class="hljs-operator">=</span> parseExpression()<br>    <span class="hljs-keyword">guard</span> then <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>  	<span class="hljs-comment">//then表达式后面不是else表达式就报错</span><br>    <span class="hljs-keyword">guard</span> lexer.currentToken<span class="hljs-operator">!</span>.token <span class="hljs-operator">==</span> .else <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">&quot;expected else.&quot;</span>)<br>    &#125;<br>    lexer.nextToken()<br>    <span class="hljs-keyword">let</span> `else` <span class="hljs-operator">=</span> parseExpression()<br>    <span class="hljs-keyword">guard</span> `else` <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-type">IfExprAST</span>(cond<span class="hljs-operator">!</span>, then<span class="hljs-operator">!</span>, `else`<span class="hljs-operator">!</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>接下来我们把它放在<code>parsePrimary</code>中。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-comment">/// 解析基本表达式的入口</span>
-<span class="hljs-comment">///</span>
-<span class="hljs-comment">/// - Returns: AST</span>
-<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parsePrimary</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">ExprAST?</span> &#123;
-    <span class="hljs-keyword">guard</span> lexer.currentToken != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    <span class="hljs-keyword">if</span> lexer.currentToken!.val == <span class="hljs-string">"("</span> &#123;
-        <span class="hljs-keyword">return</span> parseParenExpr()
-    &#125;
-    <span class="hljs-keyword">switch</span> lexer.currentToken!.token &#123;
-    <span class="hljs-keyword">case</span> .identifier:
-        <span class="hljs-keyword">return</span> parseIdentifierExpr()
-    <span class="hljs-keyword">case</span> .number:
-        <span class="hljs-keyword">return</span> parseNumberExpr()
-    <span class="hljs-keyword">case</span> .<span class="hljs-keyword">if</span>:
-        <span class="hljs-keyword">return</span> parseIfExpr()
-    <span class="hljs-keyword">default</span>:
-        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"unknow token when expecting an expression"</span>)
-    &#125;
-&#125;</code></pre></div>
-
-<h3 id="if-then-else的代码生成"><a href="#if-then-else的代码生成" class="headerlink" title="if / then / else的代码生成"></a>if / then / else的代码生成</h3><p>我们需要在<code>IfExprAST</code>中实现方法<code>codeGen()</code>。这里我们需要使用的是一个SSA操作:<a href="https://en.wikipedia.org/wiki/Static_single_assignment_form" target="_blank" rel="noopener">Phi操作</a>。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">codeGen</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">IRValue?</span> &#123;
-    <span class="hljs-keyword">var</span> condV = cond.codeGen()
-    <span class="hljs-keyword">guard</span> condV != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-  	<span class="hljs-comment">//这里有个神坑就是build条件时候要使用int1类型</span>
-    condV = builder.buildICmp(condV!, <span class="hljs-type">IntType</span>.int1.zero(), .<span class="hljs-built_in">equal</span>, name: <span class="hljs-string">"ifCond"</span>)
-    
-    <span class="hljs-keyword">let</span> theFunction = builder.insertBlock?.parent
-    <span class="hljs-keyword">guard</span> theFunction != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    
-    <span class="hljs-comment">//为then else merge创建basic block并放在函数里</span>
-    <span class="hljs-keyword">let</span> thenBB = theFunction!.appendBasicBlock(named: <span class="hljs-string">"then"</span>)
-    <span class="hljs-keyword">let</span> elseBB = theFunction!.appendBasicBlock(named: <span class="hljs-string">"else"</span>)
-    <span class="hljs-keyword">let</span> mergeBB = theFunction!.appendBasicBlock(named: <span class="hljs-string">"merge"</span>)
-    
-  	<span class="hljs-comment">//构建控制流表达式</span>
-    builder.buildCondBr(condition: condV!, then: thenBB, <span class="hljs-keyword">else</span>: elseBB)
-    
-  	<span class="hljs-comment">//让builder移动到then的基本块里</span>
-    builder.positionAtEnd(of: thenBB)
-  	<span class="hljs-comment">//插入then</span>
-    <span class="hljs-keyword">let</span> thenVal = then.codeGen()
-    <span class="hljs-keyword">guard</span> thenVal != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    builder.buildBr(mergeBB)
-    <span class="hljs-comment">//让builer移动到else的基本块里</span>
-    builder.positionAtEnd(of: elseBB)
-    <span class="hljs-keyword">let</span> elseVal = `<span class="hljs-keyword">else</span>`.codeGen()
-    <span class="hljs-keyword">guard</span> elseVal != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    builder.buildBr(mergeBB)
-    <span class="hljs-comment">//让builder移动到merge的基本块里</span>
-    builder.positionAtEnd(of: mergeBB)
-    <span class="hljs-keyword">let</span> phi = builder.buildPhi(<span class="hljs-type">FloatType</span>.double, name: <span class="hljs-string">"phi"</span>)
-    phi.addIncoming([(thenVal!, thenBB), (elseVal!, elseBB)])
-    
-    <span class="hljs-keyword">return</span> phi
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">/// 解析基本表达式的入口</span><br><span class="hljs-comment">///</span><br><span class="hljs-comment">/// - Returns: AST</span><br><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parsePrimary</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">ExprAST</span>? &#123;<br>    <span class="hljs-keyword">guard</span> lexer.currentToken <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <span class="hljs-keyword">if</span> lexer.currentToken<span class="hljs-operator">!</span>.val <span class="hljs-operator">==</span> <span class="hljs-string">&quot;(&quot;</span> &#123;<br>        <span class="hljs-keyword">return</span> parseParenExpr()<br>    &#125;<br>    <span class="hljs-keyword">switch</span> lexer.currentToken<span class="hljs-operator">!</span>.token &#123;<br>    <span class="hljs-keyword">case</span> .identifier:<br>        <span class="hljs-keyword">return</span> parseIdentifierExpr()<br>    <span class="hljs-keyword">case</span> .number:<br>        <span class="hljs-keyword">return</span> parseNumberExpr()<br>    <span class="hljs-keyword">case</span> .if:<br>        <span class="hljs-keyword">return</span> parseIfExpr()<br>    <span class="hljs-keyword">default</span>:<br>        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">&quot;unknow token when expecting an expression&quot;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="if-then-else的代码生成"><a href="#if-then-else的代码生成" class="headerlink" title="if / then / else的代码生成"></a>if / then / else的代码生成</h3><p>我们需要在<code>IfExprAST</code>中实现方法<code>codeGen()</code>。这里我们需要使用的是一个SSA操作:<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Static_single_assignment_form">Phi操作</a>。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">codeGen</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">IRValue</span>? &#123;<br>    <span class="hljs-keyword">var</span> condV <span class="hljs-operator">=</span> cond.codeGen()<br>    <span class="hljs-keyword">guard</span> condV <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>  	<span class="hljs-comment">//这里有个神坑就是build条件时候要使用int1类型</span><br>    condV <span class="hljs-operator">=</span> builder.buildICmp(condV<span class="hljs-operator">!</span>, <span class="hljs-type">IntType</span>.int1.zero(), .equal, name: <span class="hljs-string">&quot;ifCond&quot;</span>)<br>    <br>    <span class="hljs-keyword">let</span> theFunction <span class="hljs-operator">=</span> builder.insertBlock<span class="hljs-operator">?</span>.parent<br>    <span class="hljs-keyword">guard</span> theFunction <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <br>    <span class="hljs-comment">//为then else merge创建basic block并放在函数里</span><br>    <span class="hljs-keyword">let</span> thenBB <span class="hljs-operator">=</span> theFunction<span class="hljs-operator">!</span>.appendBasicBlock(named: <span class="hljs-string">&quot;then&quot;</span>)<br>    <span class="hljs-keyword">let</span> elseBB <span class="hljs-operator">=</span> theFunction<span class="hljs-operator">!</span>.appendBasicBlock(named: <span class="hljs-string">&quot;else&quot;</span>)<br>    <span class="hljs-keyword">let</span> mergeBB <span class="hljs-operator">=</span> theFunction<span class="hljs-operator">!</span>.appendBasicBlock(named: <span class="hljs-string">&quot;merge&quot;</span>)<br>    <br>  	<span class="hljs-comment">//构建控制流表达式</span><br>    builder.buildCondBr(condition: condV<span class="hljs-operator">!</span>, then: thenBB, <span class="hljs-keyword">else</span>: elseBB)<br>    <br>  	<span class="hljs-comment">//让builder移动到then的基本块里</span><br>    builder.positionAtEnd(of: thenBB)<br>  	<span class="hljs-comment">//插入then</span><br>    <span class="hljs-keyword">let</span> thenVal <span class="hljs-operator">=</span> then.codeGen()<br>    <span class="hljs-keyword">guard</span> thenVal <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    builder.buildBr(mergeBB)<br>    <span class="hljs-comment">//让builer移动到else的基本块里</span><br>    builder.positionAtEnd(of: elseBB)<br>    <span class="hljs-keyword">let</span> elseVal <span class="hljs-operator">=</span> `else`.codeGen()<br>    <span class="hljs-keyword">guard</span> elseVal <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    builder.buildBr(mergeBB)<br>    <span class="hljs-comment">//让builder移动到merge的基本块里</span><br>    builder.positionAtEnd(of: mergeBB)<br>    <span class="hljs-keyword">let</span> phi <span class="hljs-operator">=</span> builder.buildPhi(<span class="hljs-type">FloatType</span>.double, name: <span class="hljs-string">&quot;phi&quot;</span>)<br>    phi.addIncoming([(thenVal<span class="hljs-operator">!</span>, thenBB), (elseVal<span class="hljs-operator">!</span>, elseBB)])<br>    <br>    <span class="hljs-keyword">return</span> phi<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="for循环表达式"><a href="#for循环表达式" class="headerlink" title="for循环表达式"></a>for循环表达式</h3><p>Kaleidoscope的for循环长下面这样，1.0是可选的步长，默认即为1.0。</p>
-<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-keyword">for</span> <span class="hljs-selector-tag">i</span> = <span class="hljs-number">1</span>, <span class="hljs-selector-tag">i</span> &lt; n, <span class="hljs-number">1.0</span> <span class="hljs-keyword">in</span></code></pre></div>
-
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">for</span> i = <span class="hljs-number">1</span>, i &lt; n, <span class="hljs-number">1</span>.<span class="hljs-number">0</span> in<br></code></pre></td></tr></table></figure>
 <p>for循环表达式的处理会复杂一些，但还是同样运用了<code>Phi</code>操作来处理。</p>
 <p>同控制流语句的扩展，我们还是先要扩展<code>Token</code>和<code>Lexer</code>。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-keyword">case</span> `<span class="hljs-keyword">for</span>`
-
-<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> identifierStr == <span class="hljs-string">"for"</span> &#123;
-		currentToken = <span class="hljs-type">CurrentToken</span>(token: .<span class="hljs-keyword">for</span>, val: <span class="hljs-string">"for"</span>)
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">case</span> `for`<br><br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> identifierStr <span class="hljs-operator">==</span> <span class="hljs-string">&quot;for&quot;</span> &#123;<br>		currentToken <span class="hljs-operator">=</span> <span class="hljs-type">CurrentToken</span>(token: .for, val: <span class="hljs-string">&quot;for&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>接着我们扩展for循环的AST Node<code>ForExprAST</code></p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ForExprAST</span>: <span class="hljs-title">ExprAST</span> </span>&#123;
-    
-    <span class="hljs-keyword">let</span> name: <span class="hljs-type">String</span>
-    
-    <span class="hljs-keyword">let</span> start: <span class="hljs-type">ExprAST</span>
-    
-    <span class="hljs-keyword">let</span> end: <span class="hljs-type">ExprAST</span>
-    
-    <span class="hljs-keyword">let</span> step: <span class="hljs-type">ExprAST?</span>
-    
-    <span class="hljs-keyword">let</span> body: <span class="hljs-type">ExprAST</span>
-    
-    <span class="hljs-keyword">init</span>(<span class="hljs-number">_</span> name: <span class="hljs-type">String</span>, <span class="hljs-number">_</span> start: <span class="hljs-type">ExprAST</span>, <span class="hljs-number">_</span> end: <span class="hljs-type">ExprAST</span>, <span class="hljs-number">_</span> step: <span class="hljs-type">ExprAST?</span>, <span class="hljs-number">_</span> body: <span class="hljs-type">ExprAST</span>) &#123;
-        <span class="hljs-keyword">self</span>.name = name
-        <span class="hljs-keyword">self</span>.start = start
-        <span class="hljs-keyword">self</span>.end = end
-        <span class="hljs-keyword">self</span>.step = step
-        <span class="hljs-keyword">self</span>.body = body
-    &#125;
-  
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ForExprAST</span>: <span class="hljs-title">ExprAST</span> </span>&#123;<br>    <br>    <span class="hljs-keyword">let</span> name: <span class="hljs-type">String</span><br>    <br>    <span class="hljs-keyword">let</span> start: <span class="hljs-type">ExprAST</span><br>    <br>    <span class="hljs-keyword">let</span> end: <span class="hljs-type">ExprAST</span><br>    <br>    <span class="hljs-keyword">let</span> step: <span class="hljs-type">ExprAST</span>?<br>    <br>    <span class="hljs-keyword">let</span> body: <span class="hljs-type">ExprAST</span><br>    <br>    <span class="hljs-keyword">init</span>(<span class="hljs-keyword">_</span> name: <span class="hljs-type">String</span>, <span class="hljs-keyword">_</span> start: <span class="hljs-type">ExprAST</span>, <span class="hljs-keyword">_</span> end: <span class="hljs-type">ExprAST</span>, <span class="hljs-keyword">_</span> step: <span class="hljs-type">ExprAST</span>?, <span class="hljs-keyword">_</span> body: <span class="hljs-type">ExprAST</span>) &#123;<br>        <span class="hljs-keyword">self</span>.name <span class="hljs-operator">=</span> name<br>        <span class="hljs-keyword">self</span>.start <span class="hljs-operator">=</span> start<br>        <span class="hljs-keyword">self</span>.end <span class="hljs-operator">=</span> end<br>        <span class="hljs-keyword">self</span>.step <span class="hljs-operator">=</span> step<br>        <span class="hljs-keyword">self</span>.body <span class="hljs-operator">=</span> body<br>    &#125;<br>  <br>&#125;<br></code></pre></td></tr></table></figure>
 <p><code>step</code>用来表示for循环的步长，即每次变量的增长值。编译器通过检查第二个逗号是否存在来判断，如果不存在我们把它设为<code>nil</code>。</p>
-<h3 id="for循环的Parser扩展"><a href="#for循环的Parser扩展" class="headerlink" title="for循环的Parser扩展"></a>for循环的Parser扩展</h3><div class="hljs"><pre><code class="hljs swift"><span class="hljs-comment">/// 解析For表达式</span>
-<span class="hljs-comment">///</span>
-<span class="hljs-comment">/// - Returns: AST</span>
-<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseForExpr</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">ExprAST?</span> &#123;
-    lexer.nextToken()
-  	<span class="hljs-comment">//第一个得是变量，比如说`i`</span>
-    <span class="hljs-keyword">guard</span> lexer.currentToken!.token == .identifier <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"expected identifier after for."</span>)
-    &#125;
-    <span class="hljs-keyword">let</span> idName = lexer.currentToken!.val
-    lexer.nextToken()
-    <span class="hljs-keyword">guard</span> lexer.currentToken!.val == <span class="hljs-string">"="</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"expected '=' after for."</span>)
-    &#125;
-    
-    lexer.nextToken()
-  	<span class="hljs-comment">//循环开始值</span>
-    <span class="hljs-keyword">let</span> start = parseExpression()
-    <span class="hljs-keyword">guard</span> start != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    <span class="hljs-keyword">guard</span> lexer.currentToken!.val == <span class="hljs-string">","</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"expected ',' after start value."</span>)
-    &#125;
-    
-    lexer.nextToken()
-  	<span class="hljs-comment">//循环结束值</span>
-    <span class="hljs-keyword">let</span> end = parseExpression()
-    <span class="hljs-keyword">guard</span> end != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    
-  	<span class="hljs-comment">//步长</span>
-    <span class="hljs-keyword">var</span> step: <span class="hljs-type">ExprAST!</span>
-    <span class="hljs-keyword">if</span> lexer.currentToken!.val == <span class="hljs-string">","</span> &#123;
-        lexer.nextToken()
-        step = parseExpression()
-        <span class="hljs-keyword">guard</span> step != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-        &#125;
-    &#125;
-    <span class="hljs-comment">//in作为for循环的关键字不可缺少</span>
-    <span class="hljs-keyword">guard</span> lexer.currentToken!.token == .<span class="hljs-keyword">in</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">"expected 'in' after for."</span>)
-    &#125;
-    lexer.nextToken()
-    <span class="hljs-comment">//for循环的循环体解析</span>
-    <span class="hljs-keyword">let</span> body = parseExpression()
-    <span class="hljs-keyword">guard</span> body != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    
-    <span class="hljs-keyword">return</span> <span class="hljs-type">ForExprAST</span>(idName, start!, end!, step, body!)
-&#125;</code></pre></div>
-
+<h3 id="for循环的Parser扩展"><a href="#for循环的Parser扩展" class="headerlink" title="for循环的Parser扩展"></a>for循环的Parser扩展</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">/// 解析For表达式</span><br><span class="hljs-comment">///</span><br><span class="hljs-comment">/// - Returns: AST</span><br><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">parseForExpr</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">ExprAST</span>? &#123;<br>    lexer.nextToken()<br>  	<span class="hljs-comment">//第一个得是变量，比如说`i`</span><br>    <span class="hljs-keyword">guard</span> lexer.currentToken<span class="hljs-operator">!</span>.token <span class="hljs-operator">==</span> .identifier <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">&quot;expected identifier after for.&quot;</span>)<br>    &#125;<br>    <span class="hljs-keyword">let</span> idName <span class="hljs-operator">=</span> lexer.currentToken<span class="hljs-operator">!</span>.val<br>    lexer.nextToken()<br>    <span class="hljs-keyword">guard</span> lexer.currentToken<span class="hljs-operator">!</span>.val <span class="hljs-operator">==</span> <span class="hljs-string">&quot;=&quot;</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">&quot;expected &#x27;=&#x27; after for.&quot;</span>)<br>    &#125;<br>    <br>    lexer.nextToken()<br>  	<span class="hljs-comment">//循环开始值</span><br>    <span class="hljs-keyword">let</span> start <span class="hljs-operator">=</span> parseExpression()<br>    <span class="hljs-keyword">guard</span> start <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <span class="hljs-keyword">guard</span> lexer.currentToken<span class="hljs-operator">!</span>.val <span class="hljs-operator">==</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">&quot;expected &#x27;,&#x27; after start value.&quot;</span>)<br>    &#125;<br>    <br>    lexer.nextToken()<br>  	<span class="hljs-comment">//循环结束值</span><br>    <span class="hljs-keyword">let</span> end <span class="hljs-operator">=</span> parseExpression()<br>    <span class="hljs-keyword">guard</span> end <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <br>  	<span class="hljs-comment">//步长</span><br>    <span class="hljs-keyword">var</span> step: <span class="hljs-type">ExprAST</span>!<br>    <span class="hljs-keyword">if</span> lexer.currentToken<span class="hljs-operator">!</span>.val <span class="hljs-operator">==</span> <span class="hljs-string">&quot;,&quot;</span> &#123;<br>        lexer.nextToken()<br>        step <span class="hljs-operator">=</span> parseExpression()<br>        <span class="hljs-keyword">guard</span> step <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">//in作为for循环的关键字不可缺少</span><br>    <span class="hljs-keyword">guard</span> lexer.currentToken<span class="hljs-operator">!</span>.token <span class="hljs-operator">==</span> .in <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">fatalError</span>(<span class="hljs-string">&quot;expected &#x27;in&#x27; after for.&quot;</span>)<br>    &#125;<br>    lexer.nextToken()<br>    <span class="hljs-comment">//for循环的循环体解析</span><br>    <span class="hljs-keyword">let</span> body <span class="hljs-operator">=</span> parseExpression()<br>    <span class="hljs-keyword">guard</span> body <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-type">ForExprAST</span>(idName, start<span class="hljs-operator">!</span>, end<span class="hljs-operator">!</span>, step, body<span class="hljs-operator">!</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>我们在<code>parsePrimary()</code>方法中补充调用。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-keyword">case</span> .<span class="hljs-keyword">for</span>:
-		<span class="hljs-keyword">return</span> parseForExpr()</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">case</span> .for:<br>		<span class="hljs-keyword">return</span> parseForExpr()<br></code></pre></td></tr></table></figure>
 <h3 id="for循环的代码生成"><a href="#for循环的代码生成" class="headerlink" title="for循环的代码生成"></a>for循环的代码生成</h3><p>话不多说直接看代码，过程都会体现在注释中。</p>
-<div class="hljs"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">codeGen</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">IRValue?</span> &#123;
-    <span class="hljs-keyword">let</span> startVal = start.codeGen()
-    <span class="hljs-keyword">guard</span> startVal != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    
-    <span class="hljs-comment">//for循环，插在当前的block之后</span>
-    <span class="hljs-keyword">let</span> theFunction = builder.insertBlock?.parent
-    <span class="hljs-keyword">guard</span> theFunction != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    <span class="hljs-keyword">let</span> preHeaderBB = builder.insertBlock
-  	<span class="hljs-comment">//循环体的基本块</span>
-    <span class="hljs-keyword">let</span> loopBB = theFunction!.appendBasicBlock(named: <span class="hljs-string">"loop"</span>)
-    builder.buildBr(loopBB)
-  	<span class="hljs-comment">//让builder移动到</span>
-    builder.positionAtEnd(of: loopBB)
-    
-    <span class="hljs-comment">//这里控制循环或退出</span>
-    <span class="hljs-keyword">let</span> phi = builder.buildPhi(<span class="hljs-type">FloatType</span>.double, name: name)
-    phi.addIncoming([(startVal!, preHeaderBB!)])
-    
-  	<span class="hljs-comment">//防止for循环作用域与外部产生变量命名冲突，所以先记录一下，是nil也无所谓</span>
-    <span class="hljs-keyword">let</span> oldVal = namedValues[name]
-    namedValues[name] = phi
-    
-    <span class="hljs-keyword">guard</span> body.codeGen() != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    
-    <span class="hljs-keyword">let</span> stepVal: <span class="hljs-type">IRValue?</span>
-    <span class="hljs-keyword">if</span> step != <span class="hljs-literal">nil</span> &#123;
-      	<span class="hljs-comment">//有步长就要解析</span>
-        stepVal = step!.codeGen()
-        <span class="hljs-keyword">guard</span> stepVal != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-        &#125;
-    &#125; <span class="hljs-keyword">else</span> &#123;
-      	<span class="hljs-comment">//默认步长为1.0</span>
-        stepVal = <span class="hljs-type">FloatType</span>.double.constant(<span class="hljs-number">1</span>)
-    &#125;
-    <span class="hljs-comment">//步长的增长指令</span>
-    <span class="hljs-keyword">let</span> nextVar = builder.buildAdd(phi, stepVal!, name: <span class="hljs-string">"nextVar"</span>)
-    
-    <span class="hljs-comment">//循环终止条件</span>
-    <span class="hljs-keyword">var</span> endCond = end.codeGen()
-    <span class="hljs-keyword">guard</span> endCond != <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    endCond = builder.buildICmp(endCond!, <span class="hljs-type">IntType</span>.int1.zero(), .<span class="hljs-built_in">equal</span>, name: <span class="hljs-string">"loopCond"</span>)
-    
-    <span class="hljs-comment">//循环后的代码basic block</span>
-    <span class="hljs-keyword">let</span> loopEndBB = builder.insertBlock
-    <span class="hljs-keyword">let</span> afterBB = theFunction?.appendBasicBlock(named: <span class="hljs-string">"afterLoop"</span>)
-    builder.buildCondBr(condition: endCond!, then: loopBB, <span class="hljs-keyword">else</span>: afterBB!)
-    builder.positionAtEnd(of: afterBB!)
-    
-    phi.addIncoming([(nextVar, loopEndBB!)])
-    
-    <span class="hljs-keyword">if</span> oldVal != <span class="hljs-literal">nil</span> &#123;
-        namedValues[name] = oldVal!
-    &#125; <span class="hljs-keyword">else</span> &#123;
-        namedValues[name] = <span class="hljs-literal">nil</span>
-    &#125;
-    
-    <span class="hljs-comment">//for循环解析总是返回0</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-type">FloatType</span>.double.constant(<span class="hljs-number">0</span>)
-&#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">codeGen</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">IRValue</span>? &#123;<br>    <span class="hljs-keyword">let</span> startVal <span class="hljs-operator">=</span> start.codeGen()<br>    <span class="hljs-keyword">guard</span> startVal <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <br>    <span class="hljs-comment">//for循环，插在当前的block之后</span><br>    <span class="hljs-keyword">let</span> theFunction <span class="hljs-operator">=</span> builder.insertBlock<span class="hljs-operator">?</span>.parent<br>    <span class="hljs-keyword">guard</span> theFunction <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <span class="hljs-keyword">let</span> preHeaderBB <span class="hljs-operator">=</span> builder.insertBlock<br>  	<span class="hljs-comment">//循环体的基本块</span><br>    <span class="hljs-keyword">let</span> loopBB <span class="hljs-operator">=</span> theFunction<span class="hljs-operator">!</span>.appendBasicBlock(named: <span class="hljs-string">&quot;loop&quot;</span>)<br>    builder.buildBr(loopBB)<br>  	<span class="hljs-comment">//让builder移动到</span><br>    builder.positionAtEnd(of: loopBB)<br>    <br>    <span class="hljs-comment">//这里控制循环或退出</span><br>    <span class="hljs-keyword">let</span> phi <span class="hljs-operator">=</span> builder.buildPhi(<span class="hljs-type">FloatType</span>.double, name: name)<br>    phi.addIncoming([(startVal<span class="hljs-operator">!</span>, preHeaderBB<span class="hljs-operator">!</span>)])<br>    <br>  	<span class="hljs-comment">//防止for循环作用域与外部产生变量命名冲突，所以先记录一下，是nil也无所谓</span><br>    <span class="hljs-keyword">let</span> oldVal <span class="hljs-operator">=</span> namedValues[name]<br>    namedValues[name] <span class="hljs-operator">=</span> phi<br>    <br>    <span class="hljs-keyword">guard</span> body.codeGen() <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <br>    <span class="hljs-keyword">let</span> stepVal: <span class="hljs-type">IRValue</span>?<br>    <span class="hljs-keyword">if</span> step <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> &#123;<br>      	<span class="hljs-comment">//有步长就要解析</span><br>        stepVal <span class="hljs-operator">=</span> step<span class="hljs-operator">!</span>.codeGen()<br>        <span class="hljs-keyword">guard</span> stepVal <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      	<span class="hljs-comment">//默认步长为1.0</span><br>        stepVal <span class="hljs-operator">=</span> <span class="hljs-type">FloatType</span>.double.constant(<span class="hljs-number">1</span>)<br>    &#125;<br>    <span class="hljs-comment">//步长的增长指令</span><br>    <span class="hljs-keyword">let</span> nextVar <span class="hljs-operator">=</span> builder.buildAdd(phi, stepVal<span class="hljs-operator">!</span>, name: <span class="hljs-string">&quot;nextVar&quot;</span>)<br>    <br>    <span class="hljs-comment">//循环终止条件</span><br>    <span class="hljs-keyword">var</span> endCond <span class="hljs-operator">=</span> end.codeGen()<br>    <span class="hljs-keyword">guard</span> endCond <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    endCond <span class="hljs-operator">=</span> builder.buildICmp(endCond<span class="hljs-operator">!</span>, <span class="hljs-type">IntType</span>.int1.zero(), .equal, name: <span class="hljs-string">&quot;loopCond&quot;</span>)<br>    <br>    <span class="hljs-comment">//循环后的代码basic block</span><br>    <span class="hljs-keyword">let</span> loopEndBB <span class="hljs-operator">=</span> builder.insertBlock<br>    <span class="hljs-keyword">let</span> afterBB <span class="hljs-operator">=</span> theFunction<span class="hljs-operator">?</span>.appendBasicBlock(named: <span class="hljs-string">&quot;afterLoop&quot;</span>)<br>    builder.buildCondBr(condition: endCond<span class="hljs-operator">!</span>, then: loopBB, <span class="hljs-keyword">else</span>: afterBB<span class="hljs-operator">!</span>)<br>    builder.positionAtEnd(of: afterBB<span class="hljs-operator">!</span>)<br>    <br>    phi.addIncoming([(nextVar, loopEndBB<span class="hljs-operator">!</span>)])<br>    <br>    <span class="hljs-keyword">if</span> oldVal <span class="hljs-operator">!=</span> <span class="hljs-literal">nil</span> &#123;<br>        namedValues[name] <span class="hljs-operator">=</span> oldVal<span class="hljs-operator">!</span><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        namedValues[name] <span class="hljs-operator">=</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <br>    <span class="hljs-comment">//for循环解析总是返回0</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-type">FloatType</span>.double.constant(<span class="hljs-number">0</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>控制流语句</p>
-<div class="hljs"><pre><code class="hljs undefined">extern foo()<span class="hljs-comment">;
-</span>Read extern:
-
-<span class="hljs-keyword">declare</span> <span class="hljs-keyword">i64</span> <span class="hljs-title">@foo</span>()
-extern bar()<span class="hljs-comment">;
-</span>Read extern:
-
-<span class="hljs-keyword">declare</span> <span class="hljs-keyword">i64</span> <span class="hljs-title">@bar</span>()
-def baz(<span class="hljs-keyword">x</span>) if <span class="hljs-keyword">x</span> then foo() else bar()<span class="hljs-comment">;
-</span>Read function definition:
-
-<span class="hljs-keyword">define</span> <span class="hljs-keyword">i64</span> <span class="hljs-title">@baz</span>(<span class="hljs-keyword">i64</span> <span class="hljs-symbol">%x</span>) &#123;
-entry:
-  <span class="hljs-symbol">%ifCond</span> = <span class="hljs-keyword">icmp</span> <span class="hljs-keyword">eq</span> <span class="hljs-keyword">i64</span> <span class="hljs-symbol">%x</span>, <span class="hljs-number">0</span>
-  <span class="hljs-keyword">br</span> <span class="hljs-keyword">i1</span> <span class="hljs-symbol">%ifCond</span>, label <span class="hljs-symbol">%then</span>, label <span class="hljs-symbol">%else</span>
-
-then:                                             <span class="hljs-comment">; preds = %entry
-</span>  <span class="hljs-symbol">%call</span> = <span class="hljs-keyword">call</span> <span class="hljs-keyword">i64</span> <span class="hljs-title">@foo</span>()
-  <span class="hljs-keyword">br</span> label <span class="hljs-symbol">%merge</span>
-
-else:                                             <span class="hljs-comment">; preds = %entry
-</span>  <span class="hljs-symbol">%call1</span> = <span class="hljs-keyword">call</span> <span class="hljs-keyword">i64</span> <span class="hljs-title">@bar</span>()
-  <span class="hljs-keyword">br</span> label <span class="hljs-symbol">%merge</span>
-
-merge:                                            <span class="hljs-comment">; preds = %else, %then
-</span>  <span class="hljs-symbol">%phi</span> = <span class="hljs-keyword">phi</span> <span class="hljs-keyword">i64</span> [ <span class="hljs-symbol">%call</span>, <span class="hljs-symbol">%then</span> ], [ <span class="hljs-symbol">%call1</span>, <span class="hljs-symbol">%else</span> ]
-  <span class="hljs-keyword">ret</span> <span class="hljs-keyword">i64</span> <span class="hljs-symbol">%phi</span>
-&#125;</code></pre></div>
-
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs llvm">extern foo()<span class="hljs-comment">;</span><br>Read extern:<br><br><span class="hljs-keyword">declare</span> <span class="hljs-type">i64</span> <span class="hljs-title">@foo</span>()<br>extern bar()<span class="hljs-comment">;</span><br>Read extern:<br><br><span class="hljs-keyword">declare</span> <span class="hljs-type">i64</span> <span class="hljs-title">@bar</span>()<br>def baz(<span class="hljs-keyword">x</span>) if <span class="hljs-keyword">x</span> then foo() else bar()<span class="hljs-comment">;</span><br>Read function definition:<br><br><span class="hljs-keyword">define</span> <span class="hljs-type">i64</span> <span class="hljs-title">@baz</span>(<span class="hljs-type">i64</span> <span class="hljs-variable">%x</span>) &#123;<br><span class="hljs-symbol">entry:</span><br>  <span class="hljs-variable">%ifCond</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">icmp</span> <span class="hljs-keyword">eq</span> <span class="hljs-type">i64</span> <span class="hljs-variable">%x</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0</span><br>  <span class="hljs-keyword">br</span> <span class="hljs-type">i1</span> <span class="hljs-variable">%ifCond</span><span class="hljs-punctuation">,</span> label <span class="hljs-variable">%then</span><span class="hljs-punctuation">,</span> label <span class="hljs-variable">%else</span><br><br><span class="hljs-symbol">then:</span>                                             <span class="hljs-comment">; preds = %entry</span><br>  <span class="hljs-variable">%call</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">call</span> <span class="hljs-type">i64</span> <span class="hljs-title">@foo</span>()<br>  <span class="hljs-keyword">br</span> label <span class="hljs-variable">%merge</span><br><br><span class="hljs-symbol">else:</span>                                             <span class="hljs-comment">; preds = %entry</span><br>  <span class="hljs-variable">%call1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">call</span> <span class="hljs-type">i64</span> <span class="hljs-title">@bar</span>()<br>  <span class="hljs-keyword">br</span> label <span class="hljs-variable">%merge</span><br><br><span class="hljs-symbol">merge:</span>                                            <span class="hljs-comment">; preds = %else, %then</span><br>  <span class="hljs-variable">%phi</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">phi</span> <span class="hljs-type">i64</span> [ <span class="hljs-variable">%call</span><span class="hljs-punctuation">,</span> <span class="hljs-variable">%then</span> ]<span class="hljs-punctuation">,</span> [ <span class="hljs-variable">%call1</span><span class="hljs-punctuation">,</span> <span class="hljs-variable">%else</span> ]<br>  <span class="hljs-keyword">ret</span> <span class="hljs-type">i64</span> <span class="hljs-variable">%phi</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <p>for循环语句</p>
-<div class="hljs"><pre><code class="hljs undefined">extern putchard(char)<span class="hljs-comment">;
-</span>Read extern:
-
-<span class="hljs-keyword">declare</span> <span class="hljs-keyword">i64</span> <span class="hljs-title">@putchard</span>(<span class="hljs-keyword">i64</span> <span class="hljs-symbol">%char</span>)
-def printstar(n) for i = <span class="hljs-number">1</span>, i &lt; n, <span class="hljs-number">1</span> in putchard(<span class="hljs-number">42</span>)<span class="hljs-comment">;
-</span>Read function definition:
-
-<span class="hljs-keyword">define</span> <span class="hljs-keyword">i64</span> <span class="hljs-title">@printstar</span>(<span class="hljs-keyword">i64</span> <span class="hljs-symbol">%n</span>) &#123;
-entry:
-  <span class="hljs-keyword">br</span> label <span class="hljs-symbol">%loop</span>
-
-loop:                                             <span class="hljs-comment">; preds = %loop, %entry
-</span>  <span class="hljs-symbol">%i</span> = <span class="hljs-keyword">phi</span> <span class="hljs-keyword">i64</span> [ <span class="hljs-number">1</span>, <span class="hljs-symbol">%entry</span> ], [ <span class="hljs-symbol">%nextVar</span>, <span class="hljs-symbol">%loop</span> ]
-  <span class="hljs-symbol">%call</span> = <span class="hljs-keyword">call</span> <span class="hljs-keyword">i64</span> <span class="hljs-title">@putchard</span>(<span class="hljs-keyword">i64</span> <span class="hljs-number">42</span>)
-  <span class="hljs-symbol">%nextVar</span> = <span class="hljs-keyword">add</span> <span class="hljs-keyword">i64</span> <span class="hljs-symbol">%i</span>, <span class="hljs-number">1</span>
-  <span class="hljs-symbol">%boolCmp</span> = <span class="hljs-keyword">icmp</span> <span class="hljs-keyword">slt</span> <span class="hljs-keyword">i64</span> <span class="hljs-symbol">%i</span>, <span class="hljs-symbol">%n</span>
-  <span class="hljs-symbol">%0</span> = <span class="hljs-keyword">sext</span> <span class="hljs-keyword">i1</span> <span class="hljs-symbol">%boolCmp</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">i64</span>
-  <span class="hljs-symbol">%loopCond</span> = <span class="hljs-keyword">icmp</span> <span class="hljs-keyword">eq</span> <span class="hljs-keyword">i64</span> <span class="hljs-symbol">%0</span>, <span class="hljs-number">0</span>
-  <span class="hljs-keyword">br</span> <span class="hljs-keyword">i1</span> <span class="hljs-symbol">%loopCond</span>, label <span class="hljs-symbol">%loop</span>, label <span class="hljs-symbol">%afterLoop</span>
-
-afterLoop:                                        <span class="hljs-comment">; preds = %loop
-</span>  <span class="hljs-keyword">ret</span> <span class="hljs-keyword">i64</span> <span class="hljs-number">0</span>
-&#125;</code></pre></div>
-            </article>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs llvm">extern putchard(char)<span class="hljs-comment">;</span><br>Read extern:<br><br><span class="hljs-keyword">declare</span> <span class="hljs-type">i64</span> <span class="hljs-title">@putchard</span>(<span class="hljs-type">i64</span> <span class="hljs-variable">%char</span>)<br>def printstar(n) for i <span class="hljs-operator">=</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> i &lt; n<span class="hljs-punctuation">,</span> <span class="hljs-number">1</span> in putchard(<span class="hljs-number">42</span>)<span class="hljs-comment">;</span><br>Read function definition:<br><br><span class="hljs-keyword">define</span> <span class="hljs-type">i64</span> <span class="hljs-title">@printstar</span>(<span class="hljs-type">i64</span> <span class="hljs-variable">%n</span>) &#123;<br><span class="hljs-symbol">entry:</span><br>  <span class="hljs-keyword">br</span> label <span class="hljs-variable">%loop</span><br><br><span class="hljs-symbol">loop:</span>                                             <span class="hljs-comment">; preds = %loop, %entry</span><br>  <span class="hljs-variable">%i</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">phi</span> <span class="hljs-type">i64</span> [ <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> <span class="hljs-variable">%entry</span> ]<span class="hljs-punctuation">,</span> [ <span class="hljs-variable">%nextVar</span><span class="hljs-punctuation">,</span> <span class="hljs-variable">%loop</span> ]<br>  <span class="hljs-variable">%call</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">call</span> <span class="hljs-type">i64</span> <span class="hljs-title">@putchard</span>(<span class="hljs-type">i64</span> <span class="hljs-number">42</span>)<br>  <span class="hljs-variable">%nextVar</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">add</span> <span class="hljs-type">i64</span> <span class="hljs-variable">%i</span><span class="hljs-punctuation">,</span> <span class="hljs-number">1</span><br>  <span class="hljs-variable">%boolCmp</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">icmp</span> <span class="hljs-keyword">slt</span> <span class="hljs-type">i64</span> <span class="hljs-variable">%i</span><span class="hljs-punctuation">,</span> <span class="hljs-variable">%n</span><br>  <span class="hljs-variable">%0</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">sext</span> <span class="hljs-type">i1</span> <span class="hljs-variable">%boolCmp</span> <span class="hljs-keyword">to</span> <span class="hljs-type">i64</span><br>  <span class="hljs-variable">%loopCond</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">icmp</span> <span class="hljs-keyword">eq</span> <span class="hljs-type">i64</span> <span class="hljs-variable">%0</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0</span><br>  <span class="hljs-keyword">br</span> <span class="hljs-type">i1</span> <span class="hljs-variable">%loopCond</span><span class="hljs-punctuation">,</span> label <span class="hljs-variable">%loop</span><span class="hljs-punctuation">,</span> label <span class="hljs-variable">%afterLoop</span><br><br>afterLoop:                                        <span class="hljs-comment">; preds = %loop</span><br>  <span class="hljs-keyword">ret</span> <span class="hljs-type">i64</span> <span class="hljs-number">0</span><br>&#125;<br></code></pre></td></tr></table></figure>
+            </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
@@ -572,7 +272,7 @@ afterLoop:                                        <span class="hljs-comment">; p
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/编译原理/">编译原理</a>
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
                     
                   </div>
                 
@@ -586,36 +286,69 @@ afterLoop:                                        <span class="hljs-comment">; p
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
-                <div class="post-prevnext row">
-                  <div class="post-prev col-6">
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/05/教你使用swift写编译器玩具（6）/">
+                      <a href="/2020/07/05/%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8swift%E5%86%99%E7%BC%96%E8%AF%91%E5%99%A8%E7%8E%A9%E5%85%B7%EF%BC%886%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">教你使用swift写编译器玩具（6）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
-                  </div>
-                  <div class="post-next col-6">
+                  </article>
+                  <article class="post-next col-6">
                     
                     
-                      <a href="/2020/07/05/教你使用swift写编译器玩具（4）/">
+                      <a href="/2020/07/05/%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8swift%E5%86%99%E7%BC%96%E8%AF%91%E5%99%A8%E7%8E%A9%E5%85%B7%EF%BC%884%EF%BC%89/">
                         <span class="hidden-mobile">教你使用swift写编译器玩具（4）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
-                  </div>
+                  </article>
                 </div>
               
             </div>
 
             
-          </div>
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'qyz777/qyz777.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
         </div>
       </div>
     </div>
@@ -623,7 +356,7 @@ afterLoop:                                        <span class="hljs-comment">; p
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -635,16 +368,15 @@ afterLoop:                                        <span class="hljs-comment">; p
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -665,21 +397,16 @@ afterLoop:                                        <span class="hljs-comment">; p
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
     
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
   <div class="statistics">
     
     
@@ -705,24 +432,40 @@ afterLoop:                                        <span class="hljs-comment">; p
   </div>
 
 
-    
+  
   <!-- 备案信息 -->
   <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">京ICP备18016370号-1</a>
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        京ICP备18016370号-1
+      </a>
+    </span>
     
   </div>
 
 
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -733,8 +476,23 @@ afterLoop:                                        <span class="hljs-comment">; p
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
@@ -743,95 +501,29 @@ afterLoop:                                        <span class="hljs-comment">; p
 
 
 
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: 'article.markdown-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "教你使用swift写编译器玩具（5）&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+      typing(title)
+      
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -848,8 +540,8 @@ afterLoop:                                        <span class="hljs-comment">; p
 
 
 
-
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

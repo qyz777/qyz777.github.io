@@ -1,48 +1,65 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" >
 
 
 
-
-
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
   <link rel="icon" type="image/png" href="/img/favicon.ico">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content>
+  <meta name="description" content="">
   <meta name="author" content="YiZhong">
-  <meta name="keywords" content>
+  <meta name="keywords" content="">
   <title>Tensorflow Lite实战——在iOS上部署中文文本分类模型 - YiZhong&#39;s Blog</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
-
-  
-    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/tomorrow-night-eighties.min.css">
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-</head>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null},"tajs":null}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
 
 
 <body>
@@ -124,41 +141,45 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
           </li>
+        
         
       </ul>
     </div>
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner" id="banner" 
          style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Tensorflow Lite实战——在iOS上部署中文文本分类模型">
               
             </span>
 
             
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-06-27 10:06">
-      2020年6月27日 上午
-    </time>
-  </div>
-
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-27 10:06" pubdate>
+        2020年6月27日 上午
+      </time>
+    </span>
+  
+</div>
 
 <div class="mt-1">
   
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      3.1k 字
     </span>
   
 
@@ -168,7 +189,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      40
+      42
        分钟
     </span>
   
@@ -190,19 +211,21 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Tensorflow Lite实战——在iOS上部署中文文本分类模型</h1>
             
-            <article class="markdown-body">
+            <div class="markdown-body">
               <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>本文所使用的分类模型来自于<a href="[https://github.com/gaussic/text-classification-cnn-rnn](https://github.com/gaussic/text-classification-cnn-rnn)">CNN-RNN中文文本分类，基于TensorFlow</a></strong>，感谢开源。</p>
 <p>最近一段时间需要用到中文文本分类这样一个功能，于是我马上想到了Create ML，但是经过自己的尝试以后发现Create ML并不支持中文的文本分类(不信可以自己试试)。</p>
 <p>最近发现有道词典有离线翻译这样一个功能，我猜测这应该就是把模型下载到本地使用了，这么一看模型部署到移动端理论上是可行的。但各个深度学习框架我只了解过tensorflow，于是在有这样一个需求之下，我又回到了tensorflow这个大坑，去年年底说我这辈子都不会再用tensorflow了，没想到真香了。</p>
-<p>实际上tensorflow所训练的模型是放在后端最合适，但由于我不想给APP维护一个健壮的后端，所以执着于把模型部署到移动端。这个是<a href="https://github.com/qyz777/tensorflow_lite_swift_demo" target="_blank" rel="noopener">Demo</a>。</p>
+<p>实际上tensorflow所训练的模型是放在后端最合适，但由于我不想给APP维护一个健壮的后端，所以执着于把模型部署到移动端。这个是<a target="_blank" rel="noopener" href="https://github.com/qyz777/tensorflow_lite_swift_demo">Demo</a>。</p>
 <p>言归正传，从头部署一个模型我可以归纳出几个步骤</p>
 <ol>
 <li>训练并测试模型，将模型保存为ckpt格式</li>
@@ -218,280 +241,48 @@
 <h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><p>这个开源工程中会把每一个字符（汉字）映射成一个id，这个id来自于数据集中的行，意思就是第一行对应的字符id就是0，第二行对应的是1，以此类推。这样我们就获得了一个id的数组。并且这个id数组需要处理成一个固定长度，本文在iOS中处理方式为不足则数组后面添0，多余则移除数组末尾。</p>
 <h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p>输出的是一个数组，数量会超过10个，但因为数据集中的分类只有10个，所以我们只需要关注这个数组的前10个即可。这前10个数组对应的下标就是标签数组中的下标，数组的值就是预测的概率。所以输出的数组0-10的下标就对应了标签数组中0-10具体分类的可能性。</p>
 <h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><h2 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h2><p>本文使用开源工程中的CNN网络，因为TensorFlow Lite支持的operators有限，所以不是所有的TensorFlow中的operators都支持，如果出现不支持的情况就会在转换中出现类似如下的错误:</p>
-<div class="hljs"><pre><code class="hljs undefined">Some <span class="hljs-keyword">of</span> the operators <span class="hljs-keyword">in</span> the model are <span class="hljs-keyword">not</span> supported <span class="hljs-keyword">by</span> the standard TensorFlow Lite runtime. <span class="hljs-keyword">If</span> you have a <span class="hljs-keyword">custom</span> implementation <span class="hljs-keyword">for</span> them you can disable this <span class="hljs-keyword">error</span> <span class="hljs-keyword">with</span> --allow_custom_ops, <span class="hljs-keyword">or</span> <span class="hljs-keyword">by</span> setting allow_custom_ops=<span class="hljs-literal">True</span> <span class="hljs-keyword">when</span> calling tf.contrib.lite.toco_convert(). Here <span class="hljs-keyword">is</span> a list <span class="hljs-keyword">of</span> operators <span class="hljs-keyword">for</span> which  you will need <span class="hljs-keyword">custom</span> implementations: RandomUniform</code></pre></div>
-
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">Some <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> operators <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> model are <span class="hljs-keyword">not</span> supported <span class="hljs-keyword">by</span> <span class="hljs-keyword">the</span> standard TensorFlow Lite runtime. If you have <span class="hljs-keyword">a</span> custom implementation <span class="hljs-keyword">for</span> them you can disable this error <span class="hljs-keyword">with</span> <span class="hljs-comment">--allow_custom_ops, or by setting allow_custom_ops=True when calling tf.contrib.lite.toco_convert(). Here is a list of operators for which  you will need custom implementations: RandomUniform</span><br></code></pre></td></tr></table></figure>
 <p>这里的错误中可以发现不支持的operator是RandomUniform。查找之后发现CNN中的<strong>tf.contrib.layers.dropout</strong>不受支持，但是这个问题不大，我们可以用L2正则化去替代它防止过拟合。</p>
 <p>下面是修改后的参考代码:</p>
-<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-comment"># coding: utf-8</span>
-<span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> partial
-
-<span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf
-
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TCNNConfig</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-string">"""CNN配置参数"""</span>
-
-    embedding_dim = <span class="hljs-number">64</span>  <span class="hljs-comment"># 词向量维度</span>
-    seq_length = <span class="hljs-number">600</span>  <span class="hljs-comment"># 序列长度</span>
-    num_classes = <span class="hljs-number">10</span>  <span class="hljs-comment"># 类别数</span>
-    num_filters = <span class="hljs-number">256</span>  <span class="hljs-comment"># 卷积核数目</span>
-    kernel_size = <span class="hljs-number">5</span>  <span class="hljs-comment"># 卷积核尺寸</span>
-    vocab_size = <span class="hljs-number">5000</span>  <span class="hljs-comment"># 词汇表达小</span>
-
-    hidden_dim = <span class="hljs-number">128</span>  <span class="hljs-comment"># 全连接层神经元</span>
-
-    dropout_keep_prob = <span class="hljs-number">0.5</span>  <span class="hljs-comment"># dropout保留比例</span>
-    learning_rate = <span class="hljs-number">1e-3</span>  <span class="hljs-comment"># 学习率</span>
-
-    batch_size = <span class="hljs-number">64</span>  <span class="hljs-comment"># 每批训练大小</span>
-    num_epochs = <span class="hljs-number">10</span>  <span class="hljs-comment"># 总迭代轮次</span>
-
-    print_per_batch = <span class="hljs-number">100</span>  <span class="hljs-comment"># 每多少轮输出一次结果</span>
-    save_per_batch = <span class="hljs-number">10</span>  <span class="hljs-comment"># 每多少轮存入tensorboard</span>
-
-    scale = <span class="hljs-number">0.01</span>
-
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TextCNN</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-string">"""文本分类，CNN模型"""</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, config)</span>:</span>
-        self.config = config
-
-        <span class="hljs-comment"># 三个待输入的数据</span>
-        self.input_x = tf.placeholder(tf.int32, [<span class="hljs-literal">None</span>, self.config.seq_length], name=<span class="hljs-string">'input_x'</span>)
-        self.input_y = tf.placeholder(tf.float32, [<span class="hljs-literal">None</span>, self.config.num_classes], name=<span class="hljs-string">'input_y'</span>)
-        self.keep_prob = tf.placeholder(tf.float32, name=<span class="hljs-string">'keep_prob'</span>)
-
-        self.cnn()
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cnn</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-string">"""CNN模型"""</span>
-        my_dense_layer = partial(
-            tf.layers.dense, activation=tf.nn.relu,
-            <span class="hljs-comment"># 在这里传入了L2正则化函数，并在函数中传入正则化系数。</span>
-            kernel_regularizer=tf.contrib.layers.l2_regularizer(self.config.scale)
-        )
-        <span class="hljs-comment"># 词向量映射</span>
-        <span class="hljs-keyword">with</span> tf.device(<span class="hljs-string">'/cpu:0'</span>):
-            embedding = tf.get_variable(<span class="hljs-string">'embedding'</span>, [self.config.vocab_size, self.config.embedding_dim])
-            embedding_inputs = tf.nn.embedding_lookup(embedding, self.input_x)
-
-        <span class="hljs-keyword">with</span> tf.name_scope(<span class="hljs-string">"cnn"</span>):
-            <span class="hljs-comment"># CNN layer</span>
-            conv = tf.layers.conv1d(embedding_inputs, self.config.num_filters, self.config.kernel_size, name=<span class="hljs-string">'conv'</span>)
-            <span class="hljs-comment"># global max pooling layer</span>
-            gmp = tf.reduce_max(conv, reduction_indices=[<span class="hljs-number">1</span>], name=<span class="hljs-string">'gmp'</span>)
-
-        <span class="hljs-keyword">with</span> tf.name_scope(<span class="hljs-string">"score"</span>):
-            <span class="hljs-comment"># 全连接层</span>
-            fc = my_dense_layer(gmp, self.config.hidden_dim, name=<span class="hljs-string">'fc1'</span>)
-            <span class="hljs-comment"># fc = tf.layers.dense(gmp, self.config.hidden_dim, name='fc1')</span>
-            <span class="hljs-comment"># fc = tf.contrib.layers.dropout(fc, self.keep_prob)</span>
-            <span class="hljs-comment"># fc = tf.nn.relu(fc)</span>
-
-            <span class="hljs-comment"># 分类器</span>
-            self.logits = tf.layers.dense(fc, self.config.num_classes, name=<span class="hljs-string">'fc2'</span>)
-            self.y_pred_cls = tf.argmax(tf.nn.softmax(self.logits), <span class="hljs-number">1</span>)  <span class="hljs-comment"># 预测类别</span>
-
-        <span class="hljs-keyword">with</span> tf.name_scope(<span class="hljs-string">"optimize"</span>):
-            <span class="hljs-comment"># 损失函数，交叉熵</span>
-            cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=self.logits, labels=self.input_y)
-            reg_losses = tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES)
-            self.loss = tf.add_n([tf.reduce_mean(cross_entropy)] + reg_losses)
-            <span class="hljs-comment"># self.loss = tf.reduce_mean(cross_entropy)</span>
-            <span class="hljs-comment"># 优化器</span>
-            self.optim = tf.train.AdamOptimizer(learning_rate=self.config.learning_rate).minimize(self.loss)
-
-        <span class="hljs-keyword">with</span> tf.name_scope(<span class="hljs-string">"accuracy"</span>):
-            <span class="hljs-comment"># 准确率</span>
-            correct_pred = tf.equal(tf.argmax(self.input_y, <span class="hljs-number">1</span>), self.y_pred_cls)
-            self.acc = tf.reduce_mean(tf.cast(correct_pred, tf.float32))</code></pre></div>
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># coding: utf-8</span><br><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> partial<br><br><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TCNNConfig</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;CNN配置参数&quot;&quot;&quot;</span><br><br>    embedding_dim = <span class="hljs-number">64</span>  <span class="hljs-comment"># 词向量维度</span><br>    seq_length = <span class="hljs-number">600</span>  <span class="hljs-comment"># 序列长度</span><br>    num_classes = <span class="hljs-number">10</span>  <span class="hljs-comment"># 类别数</span><br>    num_filters = <span class="hljs-number">256</span>  <span class="hljs-comment"># 卷积核数目</span><br>    kernel_size = <span class="hljs-number">5</span>  <span class="hljs-comment"># 卷积核尺寸</span><br>    vocab_size = <span class="hljs-number">5000</span>  <span class="hljs-comment"># 词汇表达小</span><br><br>    hidden_dim = <span class="hljs-number">128</span>  <span class="hljs-comment"># 全连接层神经元</span><br><br>    dropout_keep_prob = <span class="hljs-number">0.5</span>  <span class="hljs-comment"># dropout保留比例</span><br>    learning_rate = <span class="hljs-number">1e-3</span>  <span class="hljs-comment"># 学习率</span><br><br>    batch_size = <span class="hljs-number">64</span>  <span class="hljs-comment"># 每批训练大小</span><br>    num_epochs = <span class="hljs-number">10</span>  <span class="hljs-comment"># 总迭代轮次</span><br><br>    print_per_batch = <span class="hljs-number">100</span>  <span class="hljs-comment"># 每多少轮输出一次结果</span><br>    save_per_batch = <span class="hljs-number">10</span>  <span class="hljs-comment"># 每多少轮存入tensorboard</span><br><br>    scale = <span class="hljs-number">0.01</span><br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TextCNN</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;文本分类，CNN模型&quot;&quot;&quot;</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, config</span>):</span><br>        self.config = config<br><br>        <span class="hljs-comment"># 三个待输入的数据</span><br>        self.input_x = tf.placeholder(tf.int32, [<span class="hljs-literal">None</span>, self.config.seq_length], name=<span class="hljs-string">&#x27;input_x&#x27;</span>)<br>        self.input_y = tf.placeholder(tf.float32, [<span class="hljs-literal">None</span>, self.config.num_classes], name=<span class="hljs-string">&#x27;input_y&#x27;</span>)<br>        self.keep_prob = tf.placeholder(tf.float32, name=<span class="hljs-string">&#x27;keep_prob&#x27;</span>)<br><br>        self.cnn()<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cnn</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-string">&quot;&quot;&quot;CNN模型&quot;&quot;&quot;</span><br>        my_dense_layer = partial(<br>            tf.layers.dense, activation=tf.nn.relu,<br>            <span class="hljs-comment"># 在这里传入了L2正则化函数，并在函数中传入正则化系数。</span><br>            kernel_regularizer=tf.contrib.layers.l2_regularizer(self.config.scale)<br>        )<br>        <span class="hljs-comment"># 词向量映射</span><br>        <span class="hljs-keyword">with</span> tf.device(<span class="hljs-string">&#x27;/cpu:0&#x27;</span>):<br>            embedding = tf.get_variable(<span class="hljs-string">&#x27;embedding&#x27;</span>, [self.config.vocab_size, self.config.embedding_dim])<br>            embedding_inputs = tf.nn.embedding_lookup(embedding, self.input_x)<br><br>        <span class="hljs-keyword">with</span> tf.name_scope(<span class="hljs-string">&quot;cnn&quot;</span>):<br>            <span class="hljs-comment"># CNN layer</span><br>            conv = tf.layers.conv1d(embedding_inputs, self.config.num_filters, self.config.kernel_size, name=<span class="hljs-string">&#x27;conv&#x27;</span>)<br>            <span class="hljs-comment"># global max pooling layer</span><br>            gmp = tf.reduce_max(conv, reduction_indices=[<span class="hljs-number">1</span>], name=<span class="hljs-string">&#x27;gmp&#x27;</span>)<br><br>        <span class="hljs-keyword">with</span> tf.name_scope(<span class="hljs-string">&quot;score&quot;</span>):<br>            <span class="hljs-comment"># 全连接层</span><br>            fc = my_dense_layer(gmp, self.config.hidden_dim, name=<span class="hljs-string">&#x27;fc1&#x27;</span>)<br>            <span class="hljs-comment"># fc = tf.layers.dense(gmp, self.config.hidden_dim, name=&#x27;fc1&#x27;)</span><br>            <span class="hljs-comment"># fc = tf.contrib.layers.dropout(fc, self.keep_prob)</span><br>            <span class="hljs-comment"># fc = tf.nn.relu(fc)</span><br><br>            <span class="hljs-comment"># 分类器</span><br>            self.logits = tf.layers.dense(fc, self.config.num_classes, name=<span class="hljs-string">&#x27;fc2&#x27;</span>)<br>            self.y_pred_cls = tf.argmax(tf.nn.softmax(self.logits), <span class="hljs-number">1</span>)  <span class="hljs-comment"># 预测类别</span><br><br>        <span class="hljs-keyword">with</span> tf.name_scope(<span class="hljs-string">&quot;optimize&quot;</span>):<br>            <span class="hljs-comment"># 损失函数，交叉熵</span><br>            cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=self.logits, labels=self.input_y)<br>            reg_losses = tf.get_collection(tf.GraphKeys.REGULARIZATION_LOSSES)<br>            self.loss = tf.add_n([tf.reduce_mean(cross_entropy)] + reg_losses)<br>            <span class="hljs-comment"># self.loss = tf.reduce_mean(cross_entropy)</span><br>            <span class="hljs-comment"># 优化器</span><br>            self.optim = tf.train.AdamOptimizer(learning_rate=self.config.learning_rate).minimize(self.loss)<br><br>        <span class="hljs-keyword">with</span> tf.name_scope(<span class="hljs-string">&quot;accuracy&quot;</span>):<br>            <span class="hljs-comment"># 准确率</span><br>            correct_pred = tf.equal(tf.argmax(self.input_y, <span class="hljs-number">1</span>), self.y_pred_cls)<br>            self.acc = tf.reduce_mean(tf.cast(correct_pred, tf.float32))<br><br></code></pre></td></tr></table></figure>
 <p>接下来在run_cnn.py中经过训练就能获得如下ckpt模型了:<br><img src="https://cdn.qyizhong.cn/8216167-07fab3cb4052360a.png" srcset="/img/loading.gif" alt="ckpt模型"></p>
 <h2 id="将ckpt模型固化转成pb模型"><a href="#将ckpt模型固化转成pb模型" class="headerlink" title="将ckpt模型固化转成pb模型"></a>将ckpt模型固化转成pb模型</h2><p>在固化模型这一个环节，你需要通读这个开源工程才行，不然你肯定不了解它的网络结构以及它的输入和输出。这也是对iOS开发者非常不友好的地方。</p>
 <p>通过源码我们可以得知<strong>TextCNN</strong>这个类中的<strong>self.logits</strong>这个属性就是我们需要关注的输出，所以我们可以通过下面这段代码打印出tensor，然后找到我们需要的输出的name</p>
-<div class="hljs"><pre><code class="hljs undefined">ops = sess.graph.get_operations()
-        <span class="hljs-keyword">for</span> <span class="hljs-built_in">op</span> <span class="hljs-keyword">in</span> ops:
-            <span class="hljs-built_in">print</span>(<span class="hljs-built_in">op</span>)</code></pre></div>
-
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs maxima">ops = sess.graph.get_operations()<br>        <span class="hljs-keyword">for</span> <span class="hljs-built_in">op</span> <span class="hljs-keyword">in</span> ops:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-built_in">op</span>)<br></code></pre></td></tr></table></figure>
 <p>这里我们需要的name是</p>
-<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-attr">output_node_names</span> = <span class="hljs-string">"score/fc2/BiasAdd"</span></code></pre></div>
-
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">output_node_names</span> = <span class="hljs-string">&quot;score/fc2/BiasAdd&quot;</span><br></code></pre></td></tr></table></figure>
 <p>参考源码:</p>
-<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">freeze_graph</span><span class="hljs-params">(input_checkpoint)</span>:</span>
-    <span class="hljs-string">"""
-    :param input_checkpoint:
-    :return:
-    """</span>
-    <span class="hljs-comment"># checkpoint = tf.train.get_checkpoint_state(model_folder) #检查目录下ckpt文件状态是否可用</span>
-    <span class="hljs-comment"># input_checkpoint = checkpoint.model_checkpoint_path #得ckpt文件路径</span>
-
-    <span class="hljs-comment"># 指定输出的节点名称,该节点名称必须是原模型中存在的节点</span>
-    output_node_names = <span class="hljs-string">"score/fc2/BiasAdd"</span>
-    saver = tf.train.import_meta_graph(input_checkpoint + <span class="hljs-string">'.meta'</span>, clear_devices=<span class="hljs-literal">True</span>)
-
-    <span class="hljs-keyword">with</span> tf.Session() <span class="hljs-keyword">as</span> sess:
-        saver.restore(sess, input_checkpoint)  <span class="hljs-comment"># 恢复图并得到数据</span>
-        output_graph_def = tf.graph_util.convert_variables_to_constants(  <span class="hljs-comment"># 模型持久化，将变量值固定</span>
-            sess=sess,
-            input_graph_def=sess.graph_def,  <span class="hljs-comment"># 等于:sess.graph_def</span>
-            output_node_names=output_node_names.split(<span class="hljs-string">","</span>)
-        )  <span class="hljs-comment"># 如果有多个输出节点，以逗号隔开</span>
-
-        <span class="hljs-keyword">with</span> tf.gfile.GFile(output_graph, <span class="hljs-string">"wb"</span>) <span class="hljs-keyword">as</span> f:  <span class="hljs-comment"># 保存模型</span>
-            f.write(output_graph_def.SerializeToString())  <span class="hljs-comment"># 序列化输出</span></code></pre></div>
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">freeze_graph</span>(<span class="hljs-params">input_checkpoint</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    :param input_checkpoint:</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># checkpoint = tf.train.get_checkpoint_state(model_folder) #检查目录下ckpt文件状态是否可用</span><br>    <span class="hljs-comment"># input_checkpoint = checkpoint.model_checkpoint_path #得ckpt文件路径</span><br><br>    <span class="hljs-comment"># 指定输出的节点名称,该节点名称必须是原模型中存在的节点</span><br>    output_node_names = <span class="hljs-string">&quot;score/fc2/BiasAdd&quot;</span><br>    saver = tf.train.import_meta_graph(input_checkpoint + <span class="hljs-string">&#x27;.meta&#x27;</span>, clear_devices=<span class="hljs-literal">True</span>)<br><br>    <span class="hljs-keyword">with</span> tf.Session() <span class="hljs-keyword">as</span> sess:<br>        saver.restore(sess, input_checkpoint)  <span class="hljs-comment"># 恢复图并得到数据</span><br>        output_graph_def = tf.graph_util.convert_variables_to_constants(  <span class="hljs-comment"># 模型持久化，将变量值固定</span><br>            sess=sess,<br>            input_graph_def=sess.graph_def,  <span class="hljs-comment"># 等于:sess.graph_def</span><br>            output_node_names=output_node_names.split(<span class="hljs-string">&quot;,&quot;</span>)<br>        )  <span class="hljs-comment"># 如果有多个输出节点，以逗号隔开</span><br><br>        <span class="hljs-keyword">with</span> tf.gfile.GFile(output_graph, <span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> f:  <span class="hljs-comment"># 保存模型</span><br>            f.write(output_graph_def.SerializeToString())  <span class="hljs-comment"># 序列化输出</span><br></code></pre></td></tr></table></figure>
 <p>input_checkpoint为你的ckpt模型路径</p>
 <h2 id="将pb模型转换为tflite模型"><a href="#将pb模型转换为tflite模型" class="headerlink" title="将pb模型转换为tflite模型"></a>将pb模型转换为tflite模型</h2><p>下面是<strong>from_frozen_graph</strong>方法的注解。这里我就要吐槽一下了，TensorFlow Lite的文档未免太敷衍了，说好的传入参数是一个[tensor]，结果老报错，在打断点调试了它们库的源码情况下发现竟然要求的是传入tensor的name？？？</p>
 <p><img src="https://cdn.qyizhong.cn/8216167-8587e8f6b65ce590.png" srcset="/img/loading.gif" alt="from_frozen_graph方法注解"></p>
 <p>这个只要没有出现operator不支持的情况就很简单，直接上源码就完了</p>
-<div class="hljs"><pre><code class="hljs undefined">def convert_to_tflite():
-    <span class="hljs-attr">input_tensors</span> = [
-        <span class="hljs-string">"input_x"</span>
-    ]
-    <span class="hljs-attr">output_tensors</span> = [
-        <span class="hljs-string">"score/fc2/BiasAdd"</span>
-    ]
-    <span class="hljs-attr">converter</span> = tf.lite.TFLiteConverter.from_frozen_graph(
-        output_graph,
-        input_tensors,
-        output_tensors)
-    converter.<span class="hljs-attr">target_ops</span> = [tf.lite.OpsSet.TFLITE_BUILTINS,
-                            tf.lite.OpsSet.SELECT_TF_OPS]
-    <span class="hljs-attr">tflite_model</span> = converter.convert()
-    open(output_tflite_model, <span class="hljs-string">"wb"</span>).write(tflite_model)</code></pre></div>
-
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs nix">def convert_to_tflite():<br>    <span class="hljs-attr">input_tensors</span> = [<br>        <span class="hljs-string">&quot;input_x&quot;</span><br>    ]<br>    <span class="hljs-attr">output_tensors</span> = [<br>        <span class="hljs-string">&quot;score/fc2/BiasAdd&quot;</span><br>    ]<br>    <span class="hljs-attr">converter</span> = tf.lite.TFLiteConverter.from_frozen_graph(<br>        output_graph,<br>        input_tensors,<br>        output_tensors)<br>    converter.<span class="hljs-attr">target_ops</span> = [tf.lite.OpsSet.TFLITE_BUILTINS,<br>                            tf.lite.OpsSet.SELECT_TF_OPS]<br>    <span class="hljs-attr">tflite_model</span> = converter.convert()<br>    open(output_tflite_model, <span class="hljs-string">&quot;wb&quot;</span>).write(tflite_model)<br></code></pre></td></tr></table></figure>
 <p>其中<strong>input_x</strong>是输入的name</p>
-<h2 id="使用cocoapods的方式引入TensorFlow-Lite"><a href="#使用cocoapods的方式引入TensorFlow-Lite" class="headerlink" title="使用cocoapods的方式引入TensorFlow Lite"></a>使用cocoapods的方式引入TensorFlow Lite</h2><p>TensorFlow Lite有好几个库，原生的需要写C++，在一顿操作之下我放弃了，完全看不懂tensor的输入嘛。还有<a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/objc" target="_blank" rel="noopener">OC封装</a>的以及<a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/swift" target="_blank" rel="noopener">swift封装</a>的。因为我的工程是swift写的，所以我直接用swift的TensorFlow Lite库</p>
+<h2 id="使用cocoapods的方式引入TensorFlow-Lite"><a href="#使用cocoapods的方式引入TensorFlow-Lite" class="headerlink" title="使用cocoapods的方式引入TensorFlow Lite"></a>使用cocoapods的方式引入TensorFlow Lite</h2><p>TensorFlow Lite有好几个库，原生的需要写C++，在一顿操作之下我放弃了，完全看不懂tensor的输入嘛。还有<a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/objc">OC封装</a>的以及<a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/experimental/swift">swift封装</a>的。因为我的工程是swift写的，所以我直接用swift的TensorFlow Lite库</p>
 <p>按照他们的README</p>
-<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-attribute">pod</span> <span class="hljs-string">'TensorFlowLiteSwift'</span></code></pre></div>
-
-<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-keyword">import</span> TensorFlowLite</code></pre></div>
-
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">pod</span> <span class="hljs-string">&#x27;TensorFlowLiteSwift&#x27;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-keyword">import</span> TensorFlowLite<br></code></pre></td></tr></table></figure>
 <p>就引入了，这一点就很友好了，比什么直接编译TensorFlow到iOS工程里那是简单的不能再简单了。</p>
 <h2 id="封装调用模型逻辑，进行文本分类"><a href="#封装调用模型逻辑，进行文本分类" class="headerlink" title="封装调用模型逻辑，进行文本分类"></a>封装调用模型逻辑，进行文本分类</h2><p>在喂数据进行预测时我们也要按照开源工程里喂数据的方式进行一番操作。调用的逻辑我们可以参考<a href="(https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/ImageClassification/ModelDataHandler/ModelDataHandler.swift)">官方Example</a></p>
 <h3 id="导入模型"><a href="#导入模型" class="headerlink" title="导入模型"></a>导入模型</h3><p>我们需要导入模型、分类和字符id，这在本文的前言中提供的demo中有体现。</p>
 <p><img src="https://cdn.qyizhong.cn/8216167-eae6ed14bcb96cba.png" srcset="/img/loading.gif" alt="必须导入的东西"></p>
-<h3 id="初始化Interpreter"><a href="#初始化Interpreter" class="headerlink" title="初始化Interpreter"></a>初始化Interpreter</h3><div class="hljs"><pre><code class="hljs undefined"><span class="hljs-keyword">private</span> <span class="hljs-keyword">init</span>() &#123;
-        <span class="hljs-keyword">let</span> options = <span class="hljs-type">InterpreterOptions</span>()
-        <span class="hljs-keyword">do</span> &#123;
-            <span class="hljs-comment">// Create the `Interpreter`.</span>
-            <span class="hljs-keyword">let</span> modelPath = <span class="hljs-type">Bundle</span>.<span class="hljs-keyword">init</span>(<span class="hljs-keyword">for</span>: <span class="hljs-type">TextClassifier</span>.<span class="hljs-keyword">self</span>).path(forResource: <span class="hljs-string">"model"</span>, ofType: <span class="hljs-string">"tflite"</span>)!
-            interpreter = <span class="hljs-keyword">try</span> <span class="hljs-type">Interpreter</span>(modelPath: modelPath, options: options)
-            <span class="hljs-comment">// Allocate memory for the model's input `Tensor`s.</span>
-            <span class="hljs-keyword">try</span> interpreter.allocateTensors()
-        &#125; <span class="hljs-keyword">catch</span> &#123;
-            <span class="hljs-built_in">print</span>(<span class="hljs-string">"Failed to create the interpreter with error: \(error.localizedDescription)"</span>)
-        &#125;
-    &#125;</code></pre></div>
-
-<h3 id="加载标签、id以及将字符转换为id"><a href="#加载标签、id以及将字符转换为id" class="headerlink" title="加载标签、id以及将字符转换为id"></a>加载标签、id以及将字符转换为id</h3><div class="hljs"><pre><code class="hljs undefined"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">loadLabels</span><span class="hljs-params">()</span></span> &#123;
-        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> path = <span class="hljs-type">Bundle</span>.<span class="hljs-keyword">init</span>(<span class="hljs-keyword">for</span>: <span class="hljs-type">TextClassifier</span>.<span class="hljs-keyword">self</span>).path(forResource: <span class="hljs-string">"labels"</span>, ofType: <span class="hljs-string">"txt"</span>) &#123;
-            <span class="hljs-keyword">let</span> fileManager = <span class="hljs-type">FileManager</span>.<span class="hljs-keyword">default</span>
-            <span class="hljs-keyword">let</span> txtData = fileManager.contents(atPath: path)!
-            <span class="hljs-keyword">let</span> content = <span class="hljs-type">String</span>.<span class="hljs-keyword">init</span>(data: txtData, encoding: .utf8)
-            <span class="hljs-keyword">let</span> rowArray = content?.<span class="hljs-built_in">split</span>(separator: <span class="hljs-string">"\n"</span>) ?? []
-            <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rowArray &#123;
-                labels.append(<span class="hljs-type">String</span>(row))
-            &#125;
-        &#125;
-    &#125;
-    
-    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">loadTextId</span><span class="hljs-params">()</span></span> &#123;
-        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> path = <span class="hljs-type">Bundle</span>.<span class="hljs-keyword">init</span>(<span class="hljs-keyword">for</span>: <span class="hljs-type">TextClassifier</span>.<span class="hljs-keyword">self</span>).path(forResource: <span class="hljs-string">"text_id"</span>, ofType: <span class="hljs-string">"txt"</span>) &#123;
-            <span class="hljs-keyword">let</span> fileManager = <span class="hljs-type">FileManager</span>.<span class="hljs-keyword">default</span>
-            <span class="hljs-keyword">let</span> txtData = fileManager.contents(atPath: path)!
-            <span class="hljs-keyword">let</span> content = <span class="hljs-type">String</span>.<span class="hljs-keyword">init</span>(data: txtData, encoding: .utf8)
-            <span class="hljs-keyword">let</span> rowArray = content?.<span class="hljs-built_in">split</span>(separator: <span class="hljs-string">"\n"</span>) ?? []
-            <span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>
-            <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rowArray &#123;
-                textIdInfo[<span class="hljs-type">String</span>(row)] = i
-                i += <span class="hljs-number">1</span>
-            &#125;
-        &#125;
-    &#125;
-    
-    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">transformTextToId</span><span class="hljs-params">(<span class="hljs-number">_</span> text: String)</span></span> -&gt; [<span class="hljs-type">Int</span>] &#123;
-        <span class="hljs-keyword">var</span> idArray: [<span class="hljs-type">Int</span>] = []
-        <span class="hljs-keyword">for</span> str <span class="hljs-keyword">in</span> text &#123;
-            idArray.append(textIdInfo[<span class="hljs-type">String</span>(str)]!)
-        &#125;
-        <span class="hljs-comment">//根据python工程中的输入设置，超出截取前面，不足后面补0</span>
-        <span class="hljs-keyword">while</span> idArray.<span class="hljs-built_in">count</span> &lt; <span class="hljs-number">2400</span> &#123;
-            idArray.append(<span class="hljs-number">0</span>)
-        &#125;
-        <span class="hljs-keyword">while</span> idArray.<span class="hljs-built_in">count</span> &gt; <span class="hljs-number">2400</span> &#123;
-            idArray.removeLast()
-        &#125;
-        <span class="hljs-keyword">return</span> idArray
-    &#125;</code></pre></div>
-
-<h3 id="进行预测"><a href="#进行预测" class="headerlink" title="进行预测"></a>进行预测</h3><div class="hljs"><pre><code class="hljs undefined"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">runModel</span><span class="hljs-params">(with text: String, closure: @escaping<span class="hljs-params">(InferenceReslutClosure)</span></span></span>) &#123;
-        <span class="hljs-type">DispatchQueue</span>.global().async &#123;
-            <span class="hljs-keyword">let</span> idArray = <span class="hljs-keyword">self</span>.transformTextToId(text)
-            <span class="hljs-keyword">let</span> outputTensor: <span class="hljs-type">Tensor</span>
-            <span class="hljs-keyword">do</span> &#123;
-                <span class="hljs-number">_</span> = <span class="hljs-keyword">try</span> <span class="hljs-keyword">self</span>.interpreter.input(at: <span class="hljs-number">0</span>)
-                <span class="hljs-keyword">let</span> idData = <span class="hljs-type">Data</span>.<span class="hljs-keyword">init</span>(bytes: idArray, <span class="hljs-built_in">count</span>: idArray.<span class="hljs-built_in">count</span>)
-                <span class="hljs-keyword">try</span> <span class="hljs-keyword">self</span>.interpreter.copy(idData, toInputAt: <span class="hljs-number">0</span>)
-                <span class="hljs-keyword">try</span> <span class="hljs-keyword">self</span>.interpreter.invoke()
-                outputTensor = <span class="hljs-keyword">try</span> <span class="hljs-keyword">self</span>.interpreter.output(at: <span class="hljs-number">0</span>)
-            &#125; <span class="hljs-keyword">catch</span> &#123;
-                <span class="hljs-built_in">print</span>(<span class="hljs-string">"An error occurred while entering data: \(error.localizedDescription)"</span>)
-                <span class="hljs-keyword">return</span>
-            &#125;
-            <span class="hljs-keyword">let</span> results: [<span class="hljs-type">Float</span>]
-            <span class="hljs-keyword">switch</span> outputTensor.dataType &#123;
-            <span class="hljs-keyword">case</span> .uInt8:
-                <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> quantization = outputTensor.quantizationParameters <span class="hljs-keyword">else</span> &#123;
-                    <span class="hljs-built_in">print</span>(<span class="hljs-string">"No results returned because the quantization values for the output tensor are nil."</span>)
-                    <span class="hljs-keyword">return</span>
-                &#125;
-                <span class="hljs-keyword">let</span> quantizedResults = [<span class="hljs-type">UInt8</span>](outputTensor.data)
-                results = quantizedResults.<span class="hljs-built_in">map</span> &#123;
-                    quantization.scale * <span class="hljs-type">Float</span>(<span class="hljs-type">Int</span>($<span class="hljs-number">0</span>) - quantization.zeroPoint)
-                &#125;
-            <span class="hljs-keyword">case</span> .float32:
-                results = outputTensor.data.withUnsafeBytes( &#123; (ptr: <span class="hljs-type">UnsafeRawBufferPointer</span>) <span class="hljs-keyword">in</span>
-                    [<span class="hljs-type">Float32</span>](<span class="hljs-type">UnsafeBufferPointer</span>.<span class="hljs-keyword">init</span>(start: ptr.baseAddress?.assumingMemoryBound(to: <span class="hljs-type">Float32</span>.<span class="hljs-keyword">self</span>), <span class="hljs-built_in">count</span>: ptr.<span class="hljs-built_in">count</span>))
-                &#125;)
-            <span class="hljs-keyword">default</span>:
-                <span class="hljs-built_in">print</span>(<span class="hljs-string">"Output tensor data type \(outputTensor.dataType) is unsupported for this app."</span>)
-                <span class="hljs-keyword">return</span>
-            &#125;
-            <span class="hljs-keyword">let</span> resultArray = <span class="hljs-keyword">self</span>.getTopN(results: results)
-            <span class="hljs-type">DispatchQueue</span>.main.async &#123;
-                closure(resultArray)
-            &#125;
-        &#125;
-    &#125;</code></pre></div>
-
+<h3 id="初始化Interpreter"><a href="#初始化Interpreter" class="headerlink" title="初始化Interpreter"></a>初始化Interpreter</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">private</span> init<span class="hljs-literal">()</span> &#123;<br>        <span class="hljs-keyword">let</span> options = <span class="hljs-constructor">InterpreterOptions()</span><br>        <span class="hljs-keyword">do</span> &#123;<br>            <span class="hljs-comment">// Create the `Interpreter`.</span><br>            <span class="hljs-keyword">let</span> modelPath = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Bundle</span>.</span></span>init(<span class="hljs-keyword">for</span>: <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">TextClassifier</span>.</span></span>self).path(forResource: <span class="hljs-string">&quot;model&quot;</span>, ofType: <span class="hljs-string">&quot;tflite&quot;</span>)!<br>            interpreter = <span class="hljs-keyword">try</span> <span class="hljs-constructor">Interpreter(<span class="hljs-params">modelPath</span>: <span class="hljs-params">modelPath</span>, <span class="hljs-params">options</span>: <span class="hljs-params">options</span>)</span><br>            <span class="hljs-comment">// Allocate memory for the model&#x27;s input `Tensor`s.</span><br>            <span class="hljs-keyword">try</span> interpreter.allocate<span class="hljs-constructor">Tensors()</span><br>        &#125; catch &#123;<br>            print(<span class="hljs-string">&quot;Failed to create the interpreter with error: \(error.localizedDescription)&quot;</span>)<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+<h3 id="加载标签、id以及将字符转换为id"><a href="#加载标签、id以及将字符转换为id" class="headerlink" title="加载标签、id以及将字符转换为id"></a>加载标签、id以及将字符转换为id</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">private</span> func <span class="hljs-function"><span class="hljs-title">loadLabels</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> path = Bundle.init(<span class="hljs-keyword">for</span>: TextClassifier.self).path(forResource: <span class="hljs-string">&quot;labels&quot;</span>, <span class="hljs-attr">ofType</span>: <span class="hljs-string">&quot;txt&quot;</span>) &#123;<br>            <span class="hljs-keyword">let</span> fileManager = FileManager.default<br>            <span class="hljs-keyword">let</span> txtData = fileManager.contents(atPath: path)!<br>            <span class="hljs-keyword">let</span> content = <span class="hljs-built_in">String</span>.init(data: txtData, <span class="hljs-attr">encoding</span>: .utf8)<br>            <span class="hljs-keyword">let</span> rowArray = content?.split(separator: <span class="hljs-string">&quot;\n&quot;</span>) ?? []<br>            <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rowArray &#123;<br>                labels.append(<span class="hljs-built_in">String</span>(row))<br>            &#125;<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">private</span> func <span class="hljs-function"><span class="hljs-title">loadTextId</span>(<span class="hljs-params"></span>)</span> &#123;<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> path = Bundle.init(<span class="hljs-keyword">for</span>: TextClassifier.self).path(forResource: <span class="hljs-string">&quot;text_id&quot;</span>, <span class="hljs-attr">ofType</span>: <span class="hljs-string">&quot;txt&quot;</span>) &#123;<br>            <span class="hljs-keyword">let</span> fileManager = FileManager.default<br>            <span class="hljs-keyword">let</span> txtData = fileManager.contents(atPath: path)!<br>            <span class="hljs-keyword">let</span> content = <span class="hljs-built_in">String</span>.init(data: txtData, <span class="hljs-attr">encoding</span>: .utf8)<br>            <span class="hljs-keyword">let</span> rowArray = content?.split(separator: <span class="hljs-string">&quot;\n&quot;</span>) ?? []<br>            <span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rowArray &#123;<br>                textIdInfo[<span class="hljs-built_in">String</span>(row)] = i<br>                i += <span class="hljs-number">1</span><br>            &#125;<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">private</span> func transformTextToId(_ text: <span class="hljs-built_in">String</span>) -&gt; [Int] &#123;<br>        <span class="hljs-keyword">var</span> idArray: [Int] = []<br>        <span class="hljs-keyword">for</span> str <span class="hljs-keyword">in</span> text &#123;<br>            idArray.append(textIdInfo[<span class="hljs-built_in">String</span>(str)]!)<br>        &#125;<br>        <span class="hljs-comment">//根据python工程中的输入设置，超出截取前面，不足后面补0</span><br>        <span class="hljs-keyword">while</span> idArray.count &lt; <span class="hljs-number">2400</span> &#123;<br>            idArray.append(<span class="hljs-number">0</span>)<br>        &#125;<br>        <span class="hljs-keyword">while</span> idArray.count &gt; <span class="hljs-number">2400</span> &#123;<br>            idArray.removeLast()<br>        &#125;<br>        <span class="hljs-keyword">return</span> idArray<br>    &#125;<br></code></pre></td></tr></table></figure>
+<h3 id="进行预测"><a href="#进行预测" class="headerlink" title="进行预测"></a>进行预测</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">runModel</span><span class="hljs-params">(with text: String, closure: @escaping<span class="hljs-params">(InferenceReslutClosure)</span></span></span>) &#123;<br>        <span class="hljs-type">DispatchQueue</span>.global().async &#123;<br>            <span class="hljs-keyword">let</span> idArray <span class="hljs-operator">=</span> <span class="hljs-keyword">self</span>.transformTextToId(text)<br>            <span class="hljs-keyword">let</span> outputTensor: <span class="hljs-type">Tensor</span><br>            <span class="hljs-keyword">do</span> &#123;<br>                <span class="hljs-keyword">_</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">try</span> <span class="hljs-keyword">self</span>.interpreter.input(at: <span class="hljs-number">0</span>)<br>                <span class="hljs-keyword">let</span> idData <span class="hljs-operator">=</span> <span class="hljs-type">Data</span>.<span class="hljs-keyword">init</span>(bytes: idArray, count: idArray.count)<br>                <span class="hljs-keyword">try</span> <span class="hljs-keyword">self</span>.interpreter.copy(idData, toInputAt: <span class="hljs-number">0</span>)<br>                <span class="hljs-keyword">try</span> <span class="hljs-keyword">self</span>.interpreter.invoke()<br>                outputTensor <span class="hljs-operator">=</span> <span class="hljs-keyword">try</span> <span class="hljs-keyword">self</span>.interpreter.output(at: <span class="hljs-number">0</span>)<br>            &#125; <span class="hljs-keyword">catch</span> &#123;<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;An error occurred while entering data: <span class="hljs-subst">\(error.localizedDescription)</span>&quot;</span>)<br>                <span class="hljs-keyword">return</span><br>            &#125;<br>            <span class="hljs-keyword">let</span> results: [<span class="hljs-type">Float</span>]<br>            <span class="hljs-keyword">switch</span> outputTensor.dataType &#123;<br>            <span class="hljs-keyword">case</span> .uInt8:<br>                <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> quantization <span class="hljs-operator">=</span> outputTensor.quantizationParameters <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;No results returned because the quantization values for the output tensor are nil.&quot;</span>)<br>                    <span class="hljs-keyword">return</span><br>                &#125;<br>                <span class="hljs-keyword">let</span> quantizedResults <span class="hljs-operator">=</span> [<span class="hljs-type">UInt8</span>](outputTensor.data)<br>                results <span class="hljs-operator">=</span> quantizedResults.map &#123;<br>                    quantization.scale <span class="hljs-operator">*</span> <span class="hljs-type">Float</span>(<span class="hljs-type">Int</span>(<span class="hljs-variable">$0</span>) <span class="hljs-operator">-</span> quantization.zeroPoint)<br>                &#125;<br>            <span class="hljs-keyword">case</span> .float32:<br>                results <span class="hljs-operator">=</span> outputTensor.data.withUnsafeBytes( &#123; (ptr: <span class="hljs-type">UnsafeRawBufferPointer</span>) <span class="hljs-keyword">in</span><br>                    [<span class="hljs-type">Float32</span>](<span class="hljs-type">UnsafeBufferPointer</span>.<span class="hljs-keyword">init</span>(start: ptr.baseAddress<span class="hljs-operator">?</span>.assumingMemoryBound(to: <span class="hljs-type">Float32</span>.<span class="hljs-keyword">self</span>), count: ptr.count))<br>                &#125;)<br>            <span class="hljs-keyword">default</span>:<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Output tensor data type <span class="hljs-subst">\(outputTensor.dataType)</span> is unsupported for this app.&quot;</span>)<br>                <span class="hljs-keyword">return</span><br>            &#125;<br>            <span class="hljs-keyword">let</span> resultArray <span class="hljs-operator">=</span> <span class="hljs-keyword">self</span>.getTopN(results: results)<br>            <span class="hljs-type">DispatchQueue</span>.main.async &#123;<br>                closure(resultArray)<br>            &#125;<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
 <p>首先我们需要把[Int]类型转换为Data类型提供给interpreter，可以如下方法转换</p>
-<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-keyword">let</span> idData = <span class="hljs-type">Data</span>.<span class="hljs-keyword">init</span>(bytes: idArray, <span class="hljs-built_in">count</span>: idArray.<span class="hljs-built_in">count</span>)</code></pre></div>
-
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">let</span> idData = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Data</span>.</span></span>init(<span class="hljs-built_in">bytes</span>: idArray, count: idArray.count)<br></code></pre></td></tr></table></figure>
 <p><strong>invoke()</strong>方法为调用模型进行预测</p>
 <p>我们拿到输出<strong>outputTensor</strong>以后，它的dataType中的float32类型就是我们需要的输出，这是因为在开源工程中的输出就是float32类型。这里我们需要用swift的指针去把Data类型换为[Float]类型，如下:</p>
-<div class="hljs"><pre><code class="hljs undefined">results = outputTensor.data.withUnsafeBytes( &#123; (<span class="hljs-keyword">ptr</span>: UnsafeRawBufferPointer) in
-                    [Float32](UnsafeBufferPointer.init(<span class="hljs-keyword">star</span><span class="hljs-variable">t:</span> <span class="hljs-keyword">ptr</span>.baseAddress?.assumingMemoryBound(<span class="hljs-keyword">to</span>: Float32.self), coun<span class="hljs-variable">t:</span> <span class="hljs-keyword">ptr</span>.<span class="hljs-built_in">count</span>))
-                &#125;)</code></pre></div>
-
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">results = outputTensor.data.<span class="hljs-keyword">with</span><span class="hljs-constructor">UnsafeBytes( &#123; (<span class="hljs-params">ptr</span>: UnsafeRawBufferPointer)</span> <span class="hljs-keyword">in</span><br>                    <span class="hljs-literal">[F<span class="hljs-identifier">loat32</span>]</span>(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">UnsafeBufferPointer</span>.</span></span>init(start: ptr.baseAddress?.assuming<span class="hljs-constructor">MemoryBound(<span class="hljs-params">to</span>: Float32.<span class="hljs-params">self</span>)</span>, count: ptr.count))<br>                &#125;)<br></code></pre></td></tr></table></figure>
 <p>至于上面那个.UInt8我没有搞懂是什么意思，但我想我的输出都是float32类型，所以应该是不会走上面那个case。</p>
 <p>最后我们通过<strong>getTopN</strong>方法取到前3个可能性最大的标签(预测值)</p>
-<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">getTopN</span><span class="hljs-params">(results: [Float])</span></span> -&gt; [<span class="hljs-type">Inference</span>] &#123;
-        <span class="hljs-comment">//创建元组数组 [(labelIndex: Int, confidence: Float)]</span>
-        <span class="hljs-keyword">let</span> zippedResults = <span class="hljs-built_in">zip</span>(labels.<span class="hljs-built_in">indices</span>, results)
-        <span class="hljs-comment">//从大到小排序并选出前resultCount个(根据python工程中的训练，只取前10个，因为分类只有10个)</span>
-        <span class="hljs-keyword">let</span> sortedResults = zippedResults.sorted &#123; $<span class="hljs-number">0.1</span> &gt; $<span class="hljs-number">1.1</span> &#125;.<span class="hljs-keyword">prefix</span>(resultCount)
-        <span class="hljs-comment">//返回前resultCount对应的标签以及预测值</span>
-        <span class="hljs-keyword">return</span> sortedResults.<span class="hljs-built_in">map</span> &#123; result <span class="hljs-keyword">in</span> <span class="hljs-type">Inference</span>.<span class="hljs-keyword">init</span>(confidence: result.<span class="hljs-number">1</span>, label: labels[result.<span class="hljs-number">0</span>]) &#125;
-    &#125;</code></pre></div>
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">getTopN</span><span class="hljs-params">(results: [Float])</span></span> -&gt; [<span class="hljs-type">Inference</span>] &#123;<br>        <span class="hljs-comment">//创建元组数组 [(labelIndex: Int, confidence: Float)]</span><br>        <span class="hljs-keyword">let</span> zippedResults <span class="hljs-operator">=</span> <span class="hljs-built_in">zip</span>(labels.indices, results)<br>        <span class="hljs-comment">//从大到小排序并选出前resultCount个(根据python工程中的训练，只取前10个，因为分类只有10个)</span><br>        <span class="hljs-keyword">let</span> sortedResults <span class="hljs-operator">=</span> zippedResults.sorted &#123; <span class="hljs-variable">$0</span>.<span class="hljs-number">1</span> <span class="hljs-operator">&gt;</span> <span class="hljs-variable">$1</span>.<span class="hljs-number">1</span> &#125;.prefix(resultCount)<br>        <span class="hljs-comment">//返回前resultCount对应的标签以及预测值</span><br>        <span class="hljs-keyword">return</span> sortedResults.map &#123; result <span class="hljs-keyword">in</span> <span class="hljs-type">Inference</span>.<span class="hljs-keyword">init</span>(confidence: result.<span class="hljs-number">1</span>, label: labels[result.<span class="hljs-number">0</span>]) &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
 <p><strong>这里取的逻辑就像上述所说的，我们只关注输出一维数组的前10个元素，然后给他们排个序取最大三个值，这三个值所在的下标直接在标签数组中取值就能获得对应的预测分类</strong>。</p>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>博客只是一个预览，详细的逻辑还是需要直接看<a href="https://github.com/qyz777/tensorflow_lite_swift_demo" target="_blank" rel="noopener">Demo</a></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/gaussic/text-classification-cnn-rnn" target="_blank" rel="noopener">CNN-RNN中文文本分类，基于TensorFlow</a><br><a href="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2-ios/#0" target="_blank" rel="noopener">TensorFlow for Poets 2: TFLite iOS</a><br><a href="https://www.jianshu.com/p/c13ed339e6a6" target="_blank" rel="noopener">【IOS/Android】TensorflowLite移动端部署</a><br><a href="https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/ImageClassification/ModelDataHandler/ModelDataHandler.swift" target="_blank" rel="noopener">TensorFlow Lite Swift Example</a><br><a href="https://stackoverflow.com/questions/50632152/tensorflow-convert-pb-file-to-tflite-using-python" target="_blank" rel="noopener">Tensorflow Convert pb file to TFLITE using python</a></p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>博客只是一个预览，详细的逻辑还是需要直接看<a target="_blank" rel="noopener" href="https://github.com/qyz777/tensorflow_lite_swift_demo">Demo</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://github.com/gaussic/text-classification-cnn-rnn">CNN-RNN中文文本分类，基于TensorFlow</a><br><a target="_blank" rel="noopener" href="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2-ios/#0">TensorFlow for Poets 2: TFLite iOS</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c13ed339e6a6">【IOS/Android】TensorflowLite移动端部署</a><br><a target="_blank" rel="noopener" href="https://github.com/tensorflow/examples/blob/master/lite/examples/image_classification/ios/ImageClassification/ModelDataHandler/ModelDataHandler.swift">TensorFlow Lite Swift Example</a><br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/50632152/tensorflow-convert-pb-file-to-tflite-using-python">Tensorflow Convert pb file to TFLITE using python</a></p>
 
-            </article>
+            </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
@@ -506,36 +297,69 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
-                <div class="post-prevnext row">
-                  <div class="post-prev col-6">
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/05/教你使用swift写编译器玩具（0）/">
+                      <a href="/2020/07/05/%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8swift%E5%86%99%E7%BC%96%E8%AF%91%E5%99%A8%E7%8E%A9%E5%85%B7%EF%BC%880%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">教你使用swift写编译器玩具（0）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
-                  </div>
-                  <div class="post-next col-6">
+                  </article>
+                  <article class="post-next col-6">
                     
                     
-                      <a href="/2020/06/27/KVOController源码全解析/">
+                      <a href="/2020/06/27/KVOController%E6%BA%90%E7%A0%81%E5%85%A8%E8%A7%A3%E6%9E%90/">
                         <span class="hidden-mobile">KVOController源码全解析</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
-                  </div>
+                  </article>
                 </div>
               
             </div>
 
             
-          </div>
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'qyz777/qyz777.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
         </div>
       </div>
     </div>
@@ -543,7 +367,7 @@
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -555,16 +379,15 @@
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -585,21 +408,16 @@
     </div>
   </div>
 </div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
     
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
   <div class="statistics">
     
     
@@ -625,24 +443,40 @@
   </div>
 
 
-    
+  
   <!-- 备案信息 -->
   <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">京ICP备18016370号-1</a>
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        京ICP备18016370号-1
+      </a>
+    </span>
     
   </div>
 
 
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -653,8 +487,23 @@
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
@@ -663,95 +512,29 @@
 
 
 
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: 'article.markdown-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "Tensorflow Lite实战——在iOS上部署中文文本分类模型&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+      typing(title)
+      
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -768,8 +551,8 @@
 
 
 
-
-
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 
