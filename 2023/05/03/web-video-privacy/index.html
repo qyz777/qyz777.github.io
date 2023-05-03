@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="YiZhong">
   <meta name="keywords" content="">
-  <title>DispatchGroup出现EXC_BAD_INSTRUCTION问题 - YiZhong&#39;s Blog</title>
+  <title>web_video_privacy - YiZhong&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -157,7 +157,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="DispatchGroup出现EXC_BAD_INSTRUCTION问题">
+            <span class="h2" id="subtitle" title="web_video_privacy">
               
             </span>
 
@@ -167,8 +167,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-06-25 17:26" pubdate>
-        2020年6月25日 下午
+      <time datetime="2023-05-03 19:14" pubdate>
+        2023年5月3日 晚上
       </time>
     </span>
   
@@ -179,7 +179,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      414 字
+      1.8k 字
     </span>
   
 
@@ -189,7 +189,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      18
        分钟
     </span>
   
@@ -219,38 +219,62 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">DispatchGroup出现EXC_BAD_INSTRUCTION问题</h1>
+            <h1 style="display: none">web_video_privacy</h1>
             
             <div class="markdown-body">
-              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前段时间看app的线上奔溃总是出现意义不明的崩溃问题，而且崩溃栈出现在闭包的回调里，并且bugly上提示说是有可能在swift解包的时候出现问题，也就是对nil使用了!。这就完全误导了我，把我对问题的理解定义为数据保护的不够到位。结果就是在多次发版后这个问题还未得到解决，所以我绝对对这个问题一探究竟。</p>
-<h2 id="出现问题的原因"><a href="#出现问题的原因" class="headerlink" title="出现问题的原因"></a>出现问题的原因</h2><p>其实出现这个问题的原因很简单，那就是group的enter和leave没有成对出现。比如说我们会在闭包的回调里去leave，但是闭包有可能返回多次，一旦多leave了，那么就会出现<strong>EXC_BAD_INSTRUCTION</strong>这个问题。</p>
-<p>举个例子</p>
-<p>我们声明如下两个方法，可以看出来work2回调了两次</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">work1</span><span class="hljs-params">(closure: <span class="hljs-params">()</span></span></span> -&gt; <span class="hljs-type">Void</span>) &#123;<br>    sleep(<span class="hljs-number">1</span>)<br>    closure()<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">work2</span><span class="hljs-params">(closure: <span class="hljs-params">()</span></span></span> -&gt; <span class="hljs-type">Void</span>) &#123;<br>    closure()<br>    sleep(<span class="hljs-number">2</span>)<br>    closure()<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>接着我们使用它们</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">viewDidLoad</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">super</span>.viewDidLoad()<br>    <br>    <span class="hljs-keyword">let</span> group <span class="hljs-operator">=</span> <span class="hljs-type">DispatchGroup</span>()<br>    <span class="hljs-keyword">let</span> queue <span class="hljs-operator">=</span> <span class="hljs-type">DispatchQueue</span>(label: <span class="hljs-string">&quot;test&quot;</span>, qos: .background, attributes: .concurrent, autoreleaseFrequency: .inherit, target: <span class="hljs-literal">nil</span>)<br>    <br>    group.enter()<br>    queue.async &#123;<br>        <span class="hljs-keyword">self</span>.work1 &#123;<br>            group.leave()<br>        &#125;<br>    &#125;<br>    <br>    group.enter()<br>    queue.async &#123;<br>        <span class="hljs-keyword">self</span>.work2 &#123;<br>            group.leave()<br>        &#125;<br>    &#125;<br>    <br>    group.notify(queue: queue) &#123;<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;同步完成&quot;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>这里可以看出来在work2的闭包的leave就会出现这个问题。</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>其实这种问题完全使我们编写代码的过程中不够细心导致的，通过完善的测试用例完全可以避免问题发生，但是我们还是需要记住一句话<strong>DispatchGroup的enter和leave必须成对出现!!!</strong></p>
+              <h1 id="网页视频助手-用户隐私政策"><a href="#网页视频助手-用户隐私政策" class="headerlink" title="网页视频助手-用户隐私政策"></a>网页视频助手-用户隐私政策</h1><p>本应用尊重并保护所有使用服务用户的个人隐私权。为了给您提供更准确、更有个性化的服务，本应用会按照本隐私权政策的规定使用和披露您的个人信息。但本应用将以高度的勤勉、审慎义务对待这些信息。除本隐私权政策另有规定外，在未征得您事先许可的情况下，本应用不会将这些信息对外披露或向第三方提供。本应用会不时更新本隐私权政策。 您在同意本应用服务使用协议之时，即视为您已经同意本隐私权政策全部内容。本隐私权政策属于本应用服务使用协议不可分割的一部分。</p>
+<ol>
+<li>适用范围</li>
+</ol>
+<p>(a) 在您注册本应用帐号时，您根据本应用要求提供的个人注册信息；</p>
+<p>(b) 在您使用本应用网络服务，或访问本应用平台网页时，本应用自动接收并记录的您的浏览器和计算机上的信息，包括但不限于您的IP地址、浏览器的类型、使用的语言、访问日期和时间、软硬件特征信息及您需求的网页记录等数据；</p>
+<p>(c) 本应用通过合法途径从商业伙伴处取得的用户个人数据。</p>
+<p>您了解并同意，以下信息不适用本隐私权政策：</p>
+<p>(a) 您在使用本应用平台提供的搜索服务时输入的关键字信息；</p>
+<p>(b) 本应用收集到的您在本应用发布的有关信息数据，包括但不限于参与活动、成交信息及评价详情；</p>
+<p>(c) 违反法律规定或违反本应用规则行为及本应用已对您采取的措施。</p>
+<ol start="2">
+<li>信息使用</li>
+</ol>
+<p>(a)本应用不会向任何无关第三方提供、出售、出租、分享或交易您的个人信息，除非事先得到您的许可，或该第三方和本应用（含本应用关联公司）单独或共同为您提供服务，且在该服务结束后，其将被禁止访问包括其以前能够访问的所有这些资料。</p>
+<p>(b) 本应用亦不允许任何第三方以任何手段收集、编辑、出售或者无偿传播您的个人信息。任何本应用平台用户如从事上述活动，一经发现，本应用有权立即终止与该用户的服务协议。</p>
+<p>(c) 为服务用户的目的，本应用可能通过使用您的个人信息，向您提供您感兴趣的信息，包括但不限于向您发出产品和服务信息，或者与本应用合作伙伴共享信息以便他们向您发送有关其产品和服务的信息（后者需要您的事先同意）。</p>
+<ol start="3">
+<li>信息披露</li>
+</ol>
+<p>在如下情况下，本应用将依据您的个人意愿或法律的规定全部或部分的披露您的个人信息：</p>
+<p>(a) 经您事先同意，向第三方披露；</p>
+<p>(b)为提供您所要求的产品和服务，而必须和第三方分享您的个人信息；</p>
+<p>(c) 根据法律的有关规定，或者行政或司法机构的要求，向第三方或者行政、司法机构披露；</p>
+<p>(d) 如您出现违反中国有关法律、法规或者本应用服务协议或相关规则的情况，需要向第三方披露；</p>
+<p>(e) 如您是适格的知识产权投诉人并已提起投诉，应被投诉人要求，向被投诉人披露，以便双方处理可能的权利纠纷；</p>
+<p>(f) 在本应用平台上创建的某一交易中，如交易任何一方履行或部分履行了交易义务并提出信息披露请求的，本应用有权决定向该用户提供其交易对方的联络方式等必要信息，以促成交易的完成或纠纷的解决。</p>
+<p>(g) 其它本应用根据法律、法规或者网站政策认为合适的披露。</p>
+<ol start="4">
+<li>信息存储和交换</li>
+</ol>
+<p>本应用收集的有关您的信息和资料将保存在本应用及（或）其关联公司的服务器上，这些信息和资料可能传送至您所在国家、地区或本应用收集信息和资料所在地的境外并在境外被访问、存储和展示。</p>
+<ol start="5">
+<li>Cookie的使用</li>
+</ol>
+<p>(a) 在您未拒绝接受cookies的情况下，本应用会在您的计算机上设定或取用cookies ，以便您能登录或使用依赖于cookies的本应用平台服务或功能。本应用使用cookies可为您提供更加周到的个性化服务，包括推广服务。</p>
+<p>(b) 您有权选择接受或拒绝接受cookies。您可以通过修改浏览器设置的方式拒绝接受cookies。但如果您选择拒绝接受cookies，则您可能无法登录或使用依赖于cookies的本应用网络服务或功能。</p>
+<p>(c) 通过本应用所设cookies所取得的有关信息，将适用本政策。</p>
+<ol start="6">
+<li>信息安全</li>
+</ol>
+<p>(a) 本应用帐号均有安全保护功能，请妥善保管您的用户名及密码信息。本应用将通过对用户密码进行加密等安全措施确保您的信息不丢失，不被滥用和变造。尽管有前述安全措施，但同时也请您注意在信息网络上不存在“完善的安全措施”。</p>
+<p>(b) 在使用本应用网络服务进行网上交易时，您不可避免的要向交易对方或潜在的交易对方披露自己的个人信息，如联络方式或者邮政地址。请您妥善保护自己的个人信息，仅在必要的情形下向他人提供。如您发现自己的个人信息泄密，尤其是本应用用户名及密码发生泄露，请您立即联络本应用客服，以便本应用采取相应措施。</p>
+<p>7.本隐私政策的更改</p>
+<p>(a)如果决定更改隐私政策，我们会在本政策中、本公司网站中以及我们认为适当的位置发布这些更改，以便您了解我们如何收集、使用您的个人信息，哪些人可以访问这些信息，以及在什么情况下我们会透露这些信息。</p>
+<p>(b)本公司保留随时修改本政策的权利，因此请经常查看。如对本政策作出重大更改，本公司会通过网站通知的形式告知。</p>
+<p>方披露自己的个人信息，如联络方式或者邮政地址。请您妥善保护自己的个人信息，仅在必要的情形下向他人提供。如您发现自己的个人信息泄密，尤其是本应用用户名及密码发生泄露，请您立即联络本应用客服，以便本应用采取相应措施。</p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/Crash/">Crash</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/iOS/">iOS</a>
-                    
-                  </div>
                 
               </div>
               
@@ -261,18 +285,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/06/25/%E5%A4%A7%E4%BA%8C%E8%87%B3%E5%A4%A7%E4%B8%89%E5%AE%9E%E4%B9%A0%E4%B8%80%E5%B9%B4%EF%BC%8C%E4%BD%A0%E6%83%B3%E7%9F%A5%E9%81%93%E7%9A%84%E8%BF%99%E9%87%8C%E9%83%BD%E6%9C%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">大二至大三实习一年，你想知道的这里都有</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/06/25/UITableView%E5%92%8CUICollectionView%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E6%BB%9A%E5%8A%A8%E5%8A%A8%E7%94%BB/">
-                        <span class="hidden-mobile">UITableView和UICollectionView实现自定义滚动动画</span>
+                      <a href="/2021/03/25/%E5%93%81%E8%B4%A8%E4%BC%98%E5%8C%96%E5%8D%8A%E5%B9%B4%E5%B7%A5%E4%BD%9C%E7%9A%84%E5%9B%9E%E5%BF%86%E4%B8%8E%E6%80%9D%E8%80%83/">
+                        <span class="hidden-mobile">品质优化半年工作的回忆与思考</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
